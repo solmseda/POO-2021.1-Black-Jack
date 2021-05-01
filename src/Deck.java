@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 class Deck extends Card{
-	public List<Card> deck = new ArrayList<Card>();
+	public static List<Card> deck = new ArrayList<Card>();
 	
 	Deck() {
 		for(int i = 1; i <= 4; i++) {
@@ -59,13 +59,15 @@ class Deck extends Card{
 	
 	
 	// retorna uma carta retirada da primeira posição da lista
-	public Card GiveCard() {
+	public Card RemoveCard() {
 		Card card = new Card();
 		card = deck.remove(0);
 		return card;
 	}
 
-
+	public Deck getDeck() {
+		return this;
+	}
 
 	public int size() {
 		int size = deck.size();

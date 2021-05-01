@@ -25,15 +25,14 @@ public class Gambler extends Player{
 	public void Stand() {
 		
 	}
-	public void Hit(Deck deck) 
+	public void Hit(Dealer dealer, Deck deck) 
 	{
-		Card card = deck.GiveCard();
+		Card card = dealer.GiveCard(deck);
 		hand.add(card);
-		
 	}
 	//se não puder nem vai aparecer
-	public void Double_Bet(Deck deck,List<coins> bet) {
-		Hit(deck);
+	public void Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {
+		Hit(dealer, deck);
 		List<Integer> NewBet=new ArrayList<Integer>(Arrays.asList(0,0,0,0,0));
 		int betvalue= 0;
 		int doublebet=0;
