@@ -27,6 +27,17 @@ public class Game {
 		return gamblers;
 	}
 	
+	public static void GiveCardsToDealer(Dealer dealer, Deck deck) {
+		Card card = new Card();
+		
+		card = dealer.GiveCard(deck);
+		dealer.hand.add(card);
+		
+		card = dealer.GiveCard(deck);
+		dealer.hand.add(card);
+	}
+	
+	
 	
 	public static void main(String args[]) {
 		Deck deck = new Deck();
