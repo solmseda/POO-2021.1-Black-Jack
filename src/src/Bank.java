@@ -21,7 +21,7 @@ public class Bank{
 		}
 	
 	//De acordo com as regras, sao 2 moedas de 100 e de 50, 5 de 20 e de 10 e 8 de 5
-	public List<coins> GiveInitialMoney() {
+	public   List<coins> GiveInitialMoney() {
 		List<coins> initialMoney= give_money(2,2,5,5,8);
 		return initialMoney;
 		}
