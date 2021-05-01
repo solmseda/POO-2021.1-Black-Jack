@@ -3,13 +3,14 @@ import java.util.*;
 
 public class Game {
 	
-	/* Criar os jogadores e dar o dinheiro inicial */
+	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
 	public static List<Gambler> CreatePlayers(String[] Names, Bank bank, Dealer dealer, Deck deck) {
 		List<Gambler> gamblers = new ArrayList<Gambler>();
+		Card card = new Card();
 		
 		for(int i = 0; i < Names.length; i++) {
 			Gambler gambler = new Gambler(Names[i]);
-			Card card = new Card();
+			
 			
 			//dar o dinheiro
 			gambler.allCoins=bank.GiveInitialMoney();
@@ -24,17 +25,13 @@ public class Game {
 			
 			gamblers.add(gambler);
 		}
+		card = dealer.GiveCard(deck);
+		dealer.hand.add(card);
+		
+		card = dealer.GiveCard(deck);
+		dealer.hand.add(card);
+		
 		return gamblers;
-	}
-	
-	public static void GiveCardsToDealer(Dealer dealer, Deck deck) {
-		Card card = new Card();
-		
-		card = dealer.GiveCard(deck);
-		dealer.hand.add(card);
-		
-		card = dealer.GiveCard(deck);
-		dealer.hand.add(card);
 	}
 	
 	
@@ -45,7 +42,5 @@ public class Game {
 		Bank bank = new Bank();
 		String[] Names = {"Sol", "Victor", "Raks"};
 		List<Gambler> gamblers = CreatePlayers(Names, bank, dealer, deck);
-		
-		
 	}
 }
