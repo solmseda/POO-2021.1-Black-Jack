@@ -4,6 +4,7 @@ import java.util.Collections;
 
 class Deck extends Card{
 	public static List<Card> deck = new ArrayList<Card>();
+	private static int shuffle = 0;
 	
 	Deck() {
 		for(int i = 1; i <= 4; i++) {
@@ -62,11 +63,15 @@ class Deck extends Card{
 	public Card RemoveCard() {
 		Card card = new Card();
 		card = deck.remove(0);
+		
+		/* Caso tenha sido distribuido 10% de 52 (arredondado para baixo = 5) reembaralhar o deck */
+		shuffle++;
+		if(shuffle == 5) {
+			Collections.shuffle(deck);
+			shuffle = 0;
+		}
 		return card;
 	}
-
-	public int size() {
-		int size = deck.size();
-		return size;
-	}
+	
+	
 }
