@@ -63,4 +63,11 @@ class Deck extends Card{
 		card = deck.remove(0);
 		return card;
 	}
+
+
+
+	public int size() {
+		int size = deck.size();
+		return size;
+	}
 }
