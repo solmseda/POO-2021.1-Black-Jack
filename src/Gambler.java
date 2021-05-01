@@ -1,5 +1,4 @@
-
-public class Gambler {
+public class Gambler extends Player{
 	public int Quant_100;
 	public int Quant_50;
 	public int Quant_20;
@@ -14,8 +13,9 @@ public class Gambler {
 	public void Stand() {
 		
 	}
-	public void Hit() {
-		
+	public void Hit(Deck deck, Card card) 
+	{
+		card = deck.GiveCard();
 	}
 	public void Double_Bet() {
 		

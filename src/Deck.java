@@ -1,6 +1,7 @@
 import java.util.List;
+import java.util.Collections;
 
-public class Deck extends Card{
+class Deck extends Card{
 	public List<Card> deck;
 	
 	public Deck() {
@@ -27,10 +28,15 @@ public class Deck extends Card{
 		deck.addAll(duplicate);
 		deck.addAll(duplicate);
 		deck.addAll(duplicate);
+		Collections.shuffle(deck);
 	}
 	
+	
+	
+	// retorna uma carta retirada da primeira posição da lista
 	public Card GiveCard() {
 		Card card = new Card();
+		card = deck.remove(0);
 		return card;
 	}
 }
