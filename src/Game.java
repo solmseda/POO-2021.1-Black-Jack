@@ -18,13 +18,13 @@ public class Game {
 		return gamblers;
 	}
 
-
+	/*
 	public static void NewRound(List<Gambler> gamblers, Deck deck, Dealer dealer) {
 		Card card = new Card();
 
 		for(int i = 0; i < gamblers.size(); i++) {
 
-			if () {
+			if (...) {
 
 			//Dar a primeira carta para o gambler
 			card = dealer.GiveCard(deck);
@@ -48,7 +48,7 @@ public class Game {
 
 
 	}
-	
+	*/
 
 
 	
