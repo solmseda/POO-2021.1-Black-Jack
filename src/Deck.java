@@ -1,12 +1,13 @@
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 
 class Deck extends Card{
-	public List<Card> deck;
+	public List<Card> deck = new ArrayList<Card>();
 	
-	public Deck() {
+	Deck() {
 		for(int i = 1; i <= 4; i++) {
-			for (int j = 1; j < 13; j++) {
+			for (int j = 1; j <= 13; j++) {
 				Card card = new Card();
 				
 				if(j >= 2 && j<=10) {
@@ -22,11 +23,11 @@ class Deck extends Card{
 						card.valor = 10;
 						card.Name = "Valete";
 					}
-					else if(j == 11) {
+					else if(j == 12) {
 						card.valor = 10;
 						card.Name = "Dama";
 					}
-					else if(j == 11) {
+					else if(j == 13) {
 						card.valor = 10;
 						card.Name = "Reis";
 					}
