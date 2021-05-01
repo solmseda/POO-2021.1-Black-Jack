@@ -28,4 +28,9 @@ public class Deck extends Card{
 		deck.addAll(duplicate);
 		deck.addAll(duplicate);
 	}
+	
+	public Card GiveCard() {
+		Card card = new Card();
+		return card;
+	}
 }
