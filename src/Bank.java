@@ -6,7 +6,8 @@ public class Bank {
 	public int Quant_10;
 	public int Quant_5;
 	
-	
+	//Vai entregar uma quantidade de dinheiro
+
 	public int give_money() {
 		return 0;
 		}
