@@ -4,6 +4,5 @@ public class coins {
 	
 	public int Get_value() {
 		return value;
-		}
 	}
 }

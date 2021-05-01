@@ -1,4 +1,4 @@
 import java.util.List;
 public class Player {
-	public List<Card>hand =new List<Card>();
+	public List<Card>hand;
 }
