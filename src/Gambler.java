@@ -1,10 +1,17 @@
 import java.util.*;
 public class Gambler extends Player{
-	public coins Quant_100= new coins(0,100);
-	public coins Quant_50= new coins(0,50);
-	public coins Quant_20= new coins(0,20);
-	public coins Quant_10= new coins(0,10);
-	public coins Quant_5= new coins(0,5);
+	public String Name;
+	coins Quant_100= new coins(0,100);
+	coins Quant_50= new coins(0,50);
+	coins Quant_20= new coins(0,20);
+	coins Quant_10= new coins(0,10);
+	coins Quant_5= new coins(0,5);
+	public List<coins> allCoins= new ArrayList<coins>();	
+	
+	Gambler(String name){ 
+		Name=name;
+		allCoins=GetMoney();
+	}
 	
 	
 	private List<coins> GetMoney() {
@@ -18,6 +25,9 @@ public class Gambler extends Player{
 		bet.add(new coins(Quant_20,20));
 		bet.add(new coins(Quant_10,10));
 		bet.add(new coins(Quant_5,5));
+		for(int i=0;i<bet.size();i++) {
+			allCoins.get(i).qtt-=bet.get(i).qtt;
+		}
 		return bet;
  
 	}
@@ -29,6 +39,7 @@ public class Gambler extends Player{
 	{
 		Card card = dealer.GiveCard(deck);
 		hand.add(card);
+		
 	}
 	//se não puder nem vai aparecer
 	public void Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {
@@ -39,13 +50,13 @@ public class Gambler extends Player{
 	    for (int i=0;i< bet.size();i++) {
 	    	betvalue += (bet.get(i).value*bet.get(i).qtt);
 	    } 
-	    List<coins> Currentmoney=GetMoney();
+
 	    while(doublebet<betvalue*2) {
-	    	for(int i=0;i<Currentmoney.size();i++) {
-	    		if(Currentmoney.get(i).qtt>0) {
+	    	for(int i=0;i<allCoins.size();i++) {
+	    		if(allCoins.get(i).qtt>0) {
 	        		int qtt=0;
-	        		while(doublebet+Currentmoney.get(i).value<betvalue*2 && Currentmoney.get(i).qtt>0) {
-	        			Currentmoney.get(i).qtt-=1;
+	        		while(doublebet+allCoins.get(i).value<betvalue*2 && allCoins.get(i).qtt>0) {
+	        			allCoins.get(i).qtt-=1;
 	        			qtt++;	
 	        		}
 	        		NewBet.add(i,qtt);

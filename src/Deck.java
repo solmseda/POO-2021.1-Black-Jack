@@ -58,15 +58,11 @@ class Deck extends Card{
 	
 	
 	
-	// retorna uma carta retirada da primeira posição da lista
+	/* Retorna uma carta retirada da primeira posição da lista */
 	public Card RemoveCard() {
 		Card card = new Card();
 		card = deck.remove(0);
 		return card;
-	}
-
-	public Deck getDeck() {
-		return this;
 	}
 
 	public int size() {
