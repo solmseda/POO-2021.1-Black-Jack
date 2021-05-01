@@ -5,10 +5,34 @@ class Deck extends Card{
 	public List<Card> deck;
 	
 	public Deck() {
-		Card card = new Card();
 		for(int i = 1; i <= 4; i++) {
 			for (int j = 1; j < 13; j++) {
-				card.valor = i;
+				Card card = new Card();
+				
+				if(j >= 2 && j<=10) {
+					card.valor = j;
+					card.Name = Integer.toString(j);
+				}
+				else {
+					if(j == 1) {
+						card.valor = j;
+						card.Name = "As";
+					}
+					else if(j == 11) {
+						card.valor = 10;
+						card.Name = "Valete";
+					}
+					else if(j == 11) {
+						card.valor = 10;
+						card.Name = "Dama";
+					}
+					else if(j == 11) {
+						card.valor = 10;
+						card.Name = "Reis";
+					}
+				}
+					
+					
 				if(i == 1) {
 					card.naipe = "Copas";
 				}
