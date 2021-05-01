@@ -1,6 +1,6 @@
 import java.util.*;
-public class Gambler extends Player{
-	public String Name;
+    class Gambler extends Player{
+	String Name;
 	coins Quant_100= new coins(0,100);
 	coins Quant_50= new coins(0,50);
 	coins Quant_20= new coins(0,20);
@@ -12,7 +12,6 @@ public class Gambler extends Player{
 		Name=name;
 		allCoins=GetMoney();
 	}
-	
 	
 	private List<coins> GetMoney() {
 		List<coins> currentmoney=new ArrayList<coins>(Arrays.asList( Quant_100, Quant_50, Quant_20, Quant_10, Quant_5));
@@ -29,7 +28,6 @@ public class Gambler extends Player{
 			allCoins.get(i).qtt-=bet.get(i).qtt;
 		}
 		return bet;
- 
 	}
 	
 	public void Stand() {
@@ -39,7 +37,8 @@ public class Gambler extends Player{
 	{
 		Card card = dealer.GiveCard(deck);
 		hand.add(card);
-		
+		System.out.println("Cartas antigas "+hand.get(0).Name+ " e "+hand.get(1).Name+"  Nova carta "+card.Name);
+		System.out.println("Somatorio:  "+(hand.get(0).valor+hand.get(1).valor+card.valor));
 	}
 	//se não puder nem vai aparecer
 	public void Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {
@@ -66,9 +65,17 @@ public class Gambler extends Player{
 	}
 	 
 	public void Split() {
-		
 	}
-	public void Surrender() {
-		
+	public void Surrender() {	
+	}
+	public Boolean Busted() {
+		int sum=0;
+		for (int i=0;i<hand.size();i++) {
+			sum+=hand.get(i).valor;
+			}
+		if (sum>21) {
+			return true;
+		}
+		return false;
 	}
 }
