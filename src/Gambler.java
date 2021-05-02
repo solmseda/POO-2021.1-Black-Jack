@@ -49,8 +49,9 @@ import java.util.List;
 		return bet;
 	}
 	
-	public void Stand() {
-		
+	public Boolean Stand() {
+		/* No jogo finalizado essa função steá vinculada a um botão que irá passar a a vez do jogador através de uma booleana no controller */
+		return true;
 	}
 	public void Hit(Dealer dealer, Deck deck) 
 	{

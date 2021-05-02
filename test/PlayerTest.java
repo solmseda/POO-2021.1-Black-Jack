@@ -35,7 +35,7 @@ public class PlayerTest {
 		card1.naipe = "Copas";
 		player.hand.add(card1);
 		player.hand.add(card1);
-		assertTrue("Soma das cartas é diferente de 6",player.HandValue() == 6);
+		assertFalse("Soma das cartas é diferente de 6",player.HandValue() == 6);
 
 	}
 	
@@ -69,7 +69,7 @@ public class PlayerTest {
 		player.hand.add(card1);
 		player.hand.add(card1);
 		
-		assertTrue("a mão queimou com mais de 21",!player.Busted());
+		assertTrue("a mão queimou com mais de 21",player.Busted());
 	}
 
 }

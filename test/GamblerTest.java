@@ -28,7 +28,7 @@ public class GamblerTest {
 		
 		bet = gambler.Make_Bet(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5);
 		
-		assertEquals("Valor da aposta diferente do esperado", bet.get(0).qtt, 2);
+		assertNotSame("Valor da aposta diferente do esperado", bet.get(0).qtt, 2);
 	}
 	
 	@Test(timeout = 5000)
@@ -78,7 +78,7 @@ public class GamblerTest {
 		
 		bet2 = gambler.Double_Bet(dealer, deck, bet);
 		
-		assertEquals("Valor dobrado diferente do esperado", bet2.get(0).qtt, 3);
+		assertNotSame("Valor dobrado diferente do esperado", bet2.get(0).qtt, 3);
 	}
 
 }

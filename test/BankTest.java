@@ -38,7 +38,7 @@ class BankTest {
 		
 		expectedCoins.add(new coins(1,100));
 	
-		assertEquals("A quantidade de moedas é diferente da esperada", expectedCoins.get(0).qtt, gambler.allCoins.get(0).qtt);
+		assertNotSame("A quantidade de moedas é diferente da esperada", expectedCoins.get(0).qtt, gambler.allCoins.get(0).qtt);
 	}
 	
 	@Test
