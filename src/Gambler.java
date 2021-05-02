@@ -13,6 +13,15 @@ import java.util.*;
 		allCoins=GetMoney();
 	}
 	
+	
+	public Integer GetBetAmount(List<coins> bet) {
+		int betvalue=0;
+		for (int i=0;i< bet.size();i++) {
+	    	betvalue += (bet.get(i).value*bet.get(i).qtt);
+	    } 
+		
+		return betvalue;
+	}
 	private List<coins> GetMoney() {
 		List<coins> currentmoney=new ArrayList<coins>(Arrays.asList( Quant_100, Quant_50, Quant_20, Quant_10, Quant_5));
 		return currentmoney;
@@ -41,33 +50,57 @@ import java.util.*;
 		System.out.println("Somatorio:  "+(hand.get(0).valor+hand.get(1).valor+card.valor));
 	}
 	//se não puder nem vai aparecer
-	public void Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {
-		Hit(dealer, deck);
-		List<Integer> NewBet=new ArrayList<Integer>(Arrays.asList(0,0,0,0,0));
-		int betvalue= 0;
+	public List<coins> Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {
+		List<coins> NewBet=Make_Bet(0,0,0,0,0);
+		int betvalue= GetBetAmount(bet);
 		int doublebet=0;
-	    for (int i=0;i< bet.size();i++) {
-	    	betvalue += (bet.get(i).value*bet.get(i).qtt);
-	    } 
-
+	    
 	    while(doublebet<betvalue*2) {
 	    	for(int i=0;i<allCoins.size();i++) {
+	    		int qtt=0;
 	    		if(allCoins.get(i).qtt>0) {
-	        		int qtt=0;
-	        		while(doublebet+allCoins.get(i).value<betvalue*2 && allCoins.get(i).qtt>0) {
+	        		while(doublebet+allCoins.get(i).value<=betvalue*2 && allCoins.get(i).qtt>0) {
 	        			allCoins.get(i).qtt-=1;
 	        			qtt++;	
+	        			doublebet+=allCoins.get(i).value;
+	        			System.out.println("doublebet!"+doublebet);
+
 	        		}
-	        		NewBet.add(i,qtt);
+	        		coins coin=new coins(qtt,allCoins.get(i).value);
+	        		NewBet.add(i,coin);
 	        	}
 	    	}
 	    }
+	    return NewBet;
 	}
 	 
 	public void Split() {
 	}
-	public void Surrender() {	
+	
+	public List<coins> Surrender(List<coins> bet) {	
+		List<coins> NewBet=Make_Bet(0,0,0,0,0);
+		int betvalue= GetBetAmount(bet);
+		int halfbet=betvalue;
+	    
+	    while(halfbet>Math.floor(betvalue/2)) {
+	    	for(int i=0;i<allCoins.size();i++) {
+	    		int qtt=bet.get(i).qtt;
+	    		if(bet.get(i).qtt<allCoins.get(i).qtt) {
+	        		while(allCoins.get(i).value-halfbet<=betvalue/2 && bet.get(i).qtt<allCoins.get(i).qtt) {
+	        			allCoins.get(i).qtt+=1;
+	        			qtt--;	
+	        			halfbet-=allCoins.get(i).value;
+	        			System.out.println("halfbet!"+halfbet);
+
+	        		}
+	        		coins coin=new coins(qtt,allCoins.get(i).value);
+	        		NewBet.add(i,coin);
+	        	}
+	    	}
+	    }
+	    return NewBet;
 	}
+
 	public Boolean Busted() {
 		int sum=0;
 		for (int i=0;i<hand.size();i++) {
