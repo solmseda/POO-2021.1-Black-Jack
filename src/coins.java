@@ -1,5 +1,5 @@
 
-public class coins {
+    class coins {
 	public int qtt;
 	public int value;
 	

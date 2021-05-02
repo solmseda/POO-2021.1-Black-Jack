@@ -1,5 +1,5 @@
 import java.util.*;
-public class Bank{
+    class Bank{
 	public coins Quant_100;
 	public coins Quant_50;
 	public coins Quant_20;
