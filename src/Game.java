@@ -58,6 +58,6 @@ public class Game {
 		Dealer dealer = new Dealer();
 		Bank bank = new Bank();
 		String[] Names = {"Sol", "Victor", "Raks"};
-		List<Gambler> gamblers = CreatePlayers(Names, bank, dealer, deck);
+		List<Gambler> gamblers = CreatePlayers(Names, bank);
 	}
 }
