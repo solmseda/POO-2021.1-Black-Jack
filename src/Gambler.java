@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
     class Gambler extends Player{
 	String Name;
 	coins Quant_100= new coins(0,100);
@@ -80,27 +82,29 @@ import java.util.*;
 	public List<coins> Surrender(List<coins> bet) {	
 		List<coins> NewBet=Make_Bet(0,0,0,0,0);
 		int betvalue= GetBetAmount(bet);
-		int halfbet=betvalue;
-	    
-	    while(halfbet>Math.floor(betvalue/2)) {
-	    	for(int i=0;i<allCoins.size();i++) {
-	    		int qtt=bet.get(i).qtt;
-	    		if(bet.get(i).qtt<allCoins.get(i).qtt) {
-	        		while(allCoins.get(i).value-halfbet<=betvalue/2 && bet.get(i).qtt<allCoins.get(i).qtt) {
-	        			allCoins.get(i).qtt+=1;
-	        			qtt--;	
-	        			halfbet-=allCoins.get(i).value;
-	        			System.out.println("halfbet!"+halfbet);
-
-	        		}
-	        		coins coin=new coins(qtt,allCoins.get(i).value);
-	        		NewBet.add(i,coin);
-	        	}
-	    	}
+		int halfbet=0;
+	    for(int i=0;i<bet.size();i++) {
+	    	//Retorna todo o valor pra mao do player
+	    	allCoins.get(i).qtt+=bet.get(i).qtt;
 	    }
-	    return NewBet;
-	}
+		  while(halfbet<betvalue/2) {
+		    	for(int i=0;i<allCoins.size();i++) {
+		    		int qtt=0;
+		    		if(allCoins.get(i).qtt>0) {
+		        		while(halfbet+allCoins.get(i).value<=betvalue/2 && allCoins.get(i).qtt>0) {
+		        			qtt++;	
+		        			halfbet+=allCoins.get(i).value;
+		        			System.out.println("halfbet!"+halfbet);
 
+		        		}
+		        		coins coin=new coins(qtt,allCoins.get(i).value);
+		        		NewBet.add(i,coin);
+		        	}
+		    	}
+		    }
+		    return NewBet;
+		}
+		 
 	public Boolean Busted() {
 		int sum=0;
 		for (int i=0;i<hand.size();i++) {
