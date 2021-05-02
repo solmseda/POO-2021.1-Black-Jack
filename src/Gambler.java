@@ -56,8 +56,6 @@ import java.util.List;
 	{
 		Card card = dealer.GiveCard(deck);
 		hand.add(card);
-		System.out.println("Cartas antigas "+hand.get(0).Name+ " e "+hand.get(1).Name+"  Nova carta "+card.Name);
-		System.out.println("Somatorio:  "+(hand.get(0).valor+hand.get(1).valor+card.valor));
 	}
 	//se não puder nem vai aparecer
 	public List<coins> Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {

@@ -10,7 +10,6 @@ public class PlayerTest {
 
 	@Test(timeout=5000)
 	public void HandValueTest() {
-		Deck deck=new Deck();
 		Player player= new Player();
 		player.hand = new ArrayList<Card>();
 		Card card1 = new Card();
@@ -23,13 +22,11 @@ public class PlayerTest {
 		card2.naipe = "Copas";
 		player.hand.add( card1);
 		player.hand.add(card2);
-		int value= player.HandValue();
-		assertTrue("Soma das cartas é diferente de 6",value=6);
+		assertTrue("Soma das cartas é diferente de 6",player.HandValue() == 6);
 
 	}
 	@Test(timeout=5000)
 	public void HandValueTestERROR() {
-		Deck deck=new Deck();
 		Player player= new Player();
 		player.hand = new ArrayList<Card>();
 		Card card1 = new Card();
@@ -38,8 +35,7 @@ public class PlayerTest {
 		card1.naipe = "Copas";
 		player.hand.add(card1);
 		player.hand.add(card1);
-		int value= player.HandValue();
-		assertTrue("Soma das cartas é diferente de 6",value=6);
+		assertTrue("Soma das cartas é diferente de 6",player.HandValue() == 6);
 
 	}
 	
@@ -56,15 +52,13 @@ public class PlayerTest {
 		card2.valor=5;
 		card2.Name="5";
 		card2.naipe = "Copas";
-		player.hand.get(0)= card1;
-		player.hand.get(1)= card2;
-		bool bustedplayer1= player.Busted();
+		player.hand.add(card1);
+		player.hand.add(card2);
 		
-		assertTrue("A mão não queimou com menos de 21",bustedplayer1=false);
+		assertTrue("A mão não queimou com menos de 21",!player.Busted());
 	}
 	@Test(timeout=5000)
 	public void BustedTestERROR() {
-		Deck deck=new Deck();
 		Player player= new Player();
 		player.hand = new ArrayList<Card>();
 		Card card1 = new Card();
@@ -74,9 +68,8 @@ public class PlayerTest {
 		player.hand.add(card1);
 		player.hand.add(card1);
 		player.hand.add(card1);
-		bool bustedplayer1= player.Busted();
 		
-		assertTrue("a mão queimou com mais de 21",bustedplayer1=true);
+		assertTrue("a mão queimou com mais de 21",!player.Busted());
 	}
 
 }
