@@ -20,4 +20,15 @@ public class Player {
 		}
 		return false;
 	}
+	
+	public void CheckAs() {
+		for(int i=0;i<hand.size();i++) {
+			int handvalue=HandValue();
+			if(hand.get(i).Name=="As") {
+				if(handvalue+10<=21) {
+					hand.get(i).valor=11;
+				}
+			}
+		}
+	}
 }
