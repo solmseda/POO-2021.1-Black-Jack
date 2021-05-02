@@ -71,5 +71,45 @@ public class PlayerTest {
 		
 		assertTrue("a mão queimou com mais de 21",player.Busted());
 	}
+	
+	@Test(timeout = 5000)
+	public void CheckAs() {
+		Card As = new Card();
+		Card other = new Card();
+		Player player = new Player();
+		
+		As.naipe = "Copas";
+		As.Name = "As";
+		
+		other.naipe = "Copas";
+		other.valor = 10;
+		
+		player.hand.add(As);
+		player.hand.add(other);
+		
+		player.CheckAs();
+		
+		assertEquals(player.hand.get(0).valor, 11);
+	}
+	
+	@Test(timeout = 5000)
+	public void CheckAsError() {
+		Card As = new Card();
+		Card other = new Card();
+		Player player = new Player();
+		
+		As.naipe = "Copas";
+		As.Name = "As";
+		
+		other.naipe = "Copas";
+		other.valor = 10;
+		
+		player.hand.add(As);
+		player.hand.add(other);
+		
+		player.CheckAs();
+		
+		assertNotSame("As deveria ser 11", player.hand.get(0).valor, 1);
+	}
 
 }
