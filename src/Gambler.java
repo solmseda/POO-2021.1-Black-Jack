@@ -112,14 +112,5 @@ import java.util.List;
 		    return NewBet;
 		}
 		 
-	public Boolean Busted() {
-		int sum=0;
-		for (int i=0;i<hand.size();i++) {
-			sum+=hand.get(i).valor;
-			}
-		if (sum>21) {
-			return true;
-		}
-		return false;
-	}
+	 
 }
