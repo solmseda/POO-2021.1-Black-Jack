@@ -16,6 +16,14 @@ import java.util.List;
 	}
 	
 	
+	
+	public Integer GetTotalMoney() {
+		int totalmoney=0;
+		for (int i=0;i< allCoins.size();i++) {
+	    	totalmoney += (allCoins.get(i).value*allCoins.get(i).qtt);
+	    } 
+		return totalmoney;
+	}
 	public Integer GetBetAmount(List<coins> bet) {
 		int betvalue=0;
 		for (int i=0;i< bet.size();i++) {
@@ -56,7 +64,10 @@ import java.util.List;
 		List<coins> NewBet=Make_Bet(0,0,0,0,0);
 		int betvalue= GetBetAmount(bet);
 		int doublebet=0;
-	    
+		for(int i=0;i<bet.size();i++) {
+	    	//Retorna todo o valor pra mao do player
+	    	allCoins.get(i).qtt+=bet.get(i).qtt;
+	    }
 	    while(doublebet<betvalue*2) {
 	    	for(int i=0;i<allCoins.size();i++) {
 	    		int qtt=0;
@@ -65,8 +76,7 @@ import java.util.List;
 	        			allCoins.get(i).qtt-=1;
 	        			qtt++;	
 	        			doublebet+=allCoins.get(i).value;
-	        			System.out.println("doublebet!"+doublebet);
-
+ 
 	        		}
 	        		coins coin=new coins(qtt,allCoins.get(i).value);
 	        		NewBet.add(i,coin);
@@ -83,19 +93,16 @@ import java.util.List;
 		List<coins> NewBet=Make_Bet(0,0,0,0,0);
 		int betvalue= GetBetAmount(bet);
 		int halfbet=0;
-	    for(int i=0;i<bet.size();i++) {
-	    	//Retorna todo o valor pra mao do player
-	    	allCoins.get(i).qtt+=bet.get(i).qtt;
-	    }
+	    
 		  while(halfbet<betvalue/2) {
 		    	for(int i=0;i<allCoins.size();i++) {
 		    		int qtt=0;
 		    		if(allCoins.get(i).qtt>0) {
 		        		while(halfbet+allCoins.get(i).value<=betvalue/2 && allCoins.get(i).qtt>0) {
+		        			allCoins.get(i).qtt-=1;
 		        			qtt++;	
 		        			halfbet+=allCoins.get(i).value;
-		        			System.out.println("halfbet!"+halfbet);
-
+ 
 		        		}
 		        		coins coin=new coins(qtt,allCoins.get(i).value);
 		        		NewBet.add(i,coin);

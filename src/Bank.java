@@ -8,7 +8,11 @@ public class Bank{
 	
 	//Vai entregar uma quantidade de dinheiro baseada em uma quantidade especifica de cada tipo de moeda
 	
-	
+	public void add_bet_money(List<coins> bet,List<coins> currentmoney){
+		for(int i=0;i<currentmoney.size();i++) {
+			currentmoney.get(i).qtt+=bet.get(i).qtt;
+		}
+   }
 	public List<coins> give_money(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5) {
 		List<coins> allcoins= new ArrayList<coins>();
 
