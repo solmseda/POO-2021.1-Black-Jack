@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-public class Dealer extends Player{
+    class Dealer extends Player{
 	
 	public Card GiveCard(Deck deck) {
 		Card card = deck.RemoveCard();
