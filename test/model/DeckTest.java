@@ -1,22 +1,21 @@
 package model;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 
-class DeckTest {
+public class DeckTest {
 	
 
-	@Test
-	void testSizeDeck() {
+	@Test(timeout = 5000)
+	public void testSizeDeck() {
 		Deck deck = new Deck();
 		assertEquals("O Deck possui 208 cartas",deck.deck.size(), 208);
 	}
 	
 	
-	@Test
-	void testSizeDeckError() {
+	@Test(timeout = 5000)
+	public void testSizeDeckError() {
 		Deck deck = new Deck();
 		Card card = new Card();
 		card.Name = "As";
@@ -27,8 +26,8 @@ class DeckTest {
 	}
 
 	
-	@Test
-	void testRemoveCard() {
+	@Test(timeout = 5000)
+	public void testRemoveCard() {
 		Deck deck = new Deck();
 		int sizeDeck = deck.deck.size();
 		deck.RemoveCard();
@@ -36,15 +35,15 @@ class DeckTest {
 	}
 	
 	
-	@Test
-	void testRemoveCardError() {
+	@Test(timeout = 5000)
+	public void testRemoveCardError() {
 		Deck deck = new Deck();
 		int sizeDeck = deck.deck.size();
 		assertNotSame("Não foi removida uma carta do deck",sizeDeck-1, deck.deck.size());
 	}
 
-	@Test
-	void testCountCardsType() {
+	@Test(timeout = 5000)
+	public void testCountCardsType() {
 		Deck deck = new Deck();
 		int contNaipeCopas = 0;
 		int contNaipeOuros = 0;
@@ -73,8 +72,8 @@ class DeckTest {
 	}
 	
 	
-	@Test
-	void testCountCardsTypeError() {
+	@Test(timeout = 5000)
+	public void testCountCardsTypeError() {
 		Deck deck = new Deck();
 		int contNaipeCopas = 0;
 		int contNaipeOuros = 0;
@@ -107,8 +106,8 @@ class DeckTest {
 
 
 	
-	@Test
-	void testCountCardsNames() {
+	@Test(timeout = 5000)
+	public void testCountCardsNames() {
 		Deck deck = new Deck();
 		int cont_As = 0;
 		int cont_2 = 0;
@@ -182,8 +181,8 @@ class DeckTest {
 	}
 	
 	
-	@Test
-	void testCountCardsNamesError() {
+	@Test(timeout = 5000)
+	public void testCountCardsNamesError() {
 		Deck deck = new Deck();
 		int cont_As = 0;
 		int cont_2 = 0;

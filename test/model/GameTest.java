@@ -1,13 +1,14 @@
+package model;
 import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class GameTest {
+public class GameTest {
 	
-	@Test
-	void GameTestCreateGamblersNames() {
+	@Test(timeout = 5000)
+	public void GameTestCreateGamblersNames() {
 		Deck deck = new Deck();
 		Dealer dealer = new Dealer();
 		Bank bank = new Bank();
@@ -20,8 +21,8 @@ class GameTest {
 	}
 
 	
-	@Test
-	void GameTestCreateGamblersNamesError() {
+	@Test(timeout = 5000)
+	public void GameTestCreateGamblersNamesError() {
 		Deck deck = new Deck();
 		Dealer dealer = new Dealer();
 		Bank bank = new Bank();

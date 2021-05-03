@@ -1,3 +1,4 @@
+package model;
 
     class coins {
 	public int qtt;
