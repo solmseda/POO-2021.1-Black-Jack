@@ -1,3 +1,4 @@
+package model;
 import java.util.*;
     class Bank{
 	public coins Quant_100;

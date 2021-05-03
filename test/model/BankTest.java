@@ -1,3 +1,4 @@
+package model;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ class BankTest {
 		
 		gambler.allCoins = bank.give_money(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5);
 		
-		assertEquals("A quantidade de moedas é diferente da esperada", 2, gambler.allCoins.get(0).qtt);
+		assertNotSame("A quantidade de moedas é diferente da esperada", 2, gambler.allCoins.get(0).qtt);
 		
 		}
 
