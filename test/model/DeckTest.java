@@ -53,16 +53,16 @@ class DeckTest {
 
 
 		for (int i = 0; i < 208; i++) {
-			if (deck.deck.get(i).naipe == "Copas") {
+			if (deck.deck.get(i).naipe.equals("Copas")) {
 				contNaipeCopas += 1;
 			}
-			else if (deck.deck.get(i).naipe == "Ouros") {
+			else if (deck.deck.get(i).naipe.equals("Ouros")) {
 				contNaipeOuros += 1;
 			}
-			else if (deck.deck.get(i).naipe == "Espadas") {
+			else if (deck.deck.get(i).naipe.equals("Espadas")) {
 				contNaipeEspadas += 1;
 			}
-			else if (deck.deck.get(i).naipe == "Paus") {
+			else if (deck.deck.get(i).naipe.equals("Paus")) {
 				contNaipePaus += 1;
 			}
 		}
@@ -89,16 +89,16 @@ class DeckTest {
 		
 		
 		for (int i = 0; i < 209; i++) {
-			if (deck.deck.get(i).naipe == "Copas") {
+			if (deck.deck.get(i).naipe.equals("Copas")) {
 				contNaipeCopas += 1;
 			}
-			else if (deck.deck.get(i).naipe == "Ouros") {
+			else if (deck.deck.get(i).naipe.equals("Ouros")) {
 				contNaipeOuros += 1;
 			}
-			else if (deck.deck.get(i).naipe == "Espadas") {
+			else if (deck.deck.get(i).naipe.equals("Espadas")) {
 				contNaipeEspadas += 1;
 			}
-			else if (deck.deck.get(i).naipe == "Paus") {
+			else if (deck.deck.get(i).naipe.equals("Paus")) {
 				contNaipePaus += 1;
 			}
 		}
