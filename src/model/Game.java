@@ -14,8 +14,31 @@ public class Game {
 			gambler.allCoins=bank.GiveInitialMoney();
 			gamblers.add(gambler);
 		}
-		
 		return gamblers;
+	}
+	
+	/* Cria a classe Bank do jogo */
+	public Bank CreateBank() {
+		Bank bank = new Bank();
+		return bank;
+	}
+	
+	/* Cria a classe Deck do jogo */
+	public Deck CreateDeck() {
+		Deck deck = new Deck();
+		return deck;
+	}
+	
+	/* Cria a classe Dealer do jogo */
+	public Dealer CreateDealer() {
+		Dealer dealer = new Dealer();
+		return dealer;
+	}
+	
+	/* Cria a classe Player do jogo */
+	public Player CreatePlayer() {
+		Player player = new Player();
+		return player;
 	}
 
 }
