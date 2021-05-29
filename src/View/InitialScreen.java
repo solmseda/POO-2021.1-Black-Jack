@@ -5,7 +5,10 @@ import javax.swing.*;
 
 import model.GameScreen;
 
-public class InitialScreen {
+public class InitialScreen extends JFrame {
+	JLabel str;
+	JButton quant_1, quant_2, quant_3, quant_4;
+	
 	JTextField gambler1;
 	JTextField gambler2;
 	JTextField gambler3;
@@ -21,7 +24,7 @@ public class InitialScreen {
 			SwingUtilities.invokeAndWait(
 					new Runnable() {
 						public void run() {
-							InitialScreen();
+							new InitialScreen();
 						}
 					}
 			);
@@ -30,7 +33,7 @@ public class InitialScreen {
 		}
 	}
 	
-	private void InitialScreen() {
+	private InitialScreen() {
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension screenSize=tk.getScreenSize();
 		int sl=screenSize.width;
@@ -42,6 +45,21 @@ public class InitialScreen {
 		
 		setLayout(new FlowLayout());
 		
+		str = new JLabel("Selecione a quantidade de jogadores");
+		add(str);
+		
+		quant_1 = new JButton("1 Jogador");
+		quant_2 = new JButton("2 Jogadores");
+		quant_3 = new JButton("3 Jogadores");
+		quant_4 = new JButton("4 Jogadores");
+		
+		
+		
+		add(quant_1);
+		add(quant_2);
+		add(quant_3);
+		add(quant_4);
+		
 		gambler1 = new JTextField(15);
 		gambler2 = new JTextField(15);
 		gambler3 = new JTextField(15);
@@ -51,15 +69,6 @@ public class InitialScreen {
 		add(gambler2);
 		add(gambler3);
 		add(gambler4);
-		
-		gambler1.addActionListener(new ActionListener() { showStatys(gambler1.getText()); });
-		
-		gambler2.addActionListener(new ActionListener() { showStatys(gambler2.getText()); });
-		
-		gambler3.addActionListener(new ActionListener() { showStatys(gambler3.getText()); });
-		
-		gambler4.addActionListener(new ActionListener() { showStatys(gambler4.getText()); });
-		
 	}
 
 	public static void main(String args[]) {
