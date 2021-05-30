@@ -1,5 +1,7 @@
 package View;
 
+import Controller.Setup;
+
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -26,6 +28,8 @@ public class GameScreenPanel extends JPanel {
 	private BufferedImage backgroundImage;
 	public GameScreenPanel() {
 		setLayout(null);
+		
+		System.out.println(Setup.Jogadores);
 			
 		JButton btnEncerrarPartida = new JButton("Encerrar Partida");
 		btnEncerrarPartida.setBounds(744, 111, 132, 39);
