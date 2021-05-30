@@ -50,7 +50,7 @@ public class Game {
 		 gamblers= CreateGamblers(jogadores,bank);
 		 deck= CreateDeck();
 	}
-	public static void NewRound() {
+	public static void NewMatch() {
 		for(int i=0;i<gamblers.size();i++) {
 			for(int j=0;j<2;j++) {
 				gamblers.get(i).hand.add(dealer.GiveCard(deck));

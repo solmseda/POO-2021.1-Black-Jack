@@ -30,8 +30,8 @@ public class Setup {
 		System.out.println("OI");
 		 
 	}
-	public static void NewRound() {
-		Game.NewRound();
+	public static void NewMatch() {
+		Game.NewMatch();
 	}
 	
 }
