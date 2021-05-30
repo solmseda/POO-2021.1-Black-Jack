@@ -63,6 +63,12 @@ public class Game {
 		 String hand=Seecard(gamblers.get(player).hand.get(card));
 		 return hand;
 	 }
+	 public static int GetGamblerMoney(int i) {
+		 return gamblers.get(i).GetTotalMoney();
+	 }
+	 public static int GetGamblerHand(int i) {
+		 return gamblers.get(i).HandValue();
+	 }
 	 public static String Seecard(Card card) {
 	        String name= "/";
 	        if(card.valor >= 2 && card.valor<=9) {

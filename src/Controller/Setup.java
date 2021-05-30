@@ -38,4 +38,10 @@ public class Setup {
 		String Hand =Game.GetCard(i,j);
 		return Hand;
 	}
+	public static String Money(int i) {
+		return ""+Game.GetGamblerMoney(i); 
+	}
+	public static String Hand(int i) {
+		return ""+Game.GetGamblerHand(i); 
+	}
 }

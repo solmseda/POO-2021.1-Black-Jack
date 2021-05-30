@@ -37,7 +37,7 @@ public class PlayerScreenPanel extends JPanel {
 		lblPontuacaoTitulo.setBounds(332, 21, 107, 47);
 		add(lblPontuacaoTitulo);
 		
-		JLabel lblPontuacao = new JLabel("0");
+		JLabel lblPontuacao = new JLabel(Setup.Hand(0));
 		lblPontuacao.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblPontuacao.setBounds(377, 57, 28, 47);
 		add(lblPontuacao);
@@ -52,9 +52,9 @@ public class PlayerScreenPanel extends JPanel {
 		lblCreditosTitulo.setBounds(207, 21, 88, 47);
 		add(lblCreditosTitulo);
 		
-		JLabel lblCreditos = new JLabel("0");
+		JLabel lblCreditos = new JLabel(Setup.Money(0));
 		lblCreditos.setFont(new Font("Calibri", Font.BOLD, 26));
-		lblCreditos.setBounds(243, 57, 28, 47);
+		lblCreditos.setBounds(240, 57, 60, 47);
 		add(lblCreditos);
 		
 		JLabel lblValorDaAposta = new JLabel("0");
@@ -103,24 +103,24 @@ public class PlayerScreenPanel extends JPanel {
         	 
         	try {
         		  
-				coin1= ImageIO.read(getClass().getResourceAsStream("/ficha 1$.PNG"));
-				int coinx= (int) ((int)coin1.getWidth()*1.3f);
-				int coiny= (int) ((int)coin1.getHeight()*1.3f);
-				G.drawImage(coin1, 0,y,coinx,coiny,null);
-				coin5= ImageIO.read(getClass().getResourceAsStream("/ficha 5$.PNG"));
-				G.drawImage(coin5, 80,y,coinx,coiny,null);
-				coin10= ImageIO.read(getClass().getResourceAsStream("/ficha 10$.PNG"));
-				G.drawImage(coin10, 160,y,coinx,coiny,null);
-				coin20= ImageIO.read(getClass().getResourceAsStream("/ficha 20$.PNG"));
-				G.drawImage(coin20, 240,y,coinx,coiny,null);
-				coin50= ImageIO.read(getClass().getResourceAsStream("/ficha 50$.PNG"));
-				G.drawImage(coin50, 310,y,coinx,coiny,null);
-				coin100= ImageIO.read(getClass().getResourceAsStream("/ficha 100$.PNG"));
-				G.drawImage(coin100, 390,y,coinx,coiny,null);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        		 coin1= ImageIO.read(getClass().getResourceAsStream("/ficha 1$.PNG"));
+                 int coinx= (int) ((int)coin1.getWidth()*1.3f);
+                 int coiny= (int) ((int)coin1.getHeight()*1.3f);
+                 G.drawImage(coin1, 5,y,coinx,coiny,null);
+                 coin5= ImageIO.read(getClass().getResourceAsStream("/ficha 5$.PNG"));
+                 G.drawImage(coin5, 80,y,coinx,coiny,null);
+                 coin10= ImageIO.read(getClass().getResourceAsStream("/ficha 10$.PNG"));
+                 G.drawImage(coin10, 155,y,coinx,coiny,null);
+                 coin20= ImageIO.read(getClass().getResourceAsStream("/ficha 20$.PNG"));
+                 G.drawImage(coin20, 230,y,coinx,coiny,null);
+                 coin50= ImageIO.read(getClass().getResourceAsStream("/ficha 50$.PNG"));
+                 G.drawImage(coin50, 305,y,coinx,coiny,null);
+                 coin100= ImageIO.read(getClass().getResourceAsStream("/ficha 100$.PNG"));
+                 G.drawImage(coin100, 380,y,coinx,coiny,null);
+             } catch (IOException e) {
+                 // TODO Auto-generated catch block
+                 e.printStackTrace();
+             }
         
 		setOpaque(false);
 		super.paint(G) ;
