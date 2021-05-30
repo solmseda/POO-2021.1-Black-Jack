@@ -44,6 +44,7 @@ public class Game {
 		return player;
 	}
 	
+	
 	public static void CreateGame(ArrayList<String> jogadores) {
 		 bank= CreateBank();
 		 dealer=CreateDealer();
@@ -63,12 +64,21 @@ public class Game {
 		 String hand=Seecard(gamblers.get(player).hand.get(card));
 		 return hand;
 	 }
+	 public static int GetHandSize(int player) {
+			return gamblers.get(player).hand.size();
+		}
 	 public static int GetGamblerMoney(int i) {
 		 return gamblers.get(i).GetTotalMoney();
 	 }
 	 public static int GetGamblerHand(int i) {
 		 return gamblers.get(i).HandValue();
 	 }
+	 
+	 public static void PlayerHit(int i) {
+		 gamblers.get(i).Hit(dealer, deck);
+		  
+	 }
+	 
 	 public static String Seecard(Card card) {
 	        String name= "/";
 	        if(card.valor >= 2 && card.valor<=9) {

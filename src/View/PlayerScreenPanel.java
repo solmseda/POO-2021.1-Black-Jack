@@ -8,6 +8,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -24,10 +26,14 @@ public class PlayerScreenPanel extends JPanel {
     private BufferedImage coin20;
     private BufferedImage coin50;
     private BufferedImage coin100;
+    private int player;
 
 	/**
 	 * Create the panel.
 	 */
+    public void getplayer() {
+    player= Setup.getplayer();
+    }
 	public PlayerScreenPanel() {
 		setBackground(new Color(0, 128, 0));
 		setLayout(null);
@@ -37,7 +43,7 @@ public class PlayerScreenPanel extends JPanel {
 		lblPontuacaoTitulo.setBounds(332, 21, 107, 47);
 		add(lblPontuacaoTitulo);
 		
-		JLabel lblPontuacao = new JLabel(Setup.Hand(0));
+		JLabel lblPontuacao = new JLabel(Setup.Hand(player));
 		lblPontuacao.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblPontuacao.setBounds(377, 57, 28, 47);
 		add(lblPontuacao);
@@ -52,7 +58,7 @@ public class PlayerScreenPanel extends JPanel {
 		lblCreditosTitulo.setBounds(207, 21, 88, 47);
 		add(lblCreditosTitulo);
 		
-		JLabel lblCreditos = new JLabel(Setup.Money(0));
+		JLabel lblCreditos = new JLabel(Setup.Money(player));
 		lblCreditos.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblCreditos.setBounds(240, 57, 60, 47);
 		add(lblCreditos);
@@ -82,15 +88,25 @@ public class PlayerScreenPanel extends JPanel {
 		btnSplit.setBounds(358, 482, 88, 38);
 		add(btnSplit);
 
+		btnHit.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    Setup.Hit(player);	
+		    revalidate();
+		    repaint();
+
+		    }
+		});
 	}
+	
 	public void paint(Graphics G) {
 		G.setColor(getBackground());
 		G.fillRect(0, 0, getWidth(), getHeight());
         int x=90;
         int y=350;
        
-        for(int i=0;i<2;i++) {
-        	String cardstring= Setup.GetCard(0,i);
+        for(int i=0;i<Setup.Handsize(player);i++) {
+        	String cardstring= Setup.GetCard(player,i);
 	        try {
 	            card= ImageIO.read(getClass().getResourceAsStream(cardstring));
 	        } catch (IOException e) {

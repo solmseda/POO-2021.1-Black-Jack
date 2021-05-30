@@ -30,10 +30,18 @@ public class Setup {
 		System.out.println("OI");
 		 
 	}
+	public static int getplayer() {
+		return 0;
+	}
 	public static void NewMatch() {
 		Game.NewMatch();
 	}
-	
+	public static void Hit(int i) {
+		Game.PlayerHit(i);
+	}
+	public static int Handsize(int i) {
+	return Game.GetHandSize(i);
+	}
 	public static String GetCard(int i,int j) {
 		String Hand =Game.GetCard(i,j);
 		return Hand;
@@ -45,3 +53,4 @@ public class Setup {
 		return ""+Game.GetGamblerHand(i); 
 	}
 }
+
