@@ -59,7 +59,11 @@ public class Game {
 			 
 		}
 	}
-	 public String Seecard(Card card) {
+	 public static String GetCard(int player, int card) {
+		 String hand=Seecard(gamblers.get(player).hand.get(card));
+		 return hand;
+	 }
+	 public static String Seecard(Card card) {
 	        String name= "/";
 	        if(card.valor >= 2 && card.valor<=9) {
 	        name= name.concat(Integer.toString(card.valor));

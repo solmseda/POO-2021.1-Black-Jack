@@ -1,14 +1,23 @@
 package View;
 
 import javax.swing.JPanel;
+
+import Controller.Setup;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 public class PlayerScreenPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+    private BufferedImage card;
 
 	/**
 	 * Create the panel.
@@ -68,4 +77,19 @@ public class PlayerScreenPanel extends JPanel {
 		add(btnSplit);
 
 	}
+	public void paint(Graphics G) { 
+        int x=0;
+        for(int i=0;i<2;i++) {
+        String cardstring= Setup.GetCard(0,i);
+        try {
+            card= ImageIO.read(getClass().getResourceAsStream(cardstring));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+         G.drawImage(card, x,0,card.getWidth(),card.getHeight(),null);
+         x+=card.getWidth();
+        }
+        
+    }
 }

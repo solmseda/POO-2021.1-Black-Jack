@@ -34,4 +34,8 @@ public class Setup {
 		Game.NewMatch();
 	}
 	
+	public static String GetCard(int i,int j) {
+		String Hand =Game.GetCard(i,j);
+		return Hand;
+	}
 }
