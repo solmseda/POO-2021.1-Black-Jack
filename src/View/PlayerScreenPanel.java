@@ -94,6 +94,7 @@ public class PlayerScreenPanel extends JPanel {
 		    Setup.Hit(player);	
 		    revalidate();
 		    repaint();
+		    lblPontuacao.setText(Setup.Hand(player));
 
 		    }
 		});
