@@ -9,6 +9,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/ericr/OneDrive/Área de Trabalho/PUC/Períodos/2021.1/Programação Orientada a Objetos/POO-2021.1-Black-Jack/resources"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
