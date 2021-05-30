@@ -40,5 +40,46 @@ public class Game {
 		Player player = new Player();
 		return player;
 	}
+	
+	 public String Seecard(Card card) {
+	        String name= "/";
+	        if(card.valor >= 2 && card.valor<=9) {
+	        name= name.concat(Integer.toString(card.valor));
+	         }
+	        else {
+	        if(card.valor == 1) {
+	        name=name.concat("a");
+	        }
+	        else if(card.valor == 10) {
+	        name=name.concat("t");
+	        }
+	        else if(card.valor == 11) {
+	        name=name.concat("j");
+	        }
+	                    
+	        else if(card.valor == 12) {
+	        name=name.concat("q");
+	        }
+	        else if(card.valor == 13) {
+	        name=name.concat("k");
+	        }
+	        }
+	        if(card.naipe=="Copas") {
+	            name=name.concat("h");
+	        }
+	        else if(card.naipe=="Paus") {
+	            name= name.concat("c");
+	        }
+	        else if(card.naipe=="Espadas") {
+	            name=name.concat("s");
+	        }
+	        else {
+	            name=name.concat("h");
+	        }
+	        
+	        name= name.concat(".gif");
 
-}
+
+	       return name;
+	       }
+	   }
