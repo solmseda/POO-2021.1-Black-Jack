@@ -502,27 +502,29 @@ public class InitialScreenPanel extends JPanel {
 		
 		btnComecarPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Jogadores = new ArrayList<String>();
+ 
 				for(int i=1; i<=(Integer)NumJogadores.getValue(); i++) {
 					if(i==1) {
-						Jogadores.add(NomeJogador_1.getText());
+ 
 						Setup.Jogadores.add(NomeJogador_1.getText());
 					}
 					else if(i==2) {
-						Jogadores.add(NomeJogador_2.getText());
+						 
 						Setup.Jogadores.add(NomeJogador_2.getText());
 					}
 					else if(i==3) {
-						Jogadores.add(NomeJogador_3.getText());
+						 
 						Setup.Jogadores.add(NomeJogador_3.getText());
 					}
 					else {
-						Jogadores.add(NomeJogador_4.getText());
+						 
 						Setup.Jogadores.add(NomeJogador_4.getText());
 					}
+					
 				}
 				 
-				//System.exit(0);
+ 
+				Setup.NewGame();
 				
 				GameScreen game = new GameScreen();
 				game.setVisible(true);

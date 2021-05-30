@@ -28,6 +28,10 @@ public class Setup {
 	public static void NewGame() {
 		Game.CreateGame(Jogadores);
 		System.out.println("OI");
+		 
+	}
+	public static void NewRound() {
+		Game.NewRound();
 	}
 	
 }

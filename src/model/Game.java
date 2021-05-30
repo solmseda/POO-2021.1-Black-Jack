@@ -4,6 +4,7 @@ import java.util.*;
 public class Game {
 	public static Bank bank;
 	public static Dealer dealer;
+	public static Deck deck;
 	public static List<Gambler> gamblers;
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
@@ -26,7 +27,7 @@ public class Game {
 	}
 	
 	/* Cria a classe Deck do jogo */
-	public Deck CreateDeck() {
+	public static Deck CreateDeck() {
 		Deck deck = new Deck();
 		return deck;
 	}
@@ -47,8 +48,17 @@ public class Game {
 		 bank= CreateBank();
 		 dealer=CreateDealer();
 		 gamblers= CreateGamblers(jogadores,bank);
+		 deck= CreateDeck();
 	}
-	
+	public static void NewRound() {
+		for(int i=0;i<gamblers.size();i++) {
+			for(int j=0;j<2;j++) {
+				gamblers.get(i).hand.add(dealer.GiveCard(deck));
+				System.out.println("JOGADOR "+i+ " " + gamblers.get(i).hand.get(j).Name);
+			}
+			 
+		}
+	}
 	 public String Seecard(Card card) {
 	        String name= "/";
 	        if(card.valor >= 2 && card.valor<=9) {

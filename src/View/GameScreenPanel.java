@@ -36,6 +36,7 @@ public class GameScreenPanel extends JPanel {
 		btnEncerrarPartida.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnEncerrarPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				 System.exit(0);
 			}
 		});
 		add(btnEncerrarPartida);
@@ -45,8 +46,8 @@ public class GameScreenPanel extends JPanel {
 		btnNovaRodada.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNovaRodada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Setup.NewGame();
-				
+				Setup.NewRound(); 
+			 
 			}
 		});
 		add(btnNovaRodada);
@@ -56,6 +57,7 @@ public class GameScreenPanel extends JPanel {
 		btnSalvarJogo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSalvarJogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+ 
 			}
 		});
 		add(btnSalvarJogo);
