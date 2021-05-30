@@ -18,6 +18,12 @@ public class PlayerScreenPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
     private BufferedImage card;
+    private BufferedImage coin1;
+    private BufferedImage coin5;
+    private BufferedImage coin10;
+    private BufferedImage coin20;
+    private BufferedImage coin50;
+    private BufferedImage coin100;
 
 	/**
 	 * Create the panel.
@@ -81,6 +87,8 @@ public class PlayerScreenPanel extends JPanel {
 		G.setColor(getBackground());
 		G.fillRect(0, 0, getWidth(), getHeight());
         int x=90;
+        int y=350;
+       
         for(int i=0;i<2;i++) {
         	String cardstring= Setup.GetCard(0,i);
 	        try {
@@ -89,9 +97,31 @@ public class PlayerScreenPanel extends JPanel {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
-	        G.drawImage(card, x,150,card.getWidth()*2,card.getHeight()*2,null);
+	        G.drawImage(card, x,130,card.getWidth()*2,card.getHeight()*2,null);
 	        x+=card.getWidth()*2+20;
         }
+        	 
+        	try {
+        		  
+				coin1= ImageIO.read(getClass().getResourceAsStream("/ficha 1$.PNG"));
+				int coinx= (int) ((int)coin1.getWidth()*1.3f);
+				int coiny= (int) ((int)coin1.getHeight()*1.3f);
+				G.drawImage(coin1, 0,y,coinx,coiny,null);
+				coin5= ImageIO.read(getClass().getResourceAsStream("/ficha 5$.PNG"));
+				G.drawImage(coin5, 80,y,coinx,coiny,null);
+				coin10= ImageIO.read(getClass().getResourceAsStream("/ficha 10$.PNG"));
+				G.drawImage(coin10, 160,y,coinx,coiny,null);
+				coin20= ImageIO.read(getClass().getResourceAsStream("/ficha 20$.PNG"));
+				G.drawImage(coin20, 240,y,coinx,coiny,null);
+				coin50= ImageIO.read(getClass().getResourceAsStream("/ficha 50$.PNG"));
+				G.drawImage(coin50, 310,y,coinx,coiny,null);
+				coin100= ImageIO.read(getClass().getResourceAsStream("/ficha 100$.PNG"));
+				G.drawImage(coin100, 390,y,coinx,coiny,null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        
 		setOpaque(false);
 		super.paint(G) ;
 		setOpaque(true);
