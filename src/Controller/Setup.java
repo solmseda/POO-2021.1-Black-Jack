@@ -2,7 +2,7 @@ package Controller;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
-
+import model.Game;
 import View.InitialScreen;
 
 
@@ -25,5 +25,9 @@ public class Setup {
 		});
 	}
 	
+	public static void NewGame() {
+		Game.CreateGame(Jogadores);
+		System.out.println("OI");
+	}
 	
 }

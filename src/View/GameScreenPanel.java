@@ -45,6 +45,8 @@ public class GameScreenPanel extends JPanel {
 		btnNovaRodada.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNovaRodada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Setup.NewGame();
+				
 			}
 		});
 		add(btnNovaRodada);

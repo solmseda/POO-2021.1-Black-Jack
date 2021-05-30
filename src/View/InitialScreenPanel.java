@@ -521,7 +521,7 @@ public class InitialScreenPanel extends JPanel {
 						Setup.Jogadores.add(NomeJogador_4.getText());
 					}
 				}
-				System.out.println(Jogadores);
+				 
 				//System.exit(0);
 				
 				GameScreen game = new GameScreen();

@@ -1,6 +1,7 @@
 package model;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,7 +14,10 @@ public class GameTest {
 		Dealer dealer = new Dealer();
 		Bank bank = new Bank();
 		Game game = new Game();
-		String[] Names = {"Sol", "Victor", "Raks"};
+		ArrayList<String> Names =new ArrayList<String>();
+		Names.add("Sol");
+		Names.add("Victor");
+		Names.add("Raks");
 		List<Gambler> gamblers = game.CreateGamblers(Names, bank);
 		assertEquals("Sol foi criado",gamblers.get(0).Name, "Sol");
 		assertEquals("Victor foi criado",gamblers.get(1).Name, "Victor");
@@ -27,7 +31,8 @@ public class GameTest {
 		Dealer dealer = new Dealer();
 		Bank bank = new Bank();
 		Game game = new Game();
-		String[] Names = {"Sol"};
+		ArrayList<String> Names = new ArrayList<String>();
+		Names.add("Sol");
 		List<Gambler> gamblers = game.CreateGamblers(Names, bank);
 		assertNotSame("Raks não foi criada",gamblers.get(0).Name, "Raks");
 	}

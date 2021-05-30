@@ -2,13 +2,15 @@ package model;
 import java.util.*;
 
 public class Game {
-	
+	public static Bank bank;
+	public static Dealer dealer;
+	public static List<Gambler> gamblers;
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
-	public List<Gambler> CreateGamblers(String[] Names, Bank bank) {
+	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
 		List<Gambler> gamblers = new ArrayList<Gambler>();
 		
-		for(int i = 0; i < Names.length; i++) {
-			Gambler gambler = new Gambler(Names[i]);
+		for(int i = 0; i < Names.size(); i++) {
+			Gambler gambler = new Gambler(Names.get(i));
 			
 			//dar o dinheiro
 			gambler.allCoins=bank.GiveInitialMoney();
@@ -18,7 +20,7 @@ public class Game {
 	}
 	
 	/* Cria a classe Bank do jogo */
-	public Bank CreateBank() {
+	public static Bank CreateBank() {
 		Bank bank = new Bank();
 		return bank;
 	}
@@ -30,7 +32,7 @@ public class Game {
 	}
 	
 	/* Cria a classe Dealer do jogo */
-	public Dealer CreateDealer() {
+	public static Dealer CreateDealer() {
 		Dealer dealer = new Dealer();
 		return dealer;
 	}
@@ -39,6 +41,12 @@ public class Game {
 	public Player CreatePlayer() {
 		Player player = new Player();
 		return player;
+	}
+	
+	public static void CreateGame(ArrayList<String> jogadores) {
+		 bank= CreateBank();
+		 dealer=CreateDealer();
+		 gamblers= CreateGamblers(jogadores,bank);
 	}
 	
 	 public String Seecard(Card card) {
