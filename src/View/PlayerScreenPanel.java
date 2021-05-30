@@ -69,5 +69,3 @@ public class PlayerScreenPanel extends JPanel {
 
 	}
 }
-
-//Teste AA
