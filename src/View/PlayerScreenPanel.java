@@ -77,19 +77,23 @@ public class PlayerScreenPanel extends JPanel {
 		add(btnSplit);
 
 	}
-	public void paint(Graphics G) { 
-        int x=0;
+	public void paint(Graphics G) {
+		G.setColor(getBackground());
+		G.fillRect(0, 0, getWidth(), getHeight());
+        int x=90;
         for(int i=0;i<2;i++) {
-        String cardstring= Setup.GetCard(0,i);
-        try {
-            card= ImageIO.read(getClass().getResourceAsStream(cardstring));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	String cardstring= Setup.GetCard(0,i);
+	        try {
+	            card= ImageIO.read(getClass().getResourceAsStream(cardstring));
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	        G.drawImage(card, x,150,card.getWidth()*2,card.getHeight()*2,null);
+	        x+=card.getWidth()*2+20;
         }
-         G.drawImage(card, x,0,card.getWidth(),card.getHeight(),null);
-         x+=card.getWidth();
-        }
-        
+		setOpaque(false);
+		super.paint(G) ;
+		setOpaque(true);
     }
 }
