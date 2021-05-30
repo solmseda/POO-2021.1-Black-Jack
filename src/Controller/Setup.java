@@ -8,7 +8,7 @@ import View.InitialScreen;
 
 public class Setup {
 	
-	static ArrayList<String> Jogadores;
+	public static ArrayList<String> Jogadores = new ArrayList<String>();
 	static InitialScreen janelaInicial = new InitialScreen();
 	
 	public static void main(String[] args) {

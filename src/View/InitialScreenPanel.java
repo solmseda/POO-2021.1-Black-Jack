@@ -1,6 +1,9 @@
 package View;
 
+import Controller.Setup;
+
 import java.awt.Graphics;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,11 +15,16 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
 import java.awt.Font;
 import javax.swing.JSpinner;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingUtilities;
+
 import java.awt.Color;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
@@ -496,17 +504,32 @@ public class InitialScreenPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Jogadores = new ArrayList<String>();
 				for(int i=1; i<=(Integer)NumJogadores.getValue(); i++) {
-					if(i==1)
+					if(i==1) {
 						Jogadores.add(NomeJogador_1.getText());
-					else if(i==2)
+						Setup.Jogadores.add(NomeJogador_1.getText());
+					}
+					else if(i==2) {
 						Jogadores.add(NomeJogador_2.getText());
-					else if(i==3)
+						Setup.Jogadores.add(NomeJogador_2.getText());
+					}
+					else if(i==3) {
 						Jogadores.add(NomeJogador_3.getText());
-					else
+						Setup.Jogadores.add(NomeJogador_3.getText());
+					}
+					else {
 						Jogadores.add(NomeJogador_4.getText());
+						Setup.Jogadores.add(NomeJogador_4.getText());
+					}
 				}
 				System.out.println(Jogadores);
-				System.exit(0);
+				//System.exit(0);
+				
+				GameScreen game = new GameScreen();
+				game.setVisible(true);
+				
+				JComponent comp = (JComponent) e.getSource();
+				Window win = SwingUtilities.getWindowAncestor(comp);
+				win.dispose();
 			}
 		});
 		

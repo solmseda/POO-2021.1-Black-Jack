@@ -24,7 +24,7 @@ public class InitialScreen extends JFrame {
 		int x=sl/2-LARG_DEFAULT/2;
 		int y=sa/2-ALT_DEFAULT/2;
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(x, y, 880, 530);
 		setTitle("BlackJack");
 		initialSc = new InitialScreenPanel();
