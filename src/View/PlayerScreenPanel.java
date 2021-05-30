@@ -8,15 +8,14 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import java.awt.event.*;
 
-public class PlayerScreenPanel extends JPanel {
+public class PlayerScreenPanel extends JPanel implements MouseListener  {
 
 	private static final long serialVersionUID = 1L;
     private BufferedImage card;
@@ -27,6 +26,7 @@ public class PlayerScreenPanel extends JPanel {
     private BufferedImage coin50;
     private BufferedImage coin100;
     private int player;
+    int iClick,jClick;
 
 	/**
 	 * Create the panel.
@@ -35,6 +35,7 @@ public class PlayerScreenPanel extends JPanel {
     player= Setup.getplayer();
     }
 	public PlayerScreenPanel() {
+		addMouseListener(this);
 		setBackground(new Color(0, 128, 0));
 		setLayout(null);
 		
@@ -143,4 +144,44 @@ public class PlayerScreenPanel extends JPanel {
 		super.paint(G) ;
 		setOpaque(true);
     }
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int x=e.getX(),y=e.getY();
+		x-=75;
+		y-=75;
+		if(x<0)
+			jClick=-1;
+		else
+			jClick=x/80;
+		if(y<0)
+			iClick=-1;
+		else
+			iClick=y/80;
+		
+		if(iClick>=0 && iClick<1 && jClick>=0 && jClick<1) {
+			System.out.println("AAAAAAAAAAAAA");
+		}
+		
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
