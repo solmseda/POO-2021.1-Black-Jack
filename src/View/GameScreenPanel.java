@@ -70,3 +70,5 @@ public class GameScreenPanel extends JPanel {
 		//setOpaque(true);
 	}
 }
+
+//Teste AA
