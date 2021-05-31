@@ -8,13 +8,15 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.*;
-
+	
 public class PlayerScreenPanel extends JPanel implements MouseListener  {
 
 	private static final long serialVersionUID = 1L;
@@ -146,23 +148,38 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     }
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int x=e.getX(),y=e.getY();
-		x-=75;
-		y-=75;
-		if(x<0)
-			jClick=-1;
-		else
-			jClick=x/80;
-		if(y<0)
-			iClick=-1;
-		else
-			iClick=y/80;
-		
-		if(iClick>=0 && iClick<1 && jClick>=0 && jClick<1) {
-			System.out.println("AAAAAAAAAAAAA");
-		}
-		
-		
+		Point clicked = e.getPoint();
+	    Rectangle bounds_coin1 = new Rectangle(5, 350, coin1.getWidth(), coin1.getHeight());
+	    Rectangle bounds_coin5 = new Rectangle(80, 350, coin1.getWidth(), coin1.getHeight());
+	    Rectangle bounds_coin10 = new Rectangle(155, 350, coin1.getWidth(), coin1.getHeight());
+	    Rectangle bounds_coin20 = new Rectangle(230, 350, coin1.getWidth(), coin1.getHeight());
+	    Rectangle bounds_coin50 = new Rectangle(305, 350, coin1.getWidth(), coin1.getHeight());
+	    Rectangle bounds_coin100 = new Rectangle(380, 350, coin1.getWidth(), coin1.getHeight());
+	    
+	    if (bounds_coin1.contains(clicked)) {
+	        // target image was clicked
+	    	System.out.println("Clicou na moeda de 1");
+	    }
+	    if (bounds_coin5.contains(clicked)) {
+	        // target image was clicked
+	    	System.out.println("Clicou na moeda de 5");
+	    }
+	    if (bounds_coin10.contains(clicked)) {
+	        // target image was clicked
+	    	System.out.println("Clicou na moeda de 10");
+	    }
+	    if (bounds_coin20.contains(clicked)) {
+	        // target image was clicked
+	    	System.out.println("Clicou na moeda de 20");
+	    }
+	    if (bounds_coin50.contains(clicked)) {
+	        // target image was clicked
+	    	System.out.println("Clicou na moeda de 50");
+	    }
+	    if (bounds_coin100.contains(clicked)) {
+	        // target image was clicked
+	    	System.out.println("Clicou na moeda de 100");
+	    }
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -184,4 +201,5 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		// TODO Auto-generated method stub
 		
 	}
+        
 }
