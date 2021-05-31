@@ -3,6 +3,7 @@ package View;
 import javax.swing.JPanel;
 
 import Controller.Setup;
+//import model.coins;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -28,7 +29,9 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     private BufferedImage coin50;
     private BufferedImage coin100;
     private int player;
-    int iClick,jClick;
+    int iClick,jClick, bet = 0;
+    
+    JLabel lblValorDaAposta;
 
 	/**
 	 * Create the panel.
@@ -66,7 +69,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblCreditos.setBounds(240, 57, 60, 47);
 		add(lblCreditos);
 		
-		JLabel lblValorDaAposta = new JLabel("0");
+		lblValorDaAposta = new JLabel(String.valueOf(bet));
 		lblValorDaAposta.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblValorDaAposta.setBounds(88, 57, 28, 47);
 		add(lblValorDaAposta);
@@ -156,30 +159,51 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	    Rectangle bounds_coin50 = new Rectangle(305, 350, coin1.getWidth(), coin1.getHeight());
 	    Rectangle bounds_coin100 = new Rectangle(380, 350, coin1.getWidth(), coin1.getHeight());
 	    
+	    int quant_100 = 0;
+		int quant_50 = 0;
+		int quant_20 = 0;
+		int quant_10 = 0;
+		int quant_5 = 0;
+		int quant_1 = 0;
+	    
 	    if (bounds_coin1.contains(clicked)) {
 	        // target image was clicked
+	    	quant_1++;
+	    	bet = bet + 1;
 	    	System.out.println("Clicou na moeda de 1");
 	    }
 	    if (bounds_coin5.contains(clicked)) {
 	        // target image was clicked
+	    	quant_5++;
+	    	bet = bet + 5;
 	    	System.out.println("Clicou na moeda de 5");
 	    }
 	    if (bounds_coin10.contains(clicked)) {
 	        // target image was clicked
+	    	quant_10++;
+	    	bet = bet + 10;
 	    	System.out.println("Clicou na moeda de 10");
 	    }
 	    if (bounds_coin20.contains(clicked)) {
 	        // target image was clicked
+	    	quant_20++;
+	    	bet = bet + 20;
 	    	System.out.println("Clicou na moeda de 20");
 	    }
 	    if (bounds_coin50.contains(clicked)) {
 	        // target image was clicked
+	    	quant_50++;
+	    	bet = bet + 50;
 	    	System.out.println("Clicou na moeda de 50");
 	    }
 	    if (bounds_coin100.contains(clicked)) {
 	        // target image was clicked
+	    	quant_100++;
+	    	bet = bet + 100;
 	    	System.out.println("Clicou na moeda de 100");
 	    }
+	    System.out.println(bet);
+	    lblValorDaAposta.setText(String.valueOf(bet));
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
