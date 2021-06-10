@@ -6,6 +6,8 @@ public class Game {
 	public static Dealer dealer;
 	public static Deck deck;
 	public static List<Gambler> gamblers;
+	public static int vez;
+	
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
 		List<Gambler> gamblers = new ArrayList<Gambler>();
@@ -50,6 +52,8 @@ public class Game {
 		 dealer=CreateDealer();
 		 gamblers= CreateGamblers(jogadores,bank);
 		 deck= CreateDeck();
+		 
+		 vez = 0;
 	}
 	public static void NewMatch() {
 		for(int i=0;i<gamblers.size();i++) {
@@ -60,6 +64,11 @@ public class Game {
 			 
 		}
 	}
+	
+	public static void makeBet(int gamblerOfTheTurn, int[] bet) {
+		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4]);
+	}
+	
 	 public static String GetCard(int player, int card) {
 		 String hand=Seecard(gamblers.get(player).hand.get(card));
 		 return hand;
@@ -120,4 +129,8 @@ public class Game {
 
 	       return name;
 	       }
-	   }
+
+	 public int getTurn() {
+		 return vez;
+	 }
+}

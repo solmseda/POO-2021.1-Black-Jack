@@ -69,12 +69,12 @@ public class InitialScreenPanel extends JPanel {
 		NumJogadores.setVisible(false);
 		add(NumJogadores);
 		
-		JLabel lblNúmeroJogadores = new JLabel("N\u00FAmero de Jogadores:");
-		lblNúmeroJogadores.setForeground(Color.BLACK);
-		lblNúmeroJogadores.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNúmeroJogadores.setBounds(638, 104, 167, 32);
-		lblNúmeroJogadores.setVisible(false);
-		add(lblNúmeroJogadores);
+		JLabel lblNumeroJogadores = new JLabel("N\u00FAmero de Jogadores:");
+		lblNumeroJogadores.setForeground(Color.BLACK);
+		lblNumeroJogadores.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNumeroJogadores.setBounds(638, 104, 167, 32);
+		lblNumeroJogadores.setVisible(false);
+		add(lblNumeroJogadores);
 		
 		JLabel lblNomesJogadores = new JLabel("Nomes dos Jogadores:");
 		lblNomesJogadores.setForeground(Color.BLACK);
@@ -167,7 +167,7 @@ public class InitialScreenPanel extends JPanel {
 		        btnNovaPartida.setVisible(false);
 		        btnCarregarPartida.setVisible(false);
 		        NumJogadores.setVisible(true);
-		        lblNúmeroJogadores.setVisible(true);
+		        lblNumeroJogadores.setVisible(true);
 		        lblNomesJogadores.setVisible(true);
 		        NomeJogador_1.setVisible(true);
 		        lblP1.setVisible(true);
@@ -183,7 +183,7 @@ public class InitialScreenPanel extends JPanel {
 		        btnCarregarPartida.setVisible(true);
 		        NumJogadores.setVisible(false);
 		        NumJogadores.setValue(1);
-		        lblNúmeroJogadores.setVisible(false);
+		        lblNumeroJogadores.setVisible(false);
 		        lblNomesJogadores.setVisible(false);
 		        NomeJogador_1.setVisible(false);
 		        NomeJogador_1.setText("");
