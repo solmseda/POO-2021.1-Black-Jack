@@ -6,6 +6,7 @@ public class Game {
 	public static Dealer dealer;
 	public static Deck deck;
 	public static List<Gambler> gamblers;
+	public static List<coins> currentbet;
 	public static int vez;
 	
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
@@ -66,7 +67,8 @@ public class Game {
 	}
 	
 	public static void makeBet(int gamblerOfTheTurn, int[] bet) {
-		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4]);
+		currentbet= gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4]);
+		
 	}
 	
 	 public static String GetCard(int player, int card) {
@@ -87,7 +89,14 @@ public class Game {
 		 gamblers.get(i).Hit(dealer, deck);
 		  
 	 }
-	 
+	 public static void PlayerDouble(int i,int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5) {
+		 
+		 currentbet=gamblers.get(i). Double_Bet( dealer,  deck,Quant_100, Quant_50,  Quant_20,  Quant_10, Quant_5);
+		 
+	 }
+	 public static Integer GetBetAmount( int i) {
+		 return gamblers.get(i).GetBetAmount(currentbet);
+	 }
 	 public static String Seecard(Card card) {
 	        String name= "/";
 	        if(card.valor >= 2 && card.valor<=9) {

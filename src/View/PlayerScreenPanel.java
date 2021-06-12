@@ -54,6 +54,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     
     boolean betDone = false;
     ArrayList<Integer> b = new ArrayList<Integer>();
+     
 
 	/**
 	 * Create the panel.
@@ -149,6 +150,9 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	btnDeal.setVisible(false);
 			    int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
 			    Game.makeBet(player, b);
+			    lblAposta.setText(Setup.GetBetAmount(player));
+		    	lblCreditos.setText(Setup.Money(player));
+			    
 		    }
 		});
 
@@ -158,7 +162,8 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	Setup.Hit(player);	
 		    	revalidate();
 		    	repaint();
-		    	lblPontuacao.setText(Setup.Hand(player));
+		    	
+		    	
 		    }
 		});
 		
@@ -170,6 +175,18 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
+			}
+		});
+		btnDouble.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
+				Setup.Double(player,b);	
+				bet+=GetGamblerMoney();
+		    	revalidate();
+		    	repaint();
+		    	lblValorDaAposta.setText(String.valueOf(bet));
+		    	lblCreditos.setText(Setup.Money(player));
 			}
 		});
 	}
