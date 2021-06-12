@@ -258,7 +258,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	    Rectangle bounds_coin100 = new Rectangle(380, y, coin1.getWidth(), coin1.getHeight());
 	    
 		if(betDone == false) {
-		    if (bounds_coin1.contains(clicked)) {
+		    if (bounds_coin1.contains(clicked) && Setup.Money(player)-1-bet >= 0) {
 		        // target image was clicked
 		    	quant_1++;
 		    	bet = bet + 1;
@@ -266,7 +266,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin5.contains(clicked)) {
+		    if (bounds_coin5.contains(clicked) && Setup.Money(player)-5-bet >= 0) {
 		        // target image was clicked
 		    	quant_5++;
 		    	bet = bet + 5;
@@ -274,7 +274,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin10.contains(clicked)) {
+		    if (bounds_coin10.contains(clicked) && Setup.Money(player)-10-bet >= 0) {
 		        // target image was clicked
 		    	quant_10++;
 		    	bet = bet + 10;
@@ -282,7 +282,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin20.contains(clicked)) {
+		    if (bounds_coin20.contains(clicked) && Setup.Money(player)-20-bet >= 0) {
 		        // target image was clicked
 		    	quant_20++;
 		    	bet = bet + 20;
@@ -290,7 +290,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin50.contains(clicked)) {
+		    if (bounds_coin50.contains(clicked) && Setup.Money(player)-50-bet >= 0) {
 		        // target image was clicked
 		    	quant_50++;
 		    	bet = bet + 50;
@@ -298,7 +298,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin100.contains(clicked)) {
+		    if (bounds_coin100.contains(clicked) && Setup.Money(player)-100-bet >= 0) {
 		        // target image was clicked
 		    	quant_100++;
 		    	bet = bet + 100;
