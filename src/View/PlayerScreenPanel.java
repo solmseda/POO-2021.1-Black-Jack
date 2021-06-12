@@ -44,6 +44,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     JButton btnHit;
     JButton btnDouble;
     JButton btnSplit;
+    JLabel lblCreditos;
     
     int quant_100 = 0;
 	int quant_50 = 0;
@@ -87,7 +88,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblCreditosTitulo.setBounds(207, 21, 88, 47);
 		add(lblCreditosTitulo);
 		
-		JLabel lblCreditos = new JLabel(Setup.Money(player));
+		lblCreditos = new JLabel(Setup.MoneyText(player));
 		lblCreditos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreditos.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblCreditos.setBounds(207, 57, 88, 47);
@@ -261,6 +262,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        // target image was clicked
 		    	quant_1++;
 		    	bet = bet + 1;
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
@@ -268,6 +270,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        // target image was clicked
 		    	quant_5++;
 		    	bet = bet + 5;
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
@@ -275,6 +278,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        // target image was clicked
 		    	quant_10++;
 		    	bet = bet + 10;
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
@@ -282,6 +286,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        // target image was clicked
 		    	quant_20++;
 		    	bet = bet + 20;
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
@@ -289,6 +294,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        // target image was clicked
 		    	quant_50++;
 		    	bet = bet + 50;
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
@@ -296,6 +302,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        // target image was clicked
 		    	quant_100++;
 		    	bet = bet + 100;
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
 		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
