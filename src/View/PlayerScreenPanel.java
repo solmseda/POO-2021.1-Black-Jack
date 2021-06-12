@@ -204,6 +204,8 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	repaint();
 		    	lblValorDaAposta.setText(String.valueOf(bet));
 		    	lblCreditos.setText(Setup.MoneyText(player));
+		    	btnHit.setEnabled(false);
+		    	btnDouble.setEnabled(false);
 			}
 		});
 	}

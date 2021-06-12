@@ -101,6 +101,7 @@ import java.util.List;
 	        	}
 	    	}
 	    }
+	    Hit( dealer,  deck) ;
 	    return NewBet;
 	}
 	 
