@@ -40,7 +40,7 @@ public class Setup {
 	}
 	public static void Double(int i,int[] bet) {
 		System.out.println("AOI");
-		Game.PlayerDouble(i,bet[0], bet[1], bet[2], bet[3], bet[4]);
+		Game.PlayerDouble(i,bet[0], bet[1], bet[2], bet[3], bet[4],bet[5]);
 	}
 	public static int Handsize(int i) {
 	return Game.GetHandSize(i);
@@ -60,6 +60,9 @@ public class Setup {
 	}
 	public static String GetBetAmount(int i) {
 		return ""+Game.GetBetAmount(i);		 
+	}
+	public static Integer GetBetMoney(int i) {
+		return Game.GetBetAmount(i);		 
 	}
 	
 	

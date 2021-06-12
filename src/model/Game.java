@@ -8,7 +8,7 @@ public class Game {
 	public static List<Gambler> gamblers;
 	public static int vez;
 	public static int apostaMinima;
-	
+	public static List<coins> currentbet;
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
 		List<Gambler> gamblers = new ArrayList<Gambler>();
@@ -67,9 +67,13 @@ public class Game {
 	}
 	
 	public static void makeBet(int gamblerOfTheTurn, int[] bet) {
-		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
+		currentbet= gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
 	}
-	
+ public static void PlayerDouble(int i,int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
+		 
+		 currentbet=gamblers.get(i). Double_Bet( dealer,  deck,Quant_100, Quant_50,  Quant_20,  Quant_10, Quant_5,Quant_1);
+		 
+	 }
 	 public static String GetCard(int player, int card) {
 		 String hand=Seecard(gamblers.get(player).hand.get(card));
 		 return hand;
@@ -87,6 +91,9 @@ public class Game {
 	 public static void PlayerHit(int i) {
 		 gamblers.get(i).Hit(dealer, deck);
 		  
+	 }
+	 public static Integer GetBetAmount( int i) {
+		 return gamblers.get(i).GetBetAmount(currentbet);
 	 }
 	 
 	 public static String Seecard(Card card) {
