@@ -47,15 +47,16 @@ class BankTest {
 		Bank bank = new Bank();
 		Gambler gambler = new Gambler("Sol");
 		List<coins> allcoins= new ArrayList<coins>();
-		int Quant_100 = 1,  Quant_50 = 1, Quant_20 = 1, Quant_10 = 1, Quant_5 = 1;
+		int Quant_100 = 1,  Quant_50 = 1, Quant_20 = 1, Quant_10 = 1, Quant_5 = 1, Quant_1 = 1;
 
 		allcoins.add(new coins(Quant_100,100));
 		allcoins.add(new coins(Quant_50,50));
 		allcoins.add(new coins(Quant_20,20));
 		allcoins.add(new coins(Quant_10,10));
 		allcoins.add(new coins(Quant_5,5));
+		allcoins.add(new coins(Quant_1,1));
 		
-		gambler.allCoins = bank.give_money(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5);
+		gambler.allCoins = bank.give_money(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5, Quant_1);
 		
 		assertEquals("A quantidade de moedas é diferente da esperada", allcoins.get(0).qtt, gambler.allCoins.get(0).qtt);
 		}
@@ -65,15 +66,16 @@ class BankTest {
 		Bank bank = new Bank();
 		Gambler gambler = new Gambler("Sol");
 		List<coins> allcoins= new ArrayList<coins>();
-		int Quant_100 = 1,  Quant_50 = 1, Quant_20 = 1, Quant_10 = 1, Quant_5 = 1;
+		int Quant_100 = 1,  Quant_50 = 1, Quant_20 = 1, Quant_10 = 1, Quant_5 = 1, Quant_1 = 1;
 
 		allcoins.add(new coins(Quant_100,100));
 		allcoins.add(new coins(Quant_50,50));
 		allcoins.add(new coins(Quant_20,20));
 		allcoins.add(new coins(Quant_10,10));
 		allcoins.add(new coins(Quant_5,5));
+		allcoins.add(new coins(Quant_1,1));
 		
-		gambler.allCoins = bank.give_money(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5);
+		gambler.allCoins = bank.give_money(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5, Quant_1);
 		
 		assertNotSame("A quantidade de moedas é diferente da esperada", 2, gambler.allCoins.get(0).qtt);
 		

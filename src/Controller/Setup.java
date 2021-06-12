@@ -9,6 +9,7 @@ import View.InitialScreen;
 public class Setup {
 	
 	public static ArrayList<String> Jogadores = new ArrayList<String>();
+	public static int apostaMinima;
 	static InitialScreen janelaInicial = new InitialScreen();
 	
 	public static void main(String[] args) {
@@ -16,7 +17,6 @@ public class Setup {
 			public void run() {
 				try {
 					janelaInicial.setVisible(true);
-					System.out.println(Jogadores);
 				} catch (Exception e) {
 					System.out.println("Erro ao gerar tela inicial");
 					e.printStackTrace();
@@ -26,8 +26,7 @@ public class Setup {
 	}
 	
 	public static void NewGame() {
-		Game.CreateGame(Jogadores);
-		System.out.println("OI");
+		Game.CreateGame(Jogadores, apostaMinima);
 		 
 	}
 	public static int getplayer() {

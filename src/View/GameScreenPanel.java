@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 
 public class GameScreenPanel extends JPanel {
@@ -49,8 +51,6 @@ public class GameScreenPanel extends JPanel {
 				Setup.NewMatch(); 
 				PlayerScreen game = new PlayerScreen();
 				game.setVisible(true);
-				
-			 
 			}
 		});
 		add(btnNovaRodada);
@@ -60,10 +60,26 @@ public class GameScreenPanel extends JPanel {
 		btnSalvarJogo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSalvarJogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
- 
+				//Depois
 			}
 		});
 		add(btnSalvarJogo);
+		
+		JLabel lblApostaMinimaTitulo = new JLabel("Aposta m\u00EDnima:");
+		lblApostaMinimaTitulo.setForeground(Color.LIGHT_GRAY);
+		lblApostaMinimaTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblApostaMinimaTitulo.setBounds(138, 66, 115, 26);
+		add(lblApostaMinimaTitulo);
+		
+		String sufix = " créditos";
+		String apostaMin = String.valueOf(Setup.apostaMinima)+sufix;
+		
+		JLabel lblCreditos = new JLabel("0 cr\u00E9ditos");
+		lblCreditos.setText(apostaMin);
+		lblCreditos.setForeground(Color.LIGHT_GRAY);
+		lblCreditos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCreditos.setBounds(148, 87, 93, 26);
+		add(lblCreditos);
 		
 		try {
 			backgroundImage = ImageIO.read(getClass().getResourceAsStream("/blackjackBKG.png"));

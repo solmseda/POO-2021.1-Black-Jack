@@ -37,7 +37,7 @@ import java.util.List;
 		List<coins> currentmoney=new ArrayList<coins>(Arrays.asList( Quant_100, Quant_50, Quant_20, Quant_10, Quant_5));
 		return currentmoney;
 	}
-	public List<coins> Make_Bet(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5) {
+	public List<coins> Make_Bet(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
 		List<coins> bet= new ArrayList<coins>();
 		bet.add(new coins(Quant_100,100));
 		bet.add(new coins(Quant_50,50));
@@ -61,7 +61,7 @@ import java.util.List;
 	}
 	//se não puder nem vai aparecer
 	public List<coins> Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {
-		List<coins> NewBet=Make_Bet(0,0,0,0,0);
+		List<coins> NewBet=Make_Bet(0,0,0,0,0,0);
 		int betvalue= GetBetAmount(bet);
 		int doublebet=0;
 		for(int i=0;i<bet.size();i++) {
@@ -90,7 +90,7 @@ import java.util.List;
 	}
 	
 	public List<coins> Surrender(List<coins> bet) {	
-		List<coins> NewBet=Make_Bet(0,0,0,0,0);
+		List<coins> NewBet=Make_Bet(0,0,0,0,0,0);
 		int betvalue= GetBetAmount(bet);
 		int halfbet=0;
 	    

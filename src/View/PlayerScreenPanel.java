@@ -261,37 +261,43 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        // target image was clicked
 		    	quant_1++;
 		    	bet = bet + 1;
-		    	btnDeal.setEnabled(true);
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
 		    if (bounds_coin5.contains(clicked)) {
 		        // target image was clicked
 		    	quant_5++;
 		    	bet = bet + 5;
-		    	btnDeal.setEnabled(true);
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
 		    if (bounds_coin10.contains(clicked)) {
 		        // target image was clicked
 		    	quant_10++;
 		    	bet = bet + 10;
-		    	btnDeal.setEnabled(true);
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
 		    if (bounds_coin20.contains(clicked)) {
 		        // target image was clicked
 		    	quant_20++;
 		    	bet = bet + 20;
-		    	btnDeal.setEnabled(true);
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
 		    if (bounds_coin50.contains(clicked)) {
 		        // target image was clicked
 		    	quant_50++;
 		    	bet = bet + 50;
-		    	btnDeal.setEnabled(true);
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
 		    if (bounds_coin100.contains(clicked)) {
 		        // target image was clicked
 		    	quant_100++;
 		    	bet = bet + 100;
-		    	btnDeal.setEnabled(true);
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
 		}
 	    lblValorDaAposta.setText(String.valueOf(bet));

@@ -7,6 +7,7 @@ public class Game {
 	public static Deck deck;
 	public static List<Gambler> gamblers;
 	public static int vez;
+	public static int apostaMinima;
 	
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
@@ -47,13 +48,13 @@ public class Game {
 	}
 	
 	
-	public static void CreateGame(ArrayList<String> jogadores) {
+	public static void CreateGame(ArrayList<String> jogadores, int apostaMinimaSpinner) {
 		 bank= CreateBank();
 		 dealer=CreateDealer();
 		 gamblers= CreateGamblers(jogadores,bank);
 		 deck= CreateDeck();
-		 
 		 vez = 0;
+		 apostaMinima = apostaMinimaSpinner;
 	}
 	public static void NewMatch() {
 		for(int i=0;i<gamblers.size();i++) {
@@ -66,7 +67,7 @@ public class Game {
 	}
 	
 	public static void makeBet(int gamblerOfTheTurn, int[] bet) {
-		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4]);
+		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
 	}
 	
 	 public static String GetCard(int player, int card) {

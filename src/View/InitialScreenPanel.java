@@ -44,6 +44,7 @@ public class InitialScreenPanel extends JPanel {
 	private JTextField NomeJogador_3;
 	private JTextField NomeJogador_4;
 	public ArrayList<String> Jogadores;
+	JSpinner ApostaMinima;
 	
 	/**
 	 * Create the panel.
@@ -153,6 +154,22 @@ public class InitialScreenPanel extends JPanel {
 		btnComecarPartida.setVisible(false);
 		add(btnComecarPartida);
 		
+		JLabel lblApostaMinima = new JLabel("Aposta m\u00EDnima:");
+		lblApostaMinima.setBackground(Color.WHITE);
+		lblApostaMinima.setVisible(false);
+		lblApostaMinima.setForeground(Color.LIGHT_GRAY);
+		lblApostaMinima.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblApostaMinima.setBounds(200, 223, 123, 31);
+		add(lblApostaMinima);
+		
+		ApostaMinima = new JSpinner();
+		ApostaMinima.setModel(new SpinnerNumberModel(20, 20, 500, 1));
+		((JSpinner.DefaultEditor) ApostaMinima.getEditor()).getTextField().setEditable(false);
+		ApostaMinima.setVisible(false);
+		ApostaMinima.setFont(new Font("Tahoma", Font.BOLD, 12));
+		ApostaMinima.setBounds(222, 253, 71, 20);
+		add(ApostaMinima);
+		
 		//Carrega Imagem Inicial
 		try {
 			backgroundImage = ImageIO.read(getClass().getResourceAsStream("/Blackjack-Game.png"));
@@ -166,6 +183,8 @@ public class InitialScreenPanel extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		        btnNovaPartida.setVisible(false);
 		        btnCarregarPartida.setVisible(false);
+		        lblApostaMinima.setVisible(true);
+		        ApostaMinima.setVisible(true);
 		        NumJogadores.setVisible(true);
 		        lblNumeroJogadores.setVisible(true);
 		        lblNomesJogadores.setVisible(true);
@@ -181,6 +200,9 @@ public class InitialScreenPanel extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		    	btnNovaPartida.setVisible(true);
 		        btnCarregarPartida.setVisible(true);
+		        lblApostaMinima.setVisible(false);
+		        ApostaMinima.setVisible(false);
+		        ApostaMinima.setValue(1);
 		        NumJogadores.setVisible(false);
 		        NumJogadores.setValue(1);
 		        lblNumeroJogadores.setVisible(false);
@@ -523,7 +545,7 @@ public class InitialScreenPanel extends JPanel {
 					
 				}
 				 
- 
+				Setup.apostaMinima = (int) ApostaMinima.getValue();
 				Setup.NewGame();
 				
 				GameScreen game = new GameScreen();
