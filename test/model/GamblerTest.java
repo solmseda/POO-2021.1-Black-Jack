@@ -53,7 +53,7 @@ public class GamblerTest {
 			gambler.allCoins.get(i).qtt-=bet.get(i).qtt;
 		}
 		
-		bet2 = gambler.Double_Bet(dealer, deck, bet);
+		bet2 = gambler.Double_Bet(dealer, deck, Quant_100 , Quant_50 , Quant_20 , Quant_10 , Quant_5 , Quant_1 );
 		
 		assertEquals("Valor dobrado diferente do esperado", bet2.get(0).qtt, 2);
 	}
@@ -79,7 +79,7 @@ public class GamblerTest {
 			gambler.allCoins.get(i).qtt-=bet.get(i).qtt;
 		}
 		
-		bet2 = gambler.Double_Bet(dealer, deck, bet);
+		bet2 = gambler.Double_Bet(dealer, deck, Quant_100, Quant_50, Quant_20, Quant_10, Quant_5, Quant_1);
 		
 		assertNotSame("Valor dobrado diferente do esperado", bet2.get(0).qtt, 3);
 	}

@@ -56,7 +56,7 @@ import java.util.List;
 	}
 	
 	
-	public 
+	  
 	public Boolean Stand() {
 		/* No jogo finalizado essa função steá vinculada a um botão que irá passar a a vez do jogador através de uma booleana no controller */
 		return true;
