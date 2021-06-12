@@ -146,7 +146,15 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	btnStand.setEnabled(true);
 		    	btnHit.setEnabled(true);
 		    	btnDouble.setEnabled(true);
-		    	btnSplit.setEnabled(true);
+
+		    	Boolean CanSplit= Setup.PreparePlayerSplit(player,bet);
+		    	if(CanSplit) {
+		    		btnSplit.setEnabled(true);
+		    	}
+		    	else {
+		    		btnSplit.setEnabled(false);
+		    	}
+		    	
 		    	lblAposta.setVisible(false);
 		    	btnDeal.setVisible(false);
 			    int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
@@ -163,8 +171,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	Setup.Hit(player);	
 		    	revalidate();
 		    	repaint();
-		    	
-		    	
+		    	lblPontuacao.setText(Setup.Hand(player));
 		    }
 		});
 		
@@ -176,6 +183,15 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
+			}
+		});
+		btnSplit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		    	revalidate();
+		    	repaint();
+		    	lblValorDaAposta.setText(String.valueOf(bet));
+		    	lblCreditos.setText(Setup.MoneyText(player));
 			}
 		});
 		btnDouble.addActionListener(new ActionListener() {

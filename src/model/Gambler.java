@@ -10,6 +10,7 @@ import java.util.List;
 	coins Quant_10= new coins(0,10);
 	coins Quant_5= new coins(0,5);
 	public List<coins> allCoins= new ArrayList<coins>();	
+	public List<Card>SplitHand = new ArrayList<Card>();
 	
 	Gambler(String name){ 
 		Name=name;
@@ -17,6 +18,10 @@ import java.util.List;
 	}
 	
 	
+	public void Split() {
+		SplitHand.add(hand.get(1));
+		hand.remove(1);
+	}
 	
 	public Integer GetTotalMoney() {
 		int totalmoney=0;
@@ -50,6 +55,8 @@ import java.util.List;
 		return bet;
 	}
 	
+	
+	public 
 	public Boolean Stand() {
 		/* No jogo finalizado essa função steá vinculada a um botão que irá passar a a vez do jogador através de uma booleana no controller */
 		return true;

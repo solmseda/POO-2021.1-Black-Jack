@@ -22,6 +22,7 @@ import java.util.List;
 		return false;
 	}
 	
+	
 	public void CheckAs() {
 		for(int i=0;i<hand.size();i++) {
 			int handvalue=HandValue();

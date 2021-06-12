@@ -9,6 +9,7 @@ public class Game {
 	public static int vez;
 	public static int apostaMinima;
 	public static List<coins> currentbet;
+	public static List<coins> splitbet;
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
 		List<Gambler> gamblers = new ArrayList<Gambler>();
@@ -48,6 +49,7 @@ public class Game {
 	}
 	
 	
+	
 	public static void CreateGame(ArrayList<String> jogadores, int apostaMinimaSpinner) {
 		 bank= CreateBank();
 		 dealer=CreateDealer();
@@ -78,6 +80,9 @@ public class Game {
 		 String hand=Seecard(gamblers.get(player).hand.get(card));
 		 return hand;
 	 }
+	 public static int GetCardValue(int i,int j) {
+			return gamblers.get(i).hand.get(j).valor;
+		}
 	 public static int GetHandSize(int player) {
 			return gamblers.get(player).hand.size();
 		}
@@ -88,6 +93,9 @@ public class Game {
 		 return gamblers.get(i).HandValue();
 	 }
 	 
+	 public static void  Split(int i){
+		 gamblers.get(i).Split();
+		}
 	 public static void PlayerHit(int i) {
 		 gamblers.get(i).Hit(dealer, deck);
 		  
