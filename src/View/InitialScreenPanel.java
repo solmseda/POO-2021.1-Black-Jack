@@ -163,7 +163,7 @@ public class InitialScreenPanel extends JPanel {
 		add(lblApostaMinima);
 		
 		ApostaMinima = new JSpinner();
-		ApostaMinima.setModel(new SpinnerNumberModel(20, 20, 500, 1));
+		ApostaMinima.setModel(new SpinnerNumberModel(20, 20, 100, 1));
 		((JSpinner.DefaultEditor) ApostaMinima.getEditor()).getTextField().setEditable(false);
 		ApostaMinima.setVisible(false);
 		ApostaMinima.setFont(new Font("Tahoma", Font.BOLD, 12));
