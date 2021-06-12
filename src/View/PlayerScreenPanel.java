@@ -44,6 +44,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     JButton btnHit;
     JButton btnDouble;
     JButton btnSplit;
+    JLabel lblCreditos;
     
     int quant_100 = 0;
 	int quant_50 = 0;
@@ -88,7 +89,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblCreditosTitulo.setBounds(207, 21, 88, 47);
 		add(lblCreditosTitulo);
 		
-		JLabel lblCreditos = new JLabel(Setup.Money(player));
+		lblCreditos = new JLabel(Setup.MoneyText(player));
 		lblCreditos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreditos.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblCreditos.setBounds(207, 57, 88, 47);
@@ -274,41 +275,53 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	    Rectangle bounds_coin100 = new Rectangle(380, y, coin1.getWidth(), coin1.getHeight());
 	    
 		if(betDone == false) {
-		    if (bounds_coin1.contains(clicked)) {
+		    if (bounds_coin1.contains(clicked) && Setup.Money(player)-1-bet >= 0) {
 		        // target image was clicked
 		    	quant_1++;
 		    	bet = bet + 1;
-		    	btnDeal.setEnabled(true);
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin5.contains(clicked)) {
+		    if (bounds_coin5.contains(clicked) && Setup.Money(player)-5-bet >= 0) {
 		        // target image was clicked
 		    	quant_5++;
 		    	bet = bet + 5;
-		    	btnDeal.setEnabled(true);
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin10.contains(clicked)) {
+		    if (bounds_coin10.contains(clicked) && Setup.Money(player)-10-bet >= 0) {
 		        // target image was clicked
 		    	quant_10++;
 		    	bet = bet + 10;
-		    	btnDeal.setEnabled(true);
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin20.contains(clicked)) {
+		    if (bounds_coin20.contains(clicked) && Setup.Money(player)-20-bet >= 0) {
 		        // target image was clicked
 		    	quant_20++;
 		    	bet = bet + 20;
-		    	btnDeal.setEnabled(true);
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin50.contains(clicked)) {
+		    if (bounds_coin50.contains(clicked) && Setup.Money(player)-50-bet >= 0) {
 		        // target image was clicked
 		    	quant_50++;
 		    	bet = bet + 50;
-		    	btnDeal.setEnabled(true);
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin100.contains(clicked)) {
+		    if (bounds_coin100.contains(clicked) && Setup.Money(player)-100-bet >= 0) {
 		        // target image was clicked
 		    	quant_100++;
 		    	bet = bet + 100;
-		    	btnDeal.setEnabled(true);
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
+		    		btnDeal.setEnabled(true);
 		    }
 		}
 	    lblValorDaAposta.setText(String.valueOf(bet));

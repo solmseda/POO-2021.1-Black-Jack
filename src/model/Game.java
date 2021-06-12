@@ -6,8 +6,8 @@ public class Game {
 	public static Dealer dealer;
 	public static Deck deck;
 	public static List<Gambler> gamblers;
-	public static List<coins> currentbet;
 	public static int vez;
+	public static int apostaMinima;
 	
 	/* Criar os jogadores e dar o e cartas iniciais dinheiro inicial */
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
@@ -48,13 +48,13 @@ public class Game {
 	}
 	
 	
-	public static void CreateGame(ArrayList<String> jogadores) {
+	public static void CreateGame(ArrayList<String> jogadores, int apostaMinimaSpinner) {
 		 bank= CreateBank();
 		 dealer=CreateDealer();
 		 gamblers= CreateGamblers(jogadores,bank);
 		 deck= CreateDeck();
-		 
 		 vez = 0;
+		 apostaMinima = apostaMinimaSpinner;
 	}
 	public static void NewMatch() {
 		for(int i=0;i<gamblers.size();i++) {
@@ -67,8 +67,7 @@ public class Game {
 	}
 	
 	public static void makeBet(int gamblerOfTheTurn, int[] bet) {
-		currentbet= gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4]);
-		
+		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
 	}
 	
 	 public static String GetCard(int player, int card) {
@@ -89,14 +88,7 @@ public class Game {
 		 gamblers.get(i).Hit(dealer, deck);
 		  
 	 }
-	 public static void PlayerDouble(int i,int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5) {
-		 
-		 currentbet=gamblers.get(i). Double_Bet( dealer,  deck,Quant_100, Quant_50,  Quant_20,  Quant_10, Quant_5);
-		 
-	 }
-	 public static Integer GetBetAmount( int i) {
-		 return gamblers.get(i).GetBetAmount(currentbet);
-	 }
+	 
 	 public static String Seecard(Card card) {
 	        String name= "/";
 	        if(card.valor >= 2 && card.valor<=9) {

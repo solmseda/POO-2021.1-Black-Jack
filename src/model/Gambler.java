@@ -17,15 +17,7 @@ import java.util.List;
 	}
 	
 	
-	public List<coins> IntToCoins(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5) {
-		List<coins> bet= new ArrayList<coins>();
-		bet.add(new coins(Quant_100,100));
-		bet.add(new coins(Quant_50,50));
-		bet.add(new coins(Quant_20,20));
-		bet.add(new coins(Quant_10,10));
-		bet.add(new coins(Quant_5,5));
-		return bet;
-	}
+	
 	public Integer GetTotalMoney() {
 		int totalmoney=0;
 		for (int i=0;i< allCoins.size();i++) {
@@ -45,7 +37,7 @@ import java.util.List;
 		List<coins> currentmoney=new ArrayList<coins>(Arrays.asList( Quant_100, Quant_50, Quant_20, Quant_10, Quant_5));
 		return currentmoney;
 	}
-	public List<coins> Make_Bet(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5) {
+	public List<coins> Make_Bet(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
 		List<coins> bet= new ArrayList<coins>();
 		bet.add(new coins(Quant_100,100));
 		bet.add(new coins(Quant_50,50));
@@ -68,14 +60,13 @@ import java.util.List;
 		hand.add(card);
 	}
 	//se não puder nem vai aparecer
-	public List<coins> Double_Bet(Dealer dealer, Deck deck,int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5) {
-		List<coins> NewBet=Make_Bet(0,0,0,0,0);
-		List<coins> internalbet= IntToCoins( Quant_100, Quant_50,  Quant_20,  Quant_10, Quant_5);
-		int betvalue= GetBetAmount(internalbet);
+	public List<coins> Double_Bet(Dealer dealer, Deck deck,List<coins> bet) {
+		List<coins> NewBet=Make_Bet(0,0,0,0,0,0);
+		int betvalue= GetBetAmount(bet);
 		int doublebet=0;
-		for(int i=0;i<internalbet.size();i++) {
+		for(int i=0;i<bet.size();i++) {
 	    	//Retorna todo o valor pra mao do player
-	    	allCoins.get(i).qtt+=internalbet.get(i).qtt;
+	    	allCoins.get(i).qtt+=bet.get(i).qtt;
 	    }
 	    while(doublebet<betvalue*2) {
 	    	for(int i=0;i<allCoins.size();i++) {
@@ -99,7 +90,7 @@ import java.util.List;
 	}
 	
 	public List<coins> Surrender(List<coins> bet) {	
-		List<coins> NewBet=Make_Bet(0,0,0,0,0);
+		List<coins> NewBet=Make_Bet(0,0,0,0,0,0);
 		int betvalue= GetBetAmount(bet);
 		int halfbet=0;
 	    
