@@ -95,6 +95,7 @@ public class Game {
 			 return Seecard(dealer.hand.get(card));
 		 else
 			 return Seecard(gamblers.get(player).AllHands.get(handnum).get(card));
+	 }
 	 
 	 public static int GetCardValue(int player,int card, int handnum) {
 		 if (player == -1)

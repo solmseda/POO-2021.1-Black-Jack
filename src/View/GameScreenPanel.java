@@ -177,11 +177,11 @@ public class GameScreenPanel extends JPanel {
 		ArrayList<String> playerHand = new ArrayList<String>();
 		playersHands.add(playerHand);
 		
-		handSizesPlayers.add(Game.GetHandSize(player));
+		handSizesPlayers.add(Game.GetHandSize(player,0));
 		for(int i=0; i<handSizesPlayers.get(player); i++) {
 			
 			if (player!=-1)
-				playersHands.get(player).add(Game.GetCard(player, i));
+				playersHands.get(player).add(Game.GetCard(player, i,0));
 			else {
 				isDealer = true;
 			}
