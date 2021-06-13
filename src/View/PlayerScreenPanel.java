@@ -203,6 +203,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		    	Game.PlayerHit(player,handNum);	
+		    	btnSplit.setEnabled(false);
 		    	revalidate();
 		    	repaint();
 		    	lblPontuacao.setText(""+Game.GetGamblerHand(player));
@@ -305,6 +306,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
+				btnSplit.setEnabled(false);
 				Game.PlayerDouble(player,b,handNum);	
 				bet=Game.GetBetAmount(player);
 				Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
