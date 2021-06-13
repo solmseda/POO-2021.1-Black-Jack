@@ -61,6 +61,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     public boolean turnDone = false;
     public int handNum=0;
     public int handstack=0;
+    public int currhand=0;
     public boolean busted = false;
     public PlayerScreenPanelSignal signal = new PlayerScreenPanelSignal();
     ArrayList<Integer> b = new ArrayList<Integer>();
@@ -186,7 +187,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnSplit.setEnabled(true);
 		    	}
 		    	else {
-		    		btnSplit.setEnabled(true);
+		    		btnSplit.setEnabled(false);
 		    	}
 		    	
 		    	lblAposta.setVisible(false);
@@ -206,12 +207,14 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	repaint();
 		    	lblPontuacao.setText(""+Game.GetGamblerHand(player));
 		    	if(Game.Busted(player)) {
+		    		
 		    		lblQueima.setText("Queimou!");
 		    		lblQueima.setVisible(true);
 		    		btnHit.setEnabled(false);
 		    		btnStand.setEnabled(false);
 		    		btnSplit.setEnabled(false);
 		    		btnDouble.setEnabled(false);
+		    		
 		    		Timer timer = new Timer();
 		    		final long temp = 2500;
 		    		TimerTask delay = new TimerTask() {
@@ -253,9 +256,11 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 				win.dispose();
 				}
 				else {
-					handNum++;
-					handstack--;
 					
+					handNum++;
+					currhand++;
+					handstack--;
+					Game.GiveCard(player,currhand);
 					revalidate();
 			    	repaint();
 			    	lblValorDaAposta.setText(String.valueOf(bet));
@@ -268,17 +273,28 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int handcount= Game.CountHands(player);
-				
-			    	Game.Split(player);	  
-			    	if(handstack==0) {
-			    		handstack=2;
+				 
+			     Game.Split(player,handNum);	  
+			     handstack++;
+				 Boolean CanSplit = Game.CanSplit(player,handNum);
+				 if((Game.GetCardValue(player,0,handNum)==1 ||Game.GetCardValue(player,0,handNum)==11)||
+						 Game.GetCardValue(player,0,handNum)==1 ||Game.GetCardValue(player,0,handNum)==11){
+					btnHit.setEnabled(false);	
+			    	btnDouble.setEnabled(false);
+					}
+			     if(CanSplit) {
+			    		btnSplit.setEnabled(true);
 			    	}
 			    	else {
-			    		handstack++;
-			    	
-				}
+			    		btnSplit.setEnabled(false);
+			    	}
+				
 		    	revalidate();
 		    	repaint();
+		    	
+		    	int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
+		    	Game.makeBet(player, b);
+		    	bet=Game.GetBetAmount(player);
 		    	lblValorDaAposta.setText(String.valueOf(bet));
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
 		     

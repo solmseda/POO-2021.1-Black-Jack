@@ -24,13 +24,11 @@ import java.util.List;
  		
 		List<Card> newhand = new ArrayList <Card>();
 		AllHands.add(newhand);
-		newhand.add(hand.get(1));
-		AllHands.get(handnum).remove(1);
+		Card card= hand.get(1);
+		AllHands.get(handnum).remove(card);
+		newhand.add(card);
 		System.out.println(AllHands.get(handnum).size()+"tama");
-		handNums++;	
-		
-		
-		
+		handNums++;		
 	}
 	
 	public Integer GetTotalMoney() {
@@ -74,7 +72,7 @@ import java.util.List;
 		Card card = dealer.GiveCard(deck);
 		card=CheckAs(card);
 		AllHands.get(handnum).add(card);
-		hand.add(card);
+ 
 	}
 	//se não puder nem vai aparecer
 	public List<coins> IntToCoins(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
