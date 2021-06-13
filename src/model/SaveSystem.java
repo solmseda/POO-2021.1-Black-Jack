@@ -7,7 +7,7 @@ import java.io.*;
 
 public class SaveSystem {
 	
-	public void SaveGame(List<Gambler> jogadores, Dealer dealer) {
+	public void SaveGame(List<Gambler> jogadores, Dealer dealer, int turn) {
 		File save = new File("Save.txt");
 		
 		try {
@@ -25,6 +25,7 @@ public class SaveSystem {
 		try {
 			FileWriter myWriter = new FileWriter(save.getName(), false);
 			myWriter.write(jogadores.size());
+			myWriter.write(turn);
 			
 			for(int i = 0; i < jogadores.size(); i++) {
 				myWriter.write(jogadores.get(i).Name);
@@ -59,7 +60,7 @@ public class SaveSystem {
 		}
 	}
 	
-	public void RetrieveGame (List<Gambler> gamblers, Dealer dealer){
+	public void RetrieveGame (List<Gambler> gamblers, Dealer dealer, int turn){
 		//List<Gambler> gamblers = new ArrayList<Gambler>();
 		
 		
@@ -69,6 +70,9 @@ public class SaveSystem {
 			while(myReader.hasNextLine()) {
 					String data = myReader.nextLine();
 					int size = Integer.parseInt(data);
+					
+					data = myReader.nextLine();
+					turn = Integer.parseInt(data);
 					
 					for (int i = 0; i < size; i++) {
 						Gambler player = new Gambler(data);
