@@ -23,7 +23,9 @@ public class Game {
 	
 	public static void StartPlayerTurn(int currentPlayer) {
 			for(int i=0;i<2;i++) {
-				gamblers.get(currentPlayer).hand.add(dealer.GiveCard(deck));
+				Card card=dealer.GiveCard(deck);
+				card=gamblers.get(currentPlayer).CheckAs(card);
+				gamblers.get(currentPlayer).hand.add(card);
 			}
 	}
 	
@@ -140,21 +142,24 @@ public class Game {
 	    	 name= name.concat(Integer.toString(card.valor));
 	     }
 	     else {
-	    	 if(card.valor == 1) {
+	    	 if(card.valor == 1 || card.valor == 11) {
 	    		 name=name.concat("a");
 	         }
 	         else if(card.valor == 10) {
+	        	 if(card.Name=="10") {
 	        	 name=name.concat("t");
 	         }
-	         else if(card.valor == 11) {
-	        	 name=name.concat("j");
-	         }          
-	         else if(card.valor == 12) {
-	        	 name=name.concat("q");
+	        	 else if(card.Name == "Valete") {
+		        	 name=name.concat("j");
+		         }          
+		         else if(card.Name == "Dama") {
+		        	 name=name.concat("q");
+		         }
+		         else {
+		        	 name=name.concat("k");
+		         }
 	         }
-	         else if(card.valor == 13) {
-	        	 name=name.concat("k");
-	         }
+	         
 	    }
 	    if(card.naipe=="Copas") {
 	    	name=name.concat("h");

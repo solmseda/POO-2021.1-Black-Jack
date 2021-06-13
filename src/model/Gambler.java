@@ -61,6 +61,7 @@ import java.util.List;
 	public void Hit(Dealer dealer, Deck deck) 
 	{
 		Card card = dealer.GiveCard(deck);
+		card=CheckAs(card);
 		hand.add(card);
 	}
 	//se não puder nem vai aparecer
