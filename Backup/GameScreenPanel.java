@@ -1,5 +1,7 @@
 package View;
 
+import Controller.Setup;
+
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -13,8 +15,6 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import java.awt.Color;
 
-import model.Game;
-
 
 public class GameScreenPanel extends JPanel {
 	
@@ -23,8 +23,6 @@ public class GameScreenPanel extends JPanel {
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
-	public GameScreenPanelSignal signal = new GameScreenPanelSignal();
-	public boolean newMatch = false;
 
 	/**
 	 * Create the panel.
@@ -32,6 +30,8 @@ public class GameScreenPanel extends JPanel {
 	private BufferedImage backgroundImage;
 	public GameScreenPanel() {
 		setLayout(null);
+		
+		System.out.println(Setup.Jogadores);
 			
 		JButton btnEncerrarPartida = new JButton("Encerrar Partida");
 		btnEncerrarPartida.setBounds(744, 111, 132, 39);
@@ -48,9 +48,9 @@ public class GameScreenPanel extends JPanel {
 		btnNovaRodada.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNovaRodada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newMatch = true;
-				signal.send(newMatch);
-				newMatch = false;
+				Setup.NewMatch(); 
+				PlayerScreen game = new PlayerScreen();
+				game.setVisible(true);
 			}
 		});
 		add(btnNovaRodada);
@@ -72,7 +72,7 @@ public class GameScreenPanel extends JPanel {
 		add(lblApostaMinimaTitulo);
 		
 		String sufix = " créditos";
-		String apostaMin = String.valueOf(Game.apostaMinima)+sufix;
+		String apostaMin = String.valueOf(Setup.apostaMinima)+sufix;
 		
 		JLabel lblCreditos = new JLabel("0 cr\u00E9ditos");
 		lblCreditos.setText(apostaMin);

@@ -1,7 +1,5 @@
 package View;
 
-import Controller.Setup;
-
 import java.awt.Graphics;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -31,7 +29,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ChangeEvent;
 
-public class InitialScreenPanel extends JPanel {
+public class InitialScreenPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	public void mouseEntered(MouseEvent e) {}
@@ -43,8 +41,11 @@ public class InitialScreenPanel extends JPanel {
 	private JTextField NomeJogador_2;
 	private JTextField NomeJogador_3;
 	private JTextField NomeJogador_4;
-	public ArrayList<String> Jogadores;
+	public ArrayList<String> Jogadores = new ArrayList<String>();
+	public int apostaMinima;
+	public boolean gameReady = false;
 	JSpinner ApostaMinima;
+	public InitialScreenPanelSignal signal = new InitialScreenPanelSignal();
 	
 	/**
 	 * Create the panel.
@@ -527,29 +528,32 @@ public class InitialScreenPanel extends JPanel {
  
 				for(int i=1; i<=(Integer)NumJogadores.getValue(); i++) {
 					if(i==1) {
- 
-						Setup.Jogadores.add(NomeJogador_1.getText());
+						
+						Jogadores.add(NomeJogador_1.getText());
+						//Setup.Jogadores.add(NomeJogador_1.getText());
 					}
 					else if(i==2) {
-						 
-						Setup.Jogadores.add(NomeJogador_2.getText());
+						
+						Jogadores.add(NomeJogador_2.getText());
+						//Setup.Jogadores.add(NomeJogador_2.getText());
 					}
 					else if(i==3) {
-						 
-						Setup.Jogadores.add(NomeJogador_3.getText());
+						
+						Jogadores.add(NomeJogador_3.getText());
+						//Setup.Jogadores.add(NomeJogador_3.getText());
 					}
 					else {
-						 
-						Setup.Jogadores.add(NomeJogador_4.getText());
+						
+						Jogadores.add(NomeJogador_4.getText());
+						//Setup.Jogadores.add(NomeJogador_4.getText());
 					}
 					
 				}
-				 
-				Setup.apostaMinima = (int) ApostaMinima.getValue();
-				Setup.NewGame();
 				
-				GameScreen game = new GameScreen();
-				game.setVisible(true);
+				apostaMinima = (int) ApostaMinima.getValue();
+				gameReady = true;
+				signal.send(gameReady);
+				gameReady = false;
 				
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);

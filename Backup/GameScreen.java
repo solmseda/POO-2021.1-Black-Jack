@@ -7,11 +7,13 @@ import javax.swing.JFrame;
 public class GameScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public GameScreenPanel panel;
+	GameScreenPanel panel;
 	final int LARG_DEFAULT=900;
 	final int ALT_DEFAULT=700;
 
-	
+	/**
+	 * Create the frame.
+	 */
 	public GameScreen() {
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension screenSize=tk.getScreenSize();
@@ -28,4 +30,20 @@ public class GameScreen extends JFrame {
 		panel.setLayout(null);
 	}
 	
+	/**
+	 * Launch the application.
+	 */
+	
+	/*public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GameScreen frame = new GameScreen();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}*/
 }

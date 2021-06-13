@@ -71,17 +71,17 @@ public class Game {
 	public static void makeBet(int gamblerOfTheTurn, int[] bet) {
 		currentbet= gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
 	}
- public static void PlayerDouble(int i,int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
+ public static void PlayerDouble(int i,int[] bet) {
 		 
-		 currentbet=gamblers.get(i). Double_Bet( dealer,  deck,Quant_100, Quant_50,  Quant_20,  Quant_10, Quant_5,Quant_1);
+		 currentbet=gamblers.get(i). Double_Bet( dealer,  deck,bet[0], bet[1],  bet[2],  bet[3], bet[4], bet[5]);
 		 
 	 }
 	 public static String GetCard(int player, int card) {
 		 String hand=Seecard(gamblers.get(player).hand.get(card));
 		 return hand;
 	 }
-	 public static int GetCardValue(int i,int j) {
-			return gamblers.get(i).hand.get(j).valor;
+	 public static int GetCardValue(int player,int card) {
+			return gamblers.get(player).hand.get(card).valor;
 		}
 	 public static int GetHandSize(int player) {
 			return gamblers.get(player).hand.size();

@@ -2,21 +2,31 @@ package Controller;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Observable;
+
 import model.Game;
-import View.InitialScreen;
+import View.Interface;
+
+import java.util.Observer;
 
 
-public class Setup {
+@SuppressWarnings("deprecation")
+class Setup implements Observer{
 	
-	public static ArrayList<String> Jogadores = new ArrayList<String>();
-	public static int apostaMinima;
-	static InitialScreen janelaInicial = new InitialScreen();
+	static ArrayList<String> Jogadores = new ArrayList<String>();
+	static int apostaMinima;
+	static Interface interfaceGrafica;
+	static int playerDaVez;
+	static Setup setup = new Setup();
+
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					janelaInicial.setVisible(true);
+					interfaceGrafica = new Interface();
+					interfaceGrafica.janelaInicial.panel.signal.addObserver(setup);
+					interfaceGrafica.janelaInicial.setVisible(true);
 				} catch (Exception e) {
 					System.out.println("Erro ao gerar tela inicial");
 					e.printStackTrace();
@@ -26,62 +36,34 @@ public class Setup {
 	}
 	
 	public static void NewGame() {
+		Jogadores = interfaceGrafica.janelaInicial.panel.Jogadores;
+		apostaMinima = (int)interfaceGrafica.janelaInicial.panel.apostaMinima;
 		Game.CreateGame(Jogadores, apostaMinima);
-		 
+		interfaceGrafica.criaJanelajogo();
+		interfaceGrafica.janelaJogo.panel.signal.addObserver(setup);
+		interfaceGrafica.janelaJogo.setVisible(true);
 	}
-	public static int getplayer() {
-		return 0;
-	}
+	
+
 	public static void NewMatch() {
 		Game.NewMatch();
+		playerDaVez = Game.vez%4;
+		interfaceGrafica.criaJanelaPlayer(playerDaVez);
+		interfaceGrafica.janelaPlayer.panel.signal.addObserver(setup);
+		interfaceGrafica.janelaPlayer.setVisible(true);
 	}
-	public static void Hit(int i) {
-		Game.PlayerHit(i);
-	}
-	public static void Double(int i,int[] bet) {
-		System.out.println("AOI");
-		Game.PlayerDouble(i,bet[0], bet[1], bet[2], bet[3], bet[4],bet[5]);
-	}
-	public static int Handsize(int i) {
-	return Game.GetHandSize(i);
-	}
-	
-	public static Boolean PreparePlayerSplit(int i, int bet) {
-		if(Handsize(i)==2) {
-			if(GetCardValue(i,0)==GetCardValue(i,1)) {
-				if(Money(i)- bet*2>0) {
-				return true;
-				}
-			}
-		}
-		return false;
-	 }
-	public static void Split(int i) {
-		Game.PlayerHit(i);	
-	}
-	
-	public static String GetCard(int i,int j) {
-		String Hand =Game.GetCard(i,j);
-		return Hand;
-	}
-	public static int GetCardValue(int i,int j) {
-		return Game.GetCardValue(i, j);
+
+	@Override
+	public void update(Observable o, Object arg) {
 		
-	}
-	public static String MoneyText(int i) {
-		return ""+Game.GetGamblerMoney(i); 
-	}
-	public static int Money(int i) {
-		return Game.GetGamblerMoney(i); 
-	}
-	public static String Hand(int i) {
-		return ""+Game.GetGamblerHand(i); 
-	}
-	public static String GetBetAmount(int i) {
-		return ""+Game.GetBetAmount(i);		 
-	}
-	public static int GetBetMoney(int i) {
-		return Game.GetBetAmount(i);		 
+		if(interfaceGrafica.janelaInicial.panel.gameReady == true)
+			NewGame();
+		
+		if(interfaceGrafica.janelaJogo.panel.newMatch == true)
+			NewMatch();
+		
+		
+		
 	}
 	
 	

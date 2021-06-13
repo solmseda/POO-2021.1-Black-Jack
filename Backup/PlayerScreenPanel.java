@@ -1,9 +1,11 @@
 package View;
-import model.Game;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.util.ArrayList;
+
+import Controller.Setup;
+import model.Game;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -52,16 +54,16 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	int quant_1 = 0;
     
     boolean betDone = false;
-    public PlayerScreenPanelSignal signal = new PlayerScreenPanelSignal();
     ArrayList<Integer> b = new ArrayList<Integer>();
      
 
 	/**
 	 * Create the panel.
 	 */
-
-	public PlayerScreenPanel(int player) {
-		this.player = player;
+    public void getplayer() {
+    player= Setup.getplayer();
+    }
+	public PlayerScreenPanel() {
 		addMouseListener(this);
 		setBackground(new Color(0, 128, 0));
 		setLayout(null);
@@ -71,7 +73,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblPontuacaoTitulo.setBounds(332, 21, 107, 47);
 		add(lblPontuacaoTitulo);
 		
-		JLabel lblPontuacao = new JLabel(""+Game.GetGamblerHand(player));
+		JLabel lblPontuacao = new JLabel(Setup.Hand(player));
 		lblPontuacao.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPontuacao.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblPontuacao.setBounds(363, 57, 47, 47);
@@ -87,7 +89,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblCreditosTitulo.setBounds(207, 21, 88, 47);
 		add(lblCreditosTitulo);
 		
-		lblCreditos = new JLabel(""+Game.GetGamblerMoney(player));
+		lblCreditos = new JLabel(Setup.MoneyText(player));
 		lblCreditos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreditos.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblCreditos.setBounds(207, 57, 88, 47);
@@ -144,16 +146,8 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	btnStand.setEnabled(true);
 		    	btnHit.setEnabled(true);
 		    	btnDouble.setEnabled(true);
-		    	
-				if(Game.GetHandSize(player)==2) {
-					if(Game.GetCardValue(player,0)==Game.GetCardValue(player,1)) {
-						if(Game.GetGamblerMoney(player)- bet*2>0) {
-							Boolean CanSplit = true;
-						}
-					}
-				}
-				Boolean CanSplit = false;
 
+		    	Boolean CanSplit= Setup.PreparePlayerSplit(player,bet);
 		    	if(CanSplit) {
 		    		btnSplit.setEnabled(true);
 		    	}
@@ -165,8 +159,8 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	btnDeal.setVisible(false);
 			    int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
 			    Game.makeBet(player, b);
-			    lblAposta.setText(""+Game.GetBetAmount(player));
-		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
+			    lblAposta.setText(Setup.GetBetAmount(player));
+		    	lblCreditos.setText(Setup. MoneyText(player));
 			    
 		    }
 		});
@@ -174,10 +168,10 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		btnHit.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	Game.PlayerHit(player);	
+		    	Setup.Hit(player);	
 		    	revalidate();
 		    	repaint();
-		    	lblPontuacao.setText(""+Game.GetGamblerHand(player));
+		    	lblPontuacao.setText(Setup.Hand(player));
 		    }
 		});
 		
@@ -185,6 +179,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Game.vez++;
+				
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
@@ -196,21 +191,19 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	revalidate();
 		    	repaint();
 		    	lblValorDaAposta.setText(String.valueOf(bet));
-		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
+		    	lblCreditos.setText(Setup.MoneyText(player));
 			}
 		});
 		btnDouble.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
-				Game.PlayerDouble(player,b);	
-				bet=Game.GetBetAmount(player);
+				 int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
+				Setup.Double(player,b);	
+				bet=Setup.GetBetMoney(player);
 		    	revalidate();
 		    	repaint();
 		    	lblValorDaAposta.setText(String.valueOf(bet));
-		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
-		    	btnHit.setEnabled(false);
-		    	btnDouble.setEnabled(false);
+		    	lblCreditos.setText(Setup.MoneyText(player));
 			}
 		});
 	}
@@ -219,7 +212,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		G.setColor(getBackground());
 		G.fillRect(0, 0, getWidth(), getHeight());
         int x=180;
-        int totalCards = Game.GetHandSize(player);
+        int totalCards = Setup.Handsize(player);
         
         try {
         	coin1= ImageIO.read(getClass().getResourceAsStream("/ficha 1$.PNG"));
@@ -246,7 +239,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
         }
         else {
 	        for(int i=0;i<totalCards;i++) {
-	        	String cardstring= Game.GetCard(player,i);
+	        	String cardstring= Setup.GetCard(player,i);
 		        try {
 		            card= ImageIO.read(getClass().getResourceAsStream(cardstring));
 		        } catch (IOException e) {
@@ -298,52 +291,52 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	    Rectangle bounds_coin100 = new Rectangle(380, y, coin1.getWidth(), coin1.getHeight());
 	    
 		if(betDone == false) {
-		    if (bounds_coin1.contains(clicked) && Game.GetGamblerMoney(player)-1-bet >= 0) {
+		    if (bounds_coin1.contains(clicked) && Setup.Money(player)-1-bet >= 0) {
 		        // target image was clicked
 		    	quant_1++;
 		    	bet = bet + 1;
-		    	lblCreditos.setText(String.valueOf(Game.GetGamblerMoney(player)-bet));
-		    	if(bet>=Game.apostaMinima)
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin5.contains(clicked) && Game.GetGamblerMoney(player)-5-bet >= 0) {
+		    if (bounds_coin5.contains(clicked) && Setup.Money(player)-5-bet >= 0) {
 		        // target image was clicked
 		    	quant_5++;
 		    	bet = bet + 5;
-		    	lblCreditos.setText(String.valueOf(Game.GetGamblerMoney(player)-bet));
-		    	if(bet>=Game.apostaMinima)
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin10.contains(clicked) && Game.GetGamblerMoney(player)-10-bet >= 0) {
+		    if (bounds_coin10.contains(clicked) && Setup.Money(player)-10-bet >= 0) {
 		        // target image was clicked
 		    	quant_10++;
 		    	bet = bet + 10;
-		    	lblCreditos.setText(String.valueOf(Game.GetGamblerMoney(player)-bet));
-		    	if(bet>=Game.apostaMinima)
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin20.contains(clicked) && Game.GetGamblerMoney(player)-20-bet >= 0) {
+		    if (bounds_coin20.contains(clicked) && Setup.Money(player)-20-bet >= 0) {
 		        // target image was clicked
 		    	quant_20++;
 		    	bet = bet + 20;
-		    	lblCreditos.setText(String.valueOf(Game.GetGamblerMoney(player)-bet));
-		    	if(bet>=Game.apostaMinima)
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin50.contains(clicked) && Game.GetGamblerMoney(player)-50-bet >= 0) {
+		    if (bounds_coin50.contains(clicked) && Setup.Money(player)-50-bet >= 0) {
 		        // target image was clicked
 		    	quant_50++;
 		    	bet = bet + 50;
-		    	lblCreditos.setText(String.valueOf(Game.GetGamblerMoney(player)-bet));
-		    	if(bet>=Game.apostaMinima)
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
-		    if (bounds_coin100.contains(clicked) && Game.GetGamblerMoney(player)-100-bet >= 0) {
+		    if (bounds_coin100.contains(clicked) && Setup.Money(player)-100-bet >= 0) {
 		        // target image was clicked
 		    	quant_100++;
 		    	bet = bet + 100;
-		    	lblCreditos.setText(String.valueOf(Game.GetGamblerMoney(player)-bet));
-		    	if(bet>=Game.apostaMinima)
+		    	lblCreditos.setText(String.valueOf(Setup.Money(player)-bet));
+		    	if(bet>=Setup.apostaMinima)
 		    		btnDeal.setEnabled(true);
 		    }
 		}

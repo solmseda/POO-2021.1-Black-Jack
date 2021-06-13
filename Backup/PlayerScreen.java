@@ -8,12 +8,30 @@ import javax.swing.JFrame;
 public class PlayerScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public PlayerScreenPanel panel;
+	PlayerScreenPanel panel;
 	final int LARG_DEFAULT=480;
 	final int ALT_DEFAULT=580;
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					PlayerScreen frame = new PlayerScreen();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-	public PlayerScreen(int player) {
+	/**
+	 * Create the frame.
+	 */
+	public PlayerScreen() {
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension screenSize=tk.getScreenSize();
 		int sl=screenSize.width;
@@ -24,7 +42,7 @@ public class PlayerScreen extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(x, y, LARG_DEFAULT, ALT_DEFAULT);
 		setTitle("Jogador");
-		panel = new PlayerScreenPanel(player);
+		panel = new PlayerScreenPanel();
 		getContentPane().add(panel);
 		panel.setLayout(null);
 	}
