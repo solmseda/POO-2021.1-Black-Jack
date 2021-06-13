@@ -23,14 +23,21 @@ import java.util.List;
 	}
 	
 	
-	public void CheckAs() {
-		for(int i=0;i<hand.size();i++) {
+	public Card CheckAs(Card card) {
+	 
 			int handvalue=HandValue();
-			if(hand.get(i).Name=="As") {
+			 
+			if(card.Name=="As") {
 				if(handvalue+10<=21) {
-					hand.get(i).valor=11;
+ 					card.valor=11;
 				}
+				else {
+					card.valor=1;
+ 				}
 			}
+ 
+			return card;
 		}
-	}
-}
+	 
+    }
+ 
