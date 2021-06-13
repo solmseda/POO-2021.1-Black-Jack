@@ -16,9 +16,10 @@ class Setup implements Observer {
 	static ArrayList<String> Jogadores = new ArrayList<String>();
 	static int apostaMinima;
 	static Interface interfaceGrafica;
-	static int playerDaVez = -1;
+	static int playerDaVez;
 	static Setup setup = new Setup();
 	static ArrayList<Boolean> turnosCompletos = new ArrayList<Boolean>();
+	static boolean busted;
 
 	
 	public static void main(String[] args) {
@@ -37,6 +38,7 @@ class Setup implements Observer {
 	}
 	
 	public static void NewGame() {
+		playerDaVez = -1;
 		Jogadores = interfaceGrafica.janelaInicial.panel.Jogadores;
 		apostaMinima = interfaceGrafica.janelaInicial.panel.apostaMinima;
 		
@@ -56,7 +58,6 @@ class Setup implements Observer {
 		Game.vez++;
 		playerDaVez++;
 		if(playerDaVez<Jogadores.size()) {
-			System.out.println(playerDaVez);
 			Game.StartPlayerTurn(playerDaVez);
 			interfaceGrafica.janelasPlayers.get(playerDaVez).setVisible(true);
 		}
@@ -67,6 +68,8 @@ class Setup implements Observer {
 	
 	public static void UpdateGamblersTable() {
 		
+		busted = interfaceGrafica.janelasPlayers.get(playerDaVez).panel.busted;
+		interfaceGrafica.janelaJogo.panel.addPlayerCards(playerDaVez,busted);
 	}
 	
 	public static void EndRound() {
