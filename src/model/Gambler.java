@@ -29,9 +29,6 @@ import java.util.List;
 		AllHands.get(handnum).remove(1);
 		System.out.println(AllHands.get(handnum).size()+"tama");
 		handNums++;	
-		
-		
-		
 	}
 	
 	public Integer GetTotalMoney() {
