@@ -89,6 +89,12 @@ public class Game {
 		}
 		return besthand;
 	}
+	public static void DealerTurn() {
+		for (int i=0; i<2; i++) {
+			dealer.hand.add(dealer.GiveCard(Game.deck));
+			}
+		}
+	
 	public static boolean Busted(int player) {
 		if(player == -1)
 			return dealer.HandValue()<21;

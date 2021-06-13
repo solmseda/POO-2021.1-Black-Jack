@@ -6,6 +6,7 @@ import java.util.*;
 	public coins Quant_20;
 	public coins Quant_10;
 	public coins Quant_5;
+	public coins Quant_1;
 	
 	//Vai entregar uma quantidade de dinheiro baseada em uma quantidade especifica de cada tipo de moeda
 	

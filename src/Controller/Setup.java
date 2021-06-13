@@ -55,6 +55,10 @@ class Setup implements Observer {
 	}
 	
 	public static void NextPlayer() {
+		if(playerDaVez == -1) {
+			Game.DealerTurn();
+			UpdateTable();
+		}
 		Game.vez++;
 		playerDaVez++;
 		if(playerDaVez<Jogadores.size()) {
@@ -68,9 +72,12 @@ class Setup implements Observer {
 	}
 	 
 	
-	public static void UpdateGamblersTable() {
+	public static void UpdateTable() {
 		
-		busted = interfaceGrafica.janelasPlayers.get(playerDaVez).panel.busted;
+		if(playerDaVez!=-1)
+			busted = interfaceGrafica.janelasPlayers.get(playerDaVez).panel.busted;
+		else
+			busted = false;
 		interfaceGrafica.janelaJogo.panel.addPlayerCards(playerDaVez,busted);
 	}
 	
@@ -97,7 +104,7 @@ class Setup implements Observer {
 		
 		for(int player=0; player<Jogadores.size(); player++) {
 			if(interfaceGrafica.janelasPlayers.get(player).panel.turnDone == true) {
-				UpdateGamblersTable();
+				UpdateTable();
 				NextPlayer();
 			}
 			

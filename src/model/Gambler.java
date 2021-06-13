@@ -29,7 +29,7 @@ import java.util.List;
 		AllHands.get(handnum).remove(card);
 		newhand.add(card);
 		System.out.println(AllHands.get(handnum).size()+"tama");
-		handNums++;		
+		handNums++;	
 	}
 	
 	public Integer GetTotalMoney() {
@@ -65,7 +65,7 @@ import java.util.List;
 	}
 	
 	public Boolean Stand() {
-		/* No jogo finalizado essa função steá vinculada a um botão que irá passar a a vez do jogador através de uma booleana no controller */
+		/* No jogo finalizado essa funï¿½ï¿½o steï¿½ vinculada a um botï¿½o que irï¿½ passar a a vez do jogador atravï¿½s de uma booleana no controller */
 		return true;
 	}
 	public void Hit(Dealer dealer, Deck deck, int handnum) 
@@ -75,7 +75,7 @@ import java.util.List;
 		AllHands.get(handnum).add(card);
  
 	}
-	//se não puder nem vai aparecer
+	//se nï¿½o puder nem vai aparecer
 	public List<coins> IntToCoins(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
 		List<coins> bet= new ArrayList<coins>();
 		bet.add(new coins(Quant_100,100));

@@ -30,10 +30,11 @@ public class GameScreenPanel extends JPanel {
 	public JButton btnSalvarJogo;
 	public JButton btnEncerrarPartida;
 	boolean isDealer = false;
-	int playerDaVez;
+	boolean normalTurn = false;
 	ArrayList<Integer> handSizesPlayers = new ArrayList<Integer>();
 	ArrayList<Boolean> listBoolBustedPlayers = new ArrayList<Boolean>();
 	ArrayList<ArrayList<String>> playersHands = new ArrayList<ArrayList<String>>();
+	ArrayList<String> dealerHand = new ArrayList<String>();
 
 	/**
 	 * Create the panel.
@@ -83,7 +84,7 @@ public class GameScreenPanel extends JPanel {
 		lblApostaMinimaTitulo.setBounds(138, 66, 115, 26);
 		add(lblApostaMinimaTitulo);
 		
-		String sufix = " créditos";
+		String sufix = " crï¿½ditos";
 		String apostaMin = String.valueOf(Game.apostaMinima)+sufix;
 		
 		JLabel lblCreditos = new JLabel("0 cr\u00E9ditos");
@@ -96,7 +97,7 @@ public class GameScreenPanel extends JPanel {
 		try {
 			backgroundImage = ImageIO.read(getClass().getResourceAsStream("/blackjackBKG.png"));
 		} catch(IOException e) {
-			System.out.println("Não carregou imagem de fundo");
+			System.out.println("Nï¿½o carregou imagem de fundo");
 		}
 		
 	}
@@ -105,11 +106,23 @@ public class GameScreenPanel extends JPanel {
 	public void paint(Graphics G) {
 		G.drawImage(backgroundImage, 0,0,backgroundImage.getWidth(),backgroundImage.getHeight(),null);
 		
-		if(isDealer == true) {
-			///
-		}
-		
-		for(int i=0; i<listBoolBustedPlayers.size(); i++) {
+		int i = 0;
+		if (isDealer == true || normalTurn == true)
+			i = -1;
+				
+		while (i<listBoolBustedPlayers.size()) {
+			
+			if(i==-1) {
+				try {
+					BufferedImage cardDealer = ImageIO.read(getClass().getResourceAsStream("/b.gif"));
+					G.drawImage(cardDealer,380+25,110,73,97,null);
+					BufferedImage cardDealer2 = ImageIO.read(getClass().getResourceAsStream(dealerHand.get(1)));
+					G.drawImage(cardDealer2,380+50,110,73,97,null);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			
 			if(i == 0) {
 				if(listBoolBustedPlayers.get(i) == false) {
@@ -163,7 +176,7 @@ public class GameScreenPanel extends JPanel {
 					}
 				}
 			}
-			
+			i++;
 		}
 		
 		setOpaque(false);
@@ -174,20 +187,26 @@ public class GameScreenPanel extends JPanel {
 	
 	public void addPlayerCards(int player, boolean busted) {
 		
-		ArrayList<String> playerHand = new ArrayList<String>();
-		playersHands.add(playerHand);
-		
-		handSizesPlayers.add(Game.GetHandSize(player,0));
-		for(int i=0; i<handSizesPlayers.get(player); i++) {
-			
-			if (player!=-1)
-				playersHands.get(player).add(Game.GetCard(player, i,Game.BestHand(player)));
-			else {
-				isDealer = true;
+		if(player == -1) {
+			isDealer = true;
+			for(int i=0; i<2; i++) {
+				dealerHand.add(Game.GetCard(player, i, 0));
 			}
 		}
-		playerDaVez = player;
-		listBoolBustedPlayers.add(busted);
+		
+		else {
+			isDealer = false;
+			normalTurn = true;
+			ArrayList<String> playerHand = new ArrayList<String>();
+			playersHands.add(playerHand);
+			
+			handSizesPlayers.add(Game.GetHandSize(player,0));
+			for(int i=0; i<handSizesPlayers.get(player); i++) {
+			
+				playersHands.get(player).add(Game.GetCard(player, i,Game.BestHand(player)));			
+			}
+			listBoolBustedPlayers.add(busted);
+		}
 		this.paint(getGraphics());
 	}
 }
