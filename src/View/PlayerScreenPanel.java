@@ -62,6 +62,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     public int handNum=0;
     public int handstack=0;
     public int currhand=0;
+    public boolean blackjack = false;
     public boolean busted = false;
     public PlayerScreenPanelSignal signal = new PlayerScreenPanelSignal();
     ArrayList<Integer> b = new ArrayList<Integer>();
@@ -79,11 +80,11 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		
 		JLabel lblMao = new JLabel("M\u00E3o");
 		lblMao.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblMao.setBounds(208, 531, 47, 38);
+		lblMao.setBounds(399, 203, 47, 38);
 		add(lblMao);
 		JLabel lblMaoNum = new JLabel("1");
 		lblMaoNum.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblMaoNum.setBounds(254, 531, 14, 38);
+		lblMaoNum.setBounds(456, 203, 14, 38);
 		add(lblMaoNum);
 		JLabel lblPontuacaoTitulo = new JLabel("Pontua\u00E7\u00E3o:");
 		lblPontuacaoTitulo.setFont(new Font("Calibri", Font.BOLD, 22));
@@ -164,6 +165,27 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblAposta.setBounds(0, 127, 464, 115);
 		add(lblAposta);
 		
+		JLabel lblSurrender = new JLabel("<--- Surrender?! --->");
+		lblSurrender.setVisible(false);
+		lblSurrender.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSurrender.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSurrender.setBounds(139, 422, 196, 49);
+		add(lblSurrender);
+		
+		JButton btnYesSurrender = new JButton("Yes...");
+		btnYesSurrender.setVisible(false);
+		btnYesSurrender.setForeground(Color.RED);
+		btnYesSurrender.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnYesSurrender.setBounds(341, 430, 89, 39);
+		add(btnYesSurrender);
+		
+		JButton btnNopeSurrender = new JButton("Nope");
+		btnNopeSurrender.setVisible(false);
+		btnNopeSurrender.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNopeSurrender.setForeground(Color.BLACK);
+		btnNopeSurrender.setBounds(40, 430, 89, 39);
+		add(btnNopeSurrender);
+		
 		btnDeal.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
@@ -196,6 +218,9 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 			    lblResultado.setText(""+Game.GetBetAmount(player));
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
 			    lblPontuacao.setText(""+Game.GetGamblerHand(player));
+			    lblSurrender.setVisible(true);
+			    btnNopeSurrender.setVisible(true);
+			    btnYesSurrender.setVisible(true);
 		    }
 		});
 
@@ -213,8 +238,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnHit.setEnabled(false);
 		    		btnStand.setEnabled(false);
 		    		btnSplit.setEnabled(false);
-		    		btnDouble.setEnabled(false);
-		    		
+		    		btnDouble.setEnabled(false);		
 		    		Timer timer = new Timer();
 		    		final long temp = 2500;
 		    		TimerTask delay = new TimerTask() {
@@ -239,6 +263,22 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnStand.setEnabled(false);
 		    		btnSplit.setEnabled(false);
 		    		btnDouble.setEnabled(false);
+		    		Timer timer = new Timer();
+		    		final long temp = 2500;
+		    		TimerTask delay = new TimerTask() {
+						@Override
+						public void run() {
+							blackjack = true;
+							turnDone = true;
+							signal.send(turnDone);
+							turnDone = false;
+							blackjack = false;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.dispose();
+						}
+		    		};
+		    		timer.schedule(delay, temp);
 		    	}
 		    }
 		    
@@ -321,6 +361,22 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnStand.setEnabled(false);
 		    		btnSplit.setEnabled(false);
 		    		btnDouble.setEnabled(false);
+		    		Timer timer = new Timer();
+		    		final long temp = 2500;
+		    		TimerTask delay = new TimerTask() {
+						@Override
+						public void run() {
+							busted = true;
+							turnDone = true;
+							signal.send(turnDone);
+							turnDone = false;
+							busted = false;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.dispose();
+						}
+		    		};
+		    		timer.schedule(delay, temp);
 		    	}
 		    	if(Game.BlackJack(player)) {
 		    		
@@ -330,6 +386,22 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnStand.setEnabled(false);
 		    		btnSplit.setEnabled(false);
 		    		btnDouble.setEnabled(false);
+		    		Timer timer = new Timer();
+		    		final long temp = 2500;
+		    		TimerTask delay = new TimerTask() {
+						@Override
+						public void run() {
+							blackjack = true;
+							turnDone = true;
+							signal.send(turnDone);
+							turnDone = false;
+							blackjack = false;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.dispose();
+						}
+		    		};
+		    		timer.schedule(delay, temp);
 		    	}
 		    	btnHit.setEnabled(false);
 		    	btnDouble.setEnabled(false);

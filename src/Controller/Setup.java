@@ -61,6 +61,7 @@ class Setup implements Observer {
 		}
 		Game.vez++;
 		playerDaVez++;
+		System.out.println(playerDaVez);
 		if(playerDaVez<Jogadores.size()) {
 			Game.StartPlayerTurn(playerDaVez);
 			interfaceGrafica.janelasPlayers.get(playerDaVez).setVisible(true);
@@ -88,6 +89,8 @@ class Setup implements Observer {
 		interfaceGrafica.janelaJogo.panel.btnNovaRodada.setVisible(true);
 		interfaceGrafica.janelaJogo.panel.btnSalvarJogo.setBounds(744, 61, 132, 39);
 		interfaceGrafica.janelaJogo.panel.btnEncerrarPartida.setBounds(744, 111, 132, 39);
+		interfaceGrafica.janelaJogo.panel.revealDealerCard();
+		
 		/*
 		 * Salvar dados em um arquivo para poder recarregar na nova partida a partir de uma flag
 		 */

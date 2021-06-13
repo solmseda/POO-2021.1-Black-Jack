@@ -29,6 +29,7 @@ public class GameScreenPanel extends JPanel {
 	public JButton btnNovaRodada;
 	public JButton btnSalvarJogo;
 	public JButton btnEncerrarPartida;
+	public boolean endRound = false;
 	boolean isDealer = false;
 	boolean normalTurn = false;
 	ArrayList<Integer> handSizesPlayers = new ArrayList<Integer>();
@@ -88,7 +89,6 @@ public class GameScreenPanel extends JPanel {
 		String apostaMin = String.valueOf(Game.apostaMinima)+sufix;
 		
 		JLabel lblCreditos = new JLabel("0 cr\u00E9ditos");
-		lblCreditos.setText(apostaMin);
 		lblCreditos.setForeground(Color.LIGHT_GRAY);
 		lblCreditos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblCreditos.setBounds(148, 87, 93, 26);
@@ -114,8 +114,14 @@ public class GameScreenPanel extends JPanel {
 			
 			if(i==-1) {
 				try {
-					BufferedImage cardDealer = ImageIO.read(getClass().getResourceAsStream("/b.gif"));
-					G.drawImage(cardDealer,380+25,110,73,97,null);
+					if(endRound == false) {
+						BufferedImage cardDealer = ImageIO.read(getClass().getResourceAsStream("/b.gif"));
+						G.drawImage(cardDealer,380+25,110,73,97,null);
+					}
+					else {
+						BufferedImage cardDealer = ImageIO.read(getClass().getResourceAsStream(dealerHand.get(0)));
+						G.drawImage(cardDealer,380+25,110,73,97,null);
+					}
 					BufferedImage cardDealer2 = ImageIO.read(getClass().getResourceAsStream(dealerHand.get(1)));
 					G.drawImage(cardDealer2,380+50,110,73,97,null);
 				} catch (IOException e) {
@@ -207,6 +213,12 @@ public class GameScreenPanel extends JPanel {
 			}
 			listBoolBustedPlayers.add(busted);
 		}
+		this.paint(getGraphics());
+	}
+	
+	
+	public void revealDealerCard() {
+		endRound = true;
 		this.paint(getGraphics());
 	}
 }
