@@ -23,34 +23,52 @@ public class SaveSystem {
 		}
 		
 		try {
-			FileWriter myWriter = new FileWriter(save.getName(), false);
-			myWriter.write(jogadores.size());
-			myWriter.write(turn);
+			BufferedWriter myWriter = new BufferedWriter(new FileWriter(new File(save.getName())));
+			myWriter.write(String.valueOf(jogadores.size()));
+			myWriter.write(System.getProperty("line.separator"));
+			
+			myWriter.write(String.valueOf(turn));
+			myWriter.write(System.getProperty("line.separator"));
 			
 			for(int i = 0; i < jogadores.size(); i++) {
 				myWriter.write(jogadores.get(i).Name);
 				
-				myWriter.write(jogadores.get(i).Quant_100.qtt);
-				myWriter.write(jogadores.get(i).Quant_50.qtt);
-				myWriter.write(jogadores.get(i).Quant_20.qtt);
-				myWriter.write(jogadores.get(i).Quant_10.qtt);
-				myWriter.write(jogadores.get(i).Quant_5.qtt);
-				myWriter.write(jogadores.get(i).Quant_1.qtt);
+				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(0).qtt));
+				myWriter.write(System.getProperty("line.separator"));
+				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(1).qtt));
+				myWriter.write(System.getProperty("line.separator"));
+				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(2).qtt));
+				myWriter.write(System.getProperty("line.separator"));
+				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(3).qtt));
+				myWriter.write(System.getProperty("line.separator"));
+				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(4).qtt));
+				myWriter.write(System.getProperty("line.separator"));
+				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(5).qtt));
+				myWriter.write(System.getProperty("line.separator"));
 				
 				for(int j = 0 ; j < jogadores.get(i).hand.size(); j ++) {
 					myWriter.write(jogadores.get(i).hand.get(j).naipe);
+					myWriter.write(System.getProperty("line.separator"));
 					myWriter.write(jogadores.get(i).hand.get(j).Name);
-					myWriter.write(jogadores.get(i).hand.get(j).valor);
+					myWriter.write(System.getProperty("line.separator"));
+					myWriter.write(String.valueOf(jogadores.get(i).hand.get(j).valor));
+					myWriter.write(System.getProperty("line.separator"));
 				}
 			}
 			
 			myWriter.write(dealer.hand.get(0).naipe);
+			myWriter.write(System.getProperty("line.separator"));
 			myWriter.write(dealer.hand.get(0).Name);
-			myWriter.write(dealer.hand.get(0).valor);
+			myWriter.write(System.getProperty("line.separator"));
+			myWriter.write(String.valueOf(dealer.hand.get(0).valor));
+			myWriter.write(System.getProperty("line.separator"));
 			
 			myWriter.write(dealer.hand.get(1).naipe);
+			myWriter.write(System.getProperty("line.separator"));
 			myWriter.write(dealer.hand.get(1).Name);
-			myWriter.write(dealer.hand.get(1).valor);
+			myWriter.write(System.getProperty("line.separator"));
+			myWriter.write(String.valueOf(dealer.hand.get(1).valor));
+			myWriter.write(System.getProperty("line.separator"));
 			
 			myWriter.close();
 

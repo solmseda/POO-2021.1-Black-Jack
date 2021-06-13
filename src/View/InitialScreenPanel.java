@@ -196,6 +196,7 @@ public class InitialScreenPanel extends JPanel{
 		    }
 		});
 		
+		
 		btnVoltar.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
@@ -560,6 +561,18 @@ public class InitialScreenPanel extends JPanel{
 				win.dispose();
 			}
 		});
+		
+		btnCarregarPartida.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				JComponent comp = (JComponent) e.getSource();
+				Window win = SwingUtilities.getWindowAncestor(comp);
+				win.dispose();
+			}
+		});
+		
 		
 	}
 	

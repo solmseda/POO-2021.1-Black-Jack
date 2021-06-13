@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 
 import model.Game;
+import model.SaveSystem;
 
 
 public class GameScreenPanel extends JPanel {
@@ -65,6 +66,9 @@ public class GameScreenPanel extends JPanel {
 		btnSalvarJogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Depois
+				SaveSystem save = new SaveSystem();
+				save.SaveGame(Game.gamblers, Game.dealer, Game.vez);
+				System.out.println("Último jogo carregado!");
 			}
 		});
 		add(btnSalvarJogo);

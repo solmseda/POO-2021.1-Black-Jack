@@ -23,6 +23,15 @@ public class Game {
 		 vez = -1;
 	}
 	
+	public static void LoadGame(ArrayList<Gambler> jogadores, Dealer dealerloading, int turn, int apostaMinimaSpinner) {
+		bank= CreateBank();
+		 dealer= dealerloading;
+		 gamblers= jogadores;
+		 apostaMinima = apostaMinimaSpinner;
+		 deck= CreateDeck();
+		 vez = turn;
+	}
+	
 	public static void StartPlayerTurn(int currentPlayer) {
 			for(int i=0;i<2;i++) {
 				Card card=dealer.GiveCard(deck);

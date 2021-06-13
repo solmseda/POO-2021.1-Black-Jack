@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import model.Game;
+import model.SaveSystem;
 import View.Interface;
 
 import java.util.Observer;
@@ -53,6 +54,25 @@ class Setup implements Observer {
 			turnosCompletos.add(false);
 		}
 	}
+	
+	/*public static void LoadGame(ArrayList<Gambler> gamblers, Dealer dealer, int vez) {
+		playerDaVez = vez;
+		SaveSystem save = new SaveSystem();
+		
+		Jogadores = interfaceGrafica.janelaInicial.panel.Jogadores;
+		apostaMinima = interfaceGrafica.janelaInicial.panel.apostaMinima;
+		
+		Game.LoadGame(gamblers, dealer, vez, apostaMinima);
+		interfaceGrafica.criaJanelajogo();
+		interfaceGrafica.janelaJogo.panel.signal.addObserver(setup);
+		interfaceGrafica.janelaJogo.setVisible(true);
+		
+		for(int player=0; player<Jogadores.size(); player++) {
+			interfaceGrafica.criaJanelaPlayer(Jogadores,player);
+			interfaceGrafica.janelasPlayers.get(player).panel.signal.addObserver(setup);
+			turnosCompletos.add(false);
+		}
+	}*/
 	
 	public static void NextPlayer() {
 		if(playerDaVez == -1) {
