@@ -106,7 +106,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblQueima.setVisible(false);
 		lblQueima.setForeground(Color.ORANGE);
 		lblQueima.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQueima.setFont(new Font("Calibri", Font.BOLD, 95));
+		lblQueima.setFont(new Font("Calibri", Font.BOLD, 50));
 		lblQueima.setBounds(0, 178, 464, 115);
 		add(lblQueima);
 		
@@ -154,17 +154,19 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	betDone = true;
 		    	btnStand.setEnabled(true);
 		    	btnHit.setEnabled(true);
-		    	btnDouble.setEnabled(true);
-		    	
-				if(Game.GetHandSize(player)==2) {
-					if(Game.GetCardValue(player,0)==Game.GetCardValue(player,1)) {
-						if(Game.GetGamblerMoney(player)- bet*2>0) {
-							Boolean CanSplit = true;
-						}
-					}
-				}
-				Boolean CanSplit = false;
-
+		    	 
+		    	int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
+				   Game.makeBet(player, b);
+				   Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
+				Boolean CanSplit = Game.CanSplit(player);
+			    Boolean CanDouble= Game.CanDouble(player); 
+		    	if(CanDouble) {
+		    		btnDouble.setEnabled(true);;
+		    	}
+		    	else {
+		    		btnDouble.setEnabled(false);
+		    	}
+				
 		    	if(CanSplit) {
 		    		btnSplit.setEnabled(true);
 		    	}
@@ -174,8 +176,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	
 		    	lblAposta.setVisible(false);
 		    	btnDeal.setVisible(false);
-			    int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
-			    Game.makeBet(player, b);
+			    
 			    lblQueima.setText(""+Game.GetBetAmount(player));
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
 			    lblPontuacao.setText(""+Game.GetGamblerHand(player));
@@ -191,6 +192,14 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	lblPontuacao.setText(""+Game.GetGamblerHand(player));
 		    	if(Game.Busted(player)) {
 		    		lblQueima.setText("Queimou!");
+		    		lblQueima.setVisible(true);
+		    		btnHit.setEnabled(false);
+		    		btnStand.setEnabled(false);
+		    		btnSplit.setEnabled(false);
+		    		btnDouble.setEnabled(false);
+		    	}
+		    	if(Game.BlackJack(player)) {
+		    		lblQueima.setText("BLACKJACK!");
 		    		lblQueima.setVisible(true);
 		    		btnHit.setEnabled(false);
 		    		btnStand.setEnabled(false);
@@ -232,6 +241,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
 		    	btnHit.setEnabled(false);
 		    	btnDouble.setEnabled(false);
+		    	Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
 			}
 		});
 	}

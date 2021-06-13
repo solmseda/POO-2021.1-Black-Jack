@@ -83,6 +83,7 @@ import java.util.List;
 	    	//Retorna todo o valor pra mao do player
 	    	allCoins.get(i).qtt+=InternalBet.get(i).qtt;
 	    }
+		
 	    while(doublebet<betvalue*2) {
 	    	for(int i=0;i<allCoins.size();i++) {
 	    		int qtt=0;

@@ -68,13 +68,18 @@ public class Game {
 			return gamblers.get(player).HandValue()>21;
 	}
 	
-	
+	public static boolean BlackJack(int player) {
+		if(player == -1)
+			return dealer.HandValue()==21;
+		else
+			return gamblers.get(player).HandValue()==21;
+	}
 	public static void makeBet(int gamblerOfTheTurn, int[] bet) {
-		currentbet= gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
+		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
 	}
 	
 	public static void PlayerDouble(int i,int[] bet) {
-		 currentbet=gamblers.get(i). Double_Bet( dealer,  deck,bet[0], bet[1],  bet[2],  bet[3], bet[4], bet[5]);
+		 gamblers.get(i). Double_Bet( dealer,  deck,bet[0], bet[1],  bet[2],  bet[3], bet[4], bet[5]);
 	 }
 	
 	 public static String GetCard(int player, int card) {
@@ -109,7 +114,26 @@ public class Game {
 	 public static Integer GetBetAmount( int i) {
 		 return gamblers.get(i).GetBetAmount(currentbet);
 	 }
-	 
+	 public static Boolean CanSplit(int i) {
+		 if(GetGamblerMoney(i)- GetBetAmount(i)*2>0) {
+	    		if(Game.GetHandSize(i)==2) {
+	    			if(Game.GetCardValue(i,0)==Game.GetCardValue(i,1)) {
+					
+	    				return true;
+	    				}
+					}
+				}
+		 return false;
+	 }
+	 public static Boolean CanDouble(int i) {
+		 if(GetGamblerMoney(i)- GetBetAmount(i)*2>0) {
+			 return true;
+		 }
+		 return false;
+		 }
+	 public static void SetBet(int i, int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
+		 currentbet= gamblers.get(i).IntToCoins(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5, Quant_1);
+	 }
 	 public static String Seecard(Card card) {
 		 String name= "/";
 	     if(card.valor >= 2 && card.valor<=9) {

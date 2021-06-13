@@ -6,5 +6,12 @@ class Dealer extends Player{
 		Card card = deck.RemoveCard();
 		return card;
 	}
+	
+	public Boolean CanBuyCards() {
+	if(HandValue()<17) {
+		return true;
+		}
+	return false;
+	}
 }
 
