@@ -235,13 +235,31 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 				int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
 				Game.PlayerDouble(player,b);	
 				bet=Game.GetBetAmount(player);
+				Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
 		    	revalidate();
 		    	repaint();
 		    	lblValorDaAposta.setText(String.valueOf(bet));
+			    lblPontuacao.setText(""+Game.GetGamblerHand(player));
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
+		    	if(Game.Busted(player)) {
+		    		lblQueima.setText("Queimou!");
+		    		lblQueima.setVisible(true);
+		    		btnHit.setEnabled(false);
+		    		btnStand.setEnabled(false);
+		    		btnSplit.setEnabled(false);
+		    		btnDouble.setEnabled(false);
+		    	}
+		    	if(Game.BlackJack(player)) {
+		    		lblQueima.setText("BLACKJACK!");
+		    		lblQueima.setVisible(true);
+		    		btnHit.setEnabled(false);
+		    		btnStand.setEnabled(false);
+		    		btnSplit.setEnabled(false);
+		    		btnDouble.setEnabled(false);
+		    	}
 		    	btnHit.setEnabled(false);
 		    	btnDouble.setEnabled(false);
-		    	Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
+		    	 
 			}
 		});
 	}
