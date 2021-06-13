@@ -30,7 +30,8 @@ public class Game {
 				gamblers.get(currentPlayer).hand.add(card);
 			}
 		    gamblers.get(currentPlayer).AllHands.add(gamblers.get(currentPlayer).hand);
-		    Game.SetHandsLeft(3);
+		    Game.SetHandsLeft(2);
+		    currenthand=0;
 	}
 	
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
@@ -49,6 +50,11 @@ public class Game {
 		return bank;
 	}
 	
+	public static void GiveCard(int currentPlayer ,int hand) {
+		Card card=dealer.GiveCard(deck);
+		card=gamblers.get(currentPlayer).CheckAs(card);
+		gamblers.get(currentPlayer).AllHands.get(hand).add(card);
+	}
 	/* Cria a classe Deck do jogo */
 	public static Deck CreateDeck() {
 		Deck deck = new Deck();
@@ -66,7 +72,23 @@ public class Game {
 		Player player = new Player();
 		return player;
 	}
+	public static Integer HandValue(List<Card> hand) {
+		int sum=0;
+		for (int i=0;i<hand.size();i++) {
+			sum+=hand.get(i).valor;
+			}
+		return sum;
+	}
 	
+	public static int BestHand(int player) {
+		int besthand= 0;
+		for(int i=1;i< gamblers.get(player).AllHands.size();i++) {
+			if(HandValue(gamblers.get(player).AllHands.get(i))> HandValue(gamblers.get(player).AllHands.get(i-1))){
+				besthand=i;
+			}
+		}
+		return besthand;
+	}
 	public static boolean Busted(int player) {
 		if(player == -1)
 			return dealer.HandValue()<21;
@@ -119,10 +141,10 @@ public class Game {
 		 return gamblers.get(i).HandValue();
 	 }
 	 
-	 public static void  Split(int i){
-		 gamblers.get(i).Split(i);
-		 gamblers.get(i).AllHands.get(i).add(dealer.GiveCard(deck));
-		 gamblers.get(i).AllHands.get(i+1).add(dealer.GiveCard(deck));
+	 public static void  Split(int i, int handnum){
+		 gamblers.get(i).Split(handnum);
+		 gamblers.get(i).AllHands.get(handnum).add(dealer.GiveCard(deck));
+ 
 		 handsleft--;
 	 }
 	 
@@ -138,10 +160,10 @@ public class Game {
 	
 		 if(GetGamblerMoney(i)- GetBetAmount(i)*2>0) {
 	    		if(GetHandSize(i,handnum)==2) {
-	    			//if(GetCardValue(i,0,handnum)==Game.GetCardValue(i,1,handnum)) {
+	    			if(GetCardValue(i,0,handnum)==Game.GetCardValue(i,1,handnum)) {
 					
 	    				return true;
-	    				//}
+	    				}
 					}
 				}
 		 
