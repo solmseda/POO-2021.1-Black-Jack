@@ -34,6 +34,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     private BufferedImage coin50;
     private BufferedImage coin100;
     private int player;
+    
     int iClick,jClick, bet = 0;
     int y=240;
     
@@ -54,7 +55,10 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	int quant_1 = 0;
     
     boolean betDone = false;
+    public boolean HandTurnDone=false;
     public boolean turnDone = false;
+    public int handNum=0;
+    public int handstack=0;
     public PlayerScreenPanelSignal signal = new PlayerScreenPanelSignal();
     ArrayList<Integer> b = new ArrayList<Integer>();
      
@@ -69,6 +73,14 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		setBackground(new Color(0, 128, 0));
 		setLayout(null);
 		
+		JLabel lblMao = new JLabel("Mão:");
+		lblMao.setFont(new Font("Calibri", Font.BOLD, 22));
+		lblMao.setBounds(207, 5, 88, 47);
+		add(lblMao);
+		JLabel lblMaoNum = new JLabel("1");
+		lblMaoNum.setFont(new Font("Calibri", Font.BOLD, 22));
+		lblMaoNum.setBounds(260, 5, 88, 47);
+		add(lblMaoNum);
 		JLabel lblPontuacaoTitulo = new JLabel("Pontua\u00E7\u00E3o:");
 		lblPontuacaoTitulo.setFont(new Font("Calibri", Font.BOLD, 22));
 		lblPontuacaoTitulo.setBounds(332, 21, 107, 47);
@@ -158,7 +170,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
 				   Game.makeBet(player, b);
 				   Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
-				Boolean CanSplit = Game.CanSplit(player);
+				Boolean CanSplit = Game.CanSplit(player,handNum);
 			    Boolean CanDouble= Game.CanDouble(player); 
 		    	if(CanDouble) {
 		    		btnDouble.setEnabled(true);;
@@ -171,7 +183,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnSplit.setEnabled(true);
 		    	}
 		    	else {
-		    		btnSplit.setEnabled(false);
+		    		btnSplit.setEnabled(true);
 		    	}
 		    	
 		    	lblAposta.setVisible(false);
@@ -186,7 +198,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		btnHit.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	Game.PlayerHit(player);	
+		    	Game.PlayerHit(player,handNum);	
 		    	revalidate();
 		    	repaint();
 		    	lblPontuacao.setText(""+Game.GetGamblerHand(player));
@@ -207,33 +219,58 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnDouble.setEnabled(false);
 		    	}
 		    }
+		    
 		});
 		
 		btnStand.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(handstack==0) {
 				turnDone = true;
 				signal.send(turnDone);
 				turnDone = false;
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
+				}
+				else {
+					handNum++;
+					handstack--;
+					
+					revalidate();
+			    	repaint();
+			    	lblValorDaAposta.setText(String.valueOf(bet));
+			    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
+				}
+				 
 			}
 		});
 		btnSplit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int handcount= Game.CountHands(player);
+				
+			    	Game.Split(player);	  
+			    	if(handstack==0) {
+			    		handstack=2;
+			    	}
+			    	else {
+			    		handstack++;
+			    	
+				}
 		    	revalidate();
 		    	repaint();
 		    	lblValorDaAposta.setText(String.valueOf(bet));
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
+		     
+		    	 
 			}
 		});
 		btnDouble.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
-				Game.PlayerDouble(player,b);	
+				Game.PlayerDouble(player,b,handNum);	
 				bet=Game.GetBetAmount(player);
 				Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
 		    	revalidate();
@@ -250,6 +287,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnDouble.setEnabled(false);
 		    	}
 		    	if(Game.BlackJack(player)) {
+		    		
 		    		lblQueima.setText("BLACKJACK!");
 		    		lblQueima.setVisible(true);
 		    		btnHit.setEnabled(false);
@@ -268,7 +306,8 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		G.setColor(getBackground());
 		G.fillRect(0, 0, getWidth(), getHeight());
         int x=180;
-        int totalCards = Game.GetHandSize(player);
+        int totalCards = Game.GetHandSize(player,handNum);
+        
         
         try {
         	coin1= ImageIO.read(getClass().getResourceAsStream("/ficha 1$.PNG"));
@@ -293,9 +332,10 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	        G.drawImage(coin50, 305,y,coinx,coiny,null);
 	        G.drawImage(coin100, 380,y,coinx,coiny,null);
         }
+        
         else {
 	        for(int i=0;i<totalCards;i++) {
-	        	String cardstring= Game.GetCard(player,i);
+	        	String cardstring= Game.GetCard(player,i,handNum);
 		        try {
 		            card= ImageIO.read(getClass().getResourceAsStream(cardstring));
 		        } catch (IOException e) {
@@ -305,6 +345,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		        G.drawImage(card, x/totalCards+i*10,130,card.getWidth()*2,card.getHeight()*2,null);
 		        x+=card.getWidth()*3+20;
 	        }
+	        
 	        y=350;
 	        int b2[] = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
 	        int numFichasDiferentes = 0;
@@ -328,6 +369,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	        for(int i=0; i<quant_50; i++) {
 	        	G.drawImage(coin50, 305+i*(int)15/quant_50,y,coinx,coiny,null);
 	        }
+	         
 	        for(int i=0; i<quant_100; i++) {
 	        	G.drawImage(coin100, 380+i*(int)15/quant_100,y,coinx,coiny,null);
 	        }

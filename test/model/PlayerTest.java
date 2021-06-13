@@ -86,7 +86,7 @@ public class PlayerTest {
 		player.hand.add(As);
 		player.hand.add(other);
 		
-		player.CheckAs();
+		player.CheckAs(As);
 		
 		assertEquals(player.hand.get(0).valor, 11);
 	}
@@ -106,7 +106,7 @@ public class PlayerTest {
 		player.hand.add(As);
 		player.hand.add(other);
 		
-		player.CheckAs();
+		player.CheckAs(As);
 		
 		assertNotSame("As deveria ser 11", player.hand.get(0).valor, 1);
 	}

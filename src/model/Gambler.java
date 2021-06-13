@@ -4,22 +4,33 @@ import java.util.Arrays;
 import java.util.List;
     class Gambler extends Player{
 	String Name;
+	
 	coins Quant_100= new coins(0,100);
 	coins Quant_50= new coins(0,50);
 	coins Quant_20= new coins(0,20);
 	coins Quant_10= new coins(0,10);
 	coins Quant_5= new coins(0,5);
 	public List<coins> allCoins= new ArrayList<coins>();	
-	public List<Card>SplitHand = new ArrayList<Card>();
+	public List<List<Card>>AllHands = new ArrayList<List<Card>>();
+	public int handNums=1;
+	
 	
 	Gambler(String name){ 
 		Name=name;
 		allCoins=GetMoney();
 	}
 	
-	public void Split() {
-		SplitHand.add(hand.get(1));
-		hand.remove(1);
+	public void Split(int handnum) {
+ 		
+		List<Card> newhand = new ArrayList <Card>();
+		AllHands.add(newhand);
+		newhand.add(hand.get(1));
+		AllHands.get(handnum).remove(1);
+		System.out.println(AllHands.get(handnum).size()+"tama");
+		handNums++;	
+		
+		
+		
 	}
 	
 	public Integer GetTotalMoney() {
@@ -58,10 +69,11 @@ import java.util.List;
 		/* No jogo finalizado essa função steá vinculada a um botão que irá passar a a vez do jogador através de uma booleana no controller */
 		return true;
 	}
-	public void Hit(Dealer dealer, Deck deck) 
+	public void Hit(Dealer dealer, Deck deck, int handnum) 
 	{
 		Card card = dealer.GiveCard(deck);
 		card=CheckAs(card);
+		AllHands.get(handnum).add(card);
 		hand.add(card);
 	}
 	//se não puder nem vai aparecer
@@ -75,7 +87,7 @@ import java.util.List;
 		return bet;
 	}
 	
-	public List<coins> Double_Bet(Dealer dealer, Deck deck,int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
+	public List<coins> Double_Bet(Dealer dealer, Deck deck,int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1, int handnum) {
 		List<coins> NewBet=Make_Bet(0,0,0,0,0,0);
 		List<coins> InternalBet= IntToCoins(Quant_100, Quant_50,  Quant_20,  Quant_10, Quant_5,Quant_1);
 		int betvalue= GetBetAmount(InternalBet);
@@ -84,6 +96,7 @@ import java.util.List;
 	    	//Retorna todo o valor pra mao do player
 	    	allCoins.get(i).qtt+=InternalBet.get(i).qtt;
 	    }
+		
 		
 	    while(doublebet<betvalue*2) {
 	    	for(int i=0;i<allCoins.size();i++) {
@@ -100,7 +113,7 @@ import java.util.List;
 	        	}
 	    	}
 	    }
-	    Hit(dealer, deck);
+	    Hit(dealer, deck,handnum);
 	    return NewBet;
 	}
 	 

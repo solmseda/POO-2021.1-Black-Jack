@@ -7,6 +7,8 @@ public class Game {
 	public static Deck deck;
 	public static List<Gambler> gamblers;
 	public static int vez;
+	public static int currenthand;
+	public static int handsleft;
 	public static int apostaMinima;
 	public static List<coins> currentbet;
 	public static List<coins> splitbet;
@@ -27,6 +29,8 @@ public class Game {
 				card=gamblers.get(currentPlayer).CheckAs(card);
 				gamblers.get(currentPlayer).hand.add(card);
 			}
+		    gamblers.get(currentPlayer).AllHands.add(gamblers.get(currentPlayer).hand);
+		    Game.SetHandsLeft(3);
 	}
 	
 	public static List<Gambler> CreateGamblers(ArrayList<String> Names, Bank bank) {
@@ -69,7 +73,9 @@ public class Game {
 		else
 			return gamblers.get(player).HandValue()>21;
 	}
-	
+	public static int CountHands(int i) {
+		return gamblers.get(i).AllHands.size();
+	}
 	public static boolean BlackJack(int player) {
 		if(player == -1)
 			return dealer.HandValue()==21;
@@ -80,21 +86,21 @@ public class Game {
 		gamblers.get(gamblerOfTheTurn).Make_Bet(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
 	}
 	
-	public static void PlayerDouble(int i,int[] bet) {
-		 gamblers.get(i). Double_Bet( dealer,  deck,bet[0], bet[1],  bet[2],  bet[3], bet[4], bet[5]);
+	public static void PlayerDouble(int i,int[] bet, int handnum) {
+		 gamblers.get(i). Double_Bet( dealer,  deck,bet[0], bet[1],  bet[2],  bet[3], bet[4], bet[5],handnum);
 	 }
 	
-	 public static String GetCard(int player, int card) {
-		 String hand=Seecard(gamblers.get(player).hand.get(card));
+	 public static String GetCard(int player, int card, int handnum) {
+		 String hand=Seecard(gamblers.get(player).AllHands.get(handnum).get(card));
 		 return hand;
 	 }
 	 
-	 public static int GetCardValue(int player,int card) {
-			return gamblers.get(player).hand.get(card).valor;
+	 public static int GetCardValue(int player,int card, int handnum) {
+			return gamblers.get(player).AllHands.get(handnum).get(card).valor;
 	 }
 	 
-	 public static int GetHandSize(int player) {
-		return gamblers.get(player).hand.size();
+	 public static int GetHandSize(int player, int handnum) {
+		return gamblers.get(player).AllHands.get(handnum).size();
 	 }
 	 
 	 public static int GetGamblerMoney(int i) {
@@ -106,27 +112,35 @@ public class Game {
 	 }
 	 
 	 public static void  Split(int i){
-		 gamblers.get(i).Split();
+		 gamblers.get(i).Split(i);
+		 gamblers.get(i).AllHands.get(i).add(dealer.GiveCard(deck));
+		 gamblers.get(i).AllHands.get(i+1).add(dealer.GiveCard(deck));
+		 handsleft--;
 	 }
 	 
-	 public static void PlayerHit(int i) {
-		 gamblers.get(i).Hit(dealer, deck);
+	 public static void PlayerHit(int i, int handnum) {
+		 gamblers.get(i).Hit(dealer, deck,handnum);
 	 }
 	 
 	 public static Integer GetBetAmount( int i) {
 		 return gamblers.get(i).GetBetAmount(currentbet);
 	 }
-	 public static Boolean CanSplit(int i) {
+	 public static Boolean CanSplit(int i, int handnum) {
+		 if(handsleft>0) {
+	
 		 if(GetGamblerMoney(i)- GetBetAmount(i)*2>0) {
-	    		if(Game.GetHandSize(i)==2) {
-	    			if(Game.GetCardValue(i,0)==Game.GetCardValue(i,1)) {
+	    		if(GetHandSize(i,handnum)==2) {
+	    			//if(GetCardValue(i,0,handnum)==Game.GetCardValue(i,1,handnum)) {
 					
 	    				return true;
-	    				}
+	    				//}
 					}
 				}
+		 
+		 }
 		 return false;
 	 }
+		 
 	 public static Boolean CanDouble(int i) {
 		 if(GetGamblerMoney(i)- GetBetAmount(i)*2>0) {
 			 return true;
@@ -143,6 +157,7 @@ public class Game {
 	     }
 	     else {
 	    	 if(card.valor == 1 || card.valor == 11) {
+	    		 
 	    		 name=name.concat("a");
 	         }
 	         else if(card.valor == 10) {
@@ -182,4 +197,17 @@ public class Game {
 	public int getTurn() {
 		return vez;
 	}
+	public static void SetCurrentHand(int i) {
+		currenthand=i;
+	}
+	public static int GetCurrentHand() {
+		return currenthand;
+	}
+	public static int GetHandsLeft() {
+		return handsleft;
+	}
+	public static void SetHandsLeft(int i) {
+		handsleft=i;
+	}
+	
 }

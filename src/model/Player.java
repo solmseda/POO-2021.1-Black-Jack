@@ -24,6 +24,7 @@ import java.util.List;
 	
 	
 	public Card CheckAs(Card card) {
+		
 	 
 			int handvalue=HandValue();
 			 

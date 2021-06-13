@@ -62,8 +62,10 @@ class Setup implements Observer {
 		}
 		else {
 			EndRound();
+			
 		}
 	}
+	 
 	
 	public static void UpdateGamblersTable() {
 		
@@ -95,6 +97,8 @@ class Setup implements Observer {
 				UpdateGamblersTable();
 				NextPlayer();
 			}
+			
+			 
 		}
 	}	
 	
