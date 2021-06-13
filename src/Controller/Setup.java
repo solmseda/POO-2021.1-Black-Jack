@@ -11,13 +11,14 @@ import java.util.Observer;
 
 
 @SuppressWarnings("deprecation")
-class Setup implements Observer{
+class Setup implements Observer {
 	
 	static ArrayList<String> Jogadores = new ArrayList<String>();
 	static int apostaMinima;
 	static Interface interfaceGrafica;
-	static int playerDaVez;
+	static int playerDaVez = -1;
 	static Setup setup = new Setup();
+	static ArrayList<Boolean> turnosCompletos = new ArrayList<Boolean>();
 
 	
 	public static void main(String[] args) {
@@ -37,20 +38,35 @@ class Setup implements Observer{
 	
 	public static void NewGame() {
 		Jogadores = interfaceGrafica.janelaInicial.panel.Jogadores;
-		apostaMinima = (int)interfaceGrafica.janelaInicial.panel.apostaMinima;
+		apostaMinima = interfaceGrafica.janelaInicial.panel.apostaMinima;
+		
 		Game.CreateGame(Jogadores, apostaMinima);
 		interfaceGrafica.criaJanelajogo();
 		interfaceGrafica.janelaJogo.panel.signal.addObserver(setup);
 		interfaceGrafica.janelaJogo.setVisible(true);
+		
+		for(int player=0; player<Jogadores.size(); player++) {
+			interfaceGrafica.criaJanelaPlayer(Jogadores,player);
+			interfaceGrafica.janelasPlayers.get(player).panel.signal.addObserver(setup);
+			turnosCompletos.add(false);
+		}
 	}
 	
-
-	public static void NewMatch() {
-		Game.NewMatch();
-		playerDaVez = Game.vez%4;
-		interfaceGrafica.criaJanelaPlayer(playerDaVez);
-		interfaceGrafica.janelaPlayer.panel.signal.addObserver(setup);
-		interfaceGrafica.janelaPlayer.setVisible(true);
+	public static void NextPlayer() {
+		Game.vez++;
+		playerDaVez++;
+		if(playerDaVez<Jogadores.size()) {
+			System.out.println(playerDaVez);
+			Game.StartPlayerTurn(playerDaVez);
+			interfaceGrafica.janelasPlayers.get(playerDaVez).setVisible(true);
+		}
+		else {
+			System.out.println("Cabou-se");
+		}
+	}
+	
+	public static void UpdateGamblersTable() {
+		
 	}
 
 	@Override
@@ -60,11 +76,15 @@ class Setup implements Observer{
 			NewGame();
 		
 		if(interfaceGrafica.janelaJogo.panel.newMatch == true)
-			NewMatch();
+			NextPlayer();
 		
-		
-		
-	}
+		for(int player=0; player<Jogadores.size(); player++) {
+			if(interfaceGrafica.janelasPlayers.get(player).panel.turnDone == true) {
+				UpdateGamblersTable();
+				NextPlayer();
+			}
+		}
+	}	
 	
 	
 	

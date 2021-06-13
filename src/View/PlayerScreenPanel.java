@@ -52,6 +52,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 	int quant_1 = 0;
     
     boolean betDone = false;
+    public boolean turnDone = false;
     public PlayerScreenPanelSignal signal = new PlayerScreenPanelSignal();
     ArrayList<Integer> b = new ArrayList<Integer>();
      
@@ -71,7 +72,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblPontuacaoTitulo.setBounds(332, 21, 107, 47);
 		add(lblPontuacaoTitulo);
 		
-		JLabel lblPontuacao = new JLabel(""+Game.GetGamblerHand(player));
+		JLabel lblPontuacao = new JLabel(""+0);
 		lblPontuacao.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPontuacao.setFont(new Font("Calibri", Font.BOLD, 26));
 		lblPontuacao.setBounds(363, 57, 47, 47);
@@ -167,7 +168,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 			    Game.makeBet(player, b);
 			    lblAposta.setText(""+Game.GetBetAmount(player));
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
-			    
+			    lblPontuacao.setText(""+Game.GetGamblerHand(player));
 		    }
 		});
 
@@ -184,7 +185,9 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		btnStand.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Game.vez++;
+				turnDone = true;
+				signal.send(turnDone);
+				turnDone = false;
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
