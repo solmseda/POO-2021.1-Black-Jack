@@ -79,7 +79,9 @@ public class Game {
 			}
 		return sum;
 	}
-	
+	public static void Surrender(int player,int[] bet) {
+		gamblers.get(player).Surrender(bet[0], bet[1], bet[2], bet[3], bet[4], bet[5]);
+	}
 	public static int BestHand(int player) {
 		int besthand= 0;
 		for(int i=1;i< gamblers.get(player).AllHands.size();i++) {

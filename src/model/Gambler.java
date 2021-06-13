@@ -117,11 +117,18 @@ import java.util.List;
 	}
 	 
 	
-	public List<coins> Surrender(List<coins> bet) {	
+	public List<coins> Surrender(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {	
 		List<coins> NewBet=Make_Bet(0,0,0,0,0,0);
-		int betvalue= GetBetAmount(bet);
+		List<coins> InternalBet= IntToCoins(Quant_100, Quant_50,  Quant_20,  Quant_10, Quant_5,Quant_1);
+		int betvalue= GetBetAmount(InternalBet);
 		int halfbet=0;
-	    
+		for(int i=0;i<InternalBet.size();i++) {
+	    	//Retorna todo o valor pra mao do player
+	    	allCoins.get(i).qtt+=InternalBet.get(i).qtt;
+	    }
+		if(halfbet%2==1) {
+			halfbet++;
+		}
 		  while(halfbet<betvalue/2) {
 		    	for(int i=0;i<allCoins.size();i++) {
 		    		int qtt=0;
@@ -138,6 +145,7 @@ import java.util.List;
 		    	}
 		    }
 		    return NewBet;
+		    
 		}
 		 
 	 

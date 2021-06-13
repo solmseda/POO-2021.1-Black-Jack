@@ -186,17 +186,22 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		btnNopeSurrender.setBounds(40, 430, 89, 39);
 		add(btnNopeSurrender);
 		
-		btnDeal.addActionListener(new ActionListener() {
+		btnNopeSurrender.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	 
 		    	betDone = true;
 		    	btnStand.setEnabled(true);
 		    	btnHit.setEnabled(true);
+		    	btnDouble.setEnabled(true);
 		    	 
-		    	int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
-				   Game.makeBet(player, b);
-				   Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
-				Boolean CanSplit = Game.CanSplit(player,handNum);
+			    lblResultado.setText(""+Game.GetBetAmount(player));
+		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
+			    lblPontuacao.setText(""+Game.GetGamblerHand(player));
+			    lblSurrender.setVisible(false);
+			    btnNopeSurrender.setVisible(false);
+			    btnYesSurrender.setVisible(false);
+			    Boolean CanSplit = Game.CanSplit(player,handNum);
 			    Boolean CanDouble= Game.CanDouble(player); 
 		    	if(CanDouble) {
 		    		btnDouble.setEnabled(true);;
@@ -212,6 +217,51 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnSplit.setEnabled(false);
 		    	}
 		    	
+		    }
+		});
+		btnYesSurrender.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
+		    	Game.Surrender(player,b);
+		    	
+		    	
+				revalidate();
+		    	repaint();
+				Timer timer = new Timer();
+	    		final long temp = 1000;
+	    		TimerTask delay = new TimerTask() {
+					@Override
+					public void run() {
+						 
+					 	lblCreditos.setText(""+Game.GetGamblerMoney(player));
+					 	busted = true;
+						turnDone = true;
+						signal.send(turnDone);
+						turnDone = false;
+						busted = false;
+ 
+						JComponent comp = (JComponent) e.getSource();
+						Window win = SwingUtilities.getWindowAncestor(comp);
+						win.dispose();
+					}
+	    		};
+	    		timer.schedule(delay, temp);
+		    }
+		    	
+		});
+
+		btnDeal.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	betDone = true;
+		    	btnStand.setEnabled(false);
+		    	btnHit.setEnabled(false);
+		    	 
+		    	int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
+				   Game.makeBet(player, b);
+				   Game.SetBet(player, quant_100, quant_50, quant_20, quant_10, quant_5, quant_1);
+				 
 		    	lblAposta.setVisible(false);
 		    	btnDeal.setVisible(false);
 			    
