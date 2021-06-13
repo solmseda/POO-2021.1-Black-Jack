@@ -90,17 +90,25 @@ public class Game {
 		 gamblers.get(i). Double_Bet( dealer,  deck,bet[0], bet[1],  bet[2],  bet[3], bet[4], bet[5],handnum);
 	 }
 	
-	 public static String GetCard(int player, int card, int handnum) {
-		 String hand=Seecard(gamblers.get(player).AllHands.get(handnum).get(card));
-		 return hand;
+	 public static String GetCard(int player, int card) {
+		 if(player==-1)
+			 return Seecard(dealer.hand.get(card));
+		 else
+			 return Seecard(gamblers.get(player).hand.get(card));
 	 }
 	 
-	 public static int GetCardValue(int player,int card, int handnum) {
-			return gamblers.get(player).AllHands.get(handnum).get(card).valor;
+	 public static int GetCardValue(int player,int card) {
+		 if (player == -1)
+			 return dealer.hand.get(card).valor;
+		 else
+			return gamblers.get(player).hand.get(card).valor;
 	 }
 	 
-	 public static int GetHandSize(int player, int handnum) {
-		return gamblers.get(player).AllHands.get(handnum).size();
+	 public static int GetHandSize(int player) {
+		 if(player == -1)
+			 return dealer.hand.size();
+		 else
+			 return gamblers.get(player).hand.size();
 	 }
 	 
 	 public static int GetGamblerMoney(int i) {
@@ -151,34 +159,33 @@ public class Game {
 		 currentbet= gamblers.get(i).IntToCoins(Quant_100, Quant_50, Quant_20, Quant_10, Quant_5, Quant_1);
 	 }
 	 public static String Seecard(Card card) {
-		 String name= "/";
-	     if(card.valor >= 2 && card.valor<=9) {
-	    	 name= name.concat(Integer.toString(card.valor));
-	     }
-	     else {
-	    	 if(card.valor == 1 || card.valor == 11) {
-	    		 
-	    		 name=name.concat("a");
-	         }
-	         else if(card.valor == 10) {
-	        	 if(card.Name=="10") {
-	        	 name=name.concat("t");
-	         }
-	        	 else if(card.Name == "Valete") {
-		        	 name=name.concat("j");
-		         }          
-		         else if(card.Name == "Dama") {
-		        	 name=name.concat("q");
-		         }
-		         else {
-		        	 name=name.concat("k");
-		         }
-	         }
-	         
-	    }
-	    if(card.naipe=="Copas") {
-	    	name=name.concat("h");
-	    }
+         String name= "/";
+         if(card.valor >= 2 && card.valor<=9) {
+             name= name.concat(Integer.toString(card.valor));
+         }
+         else {
+             if(card.valor == 1 || card.valor == 11) {
+                 name=name.concat("a");
+             }
+             else if(card.valor == 10) {
+                 if(card.Name=="10") {
+                 name=name.concat("t");
+             }
+                 else if(card.Name == "Valete") {
+                     name=name.concat("j");
+                 }          
+                 else if(card.Name == "Dama") {
+                     name=name.concat("q");
+                 }
+                 else {
+                     name=name.concat("k");
+                 }
+             }
+             
+        }
+        if(card.naipe=="Copas") {
+            name=name.concat("h");
+        }
         else if(card.naipe=="Paus") {
             name= name.concat("c");
         }
@@ -192,7 +199,7 @@ public class Game {
         name= name.concat(".gif");
 
         return name;
-	}
+    }
 
 	public int getTurn() {
 		return vez;

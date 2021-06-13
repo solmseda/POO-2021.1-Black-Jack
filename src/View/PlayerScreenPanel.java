@@ -4,7 +4,9 @@ import model.Game;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -59,6 +61,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     public boolean turnDone = false;
     public int handNum=0;
     public int handstack=0;
+    public boolean busted = false;
     public PlayerScreenPanelSignal signal = new PlayerScreenPanelSignal();
     ArrayList<Integer> b = new ArrayList<Integer>();
      
@@ -73,7 +76,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		setBackground(new Color(0, 128, 0));
 		setLayout(null);
 		
-		JLabel lblMao = new JLabel("Mão:");
+		JLabel lblMao = new JLabel("Mï¿½o:");
 		lblMao.setFont(new Font("Calibri", Font.BOLD, 22));
 		lblMao.setBounds(207, 5, 88, 47);
 		add(lblMao);
@@ -209,6 +212,22 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    		btnStand.setEnabled(false);
 		    		btnSplit.setEnabled(false);
 		    		btnDouble.setEnabled(false);
+		    		Timer timer = new Timer();
+		    		final long temp = 2500;
+		    		TimerTask delay = new TimerTask() {
+						@Override
+						public void run() {
+							busted = true;
+							turnDone = true;
+							signal.send(turnDone);
+							turnDone = false;
+							busted = false;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.dispose();
+						}
+		    		};
+		    		timer.schedule(delay, temp);
 		    	}
 		    	if(Game.BlackJack(player)) {
 		    		lblQueima.setText("BLACKJACK!");
