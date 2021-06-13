@@ -96,22 +96,22 @@ public class SaveSystem {
 						Gambler player = new Gambler(data);
 						
 						data = myReader.nextLine();
-						player.Quant_100.qtt = Integer.parseInt(data);
+						player.allCoins.get(0).qtt = Integer.parseInt(data);
 						
 						data = myReader.nextLine();
-						player.Quant_50.qtt = Integer.parseInt(data);
+						player.allCoins.get(1).qtt = Integer.parseInt(data);
 						
 						data = myReader.nextLine();
-						player.Quant_20.qtt = Integer.parseInt(data);
+						player.allCoins.get(2).qtt = Integer.parseInt(data);
 						
 						data = myReader.nextLine();
-						player.Quant_10.qtt = Integer.parseInt(data);
+						player.allCoins.get(3).qtt = Integer.parseInt(data);
 						
 						data = myReader.nextLine();
-						player.Quant_5.qtt = Integer.parseInt(data);
+						player.allCoins.get(4).qtt = Integer.parseInt(data);
 						
 						data = myReader.nextLine();
-						player.Quant_1.qtt = Integer.parseInt(data);
+						player.allCoins.get(5).qtt = Integer.parseInt(data);
 						
 						data = myReader.nextLine();
 						player.hand.get(0).naipe = data;
