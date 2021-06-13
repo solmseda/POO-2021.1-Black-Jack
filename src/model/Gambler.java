@@ -10,6 +10,7 @@ import java.util.List;
 	coins Quant_20= new coins(0,20);
 	coins Quant_10= new coins(0,10);
 	coins Quant_5= new coins(0,5);
+	coins Quant_1= new coins(0,10);
 	public List<coins> allCoins= new ArrayList<coins>();	
 	public List<List<Card>>AllHands = new ArrayList<List<Card>>();
 	public int handNums=1;
@@ -47,7 +48,7 @@ import java.util.List;
 		return betvalue;
 	}
 	private List<coins> GetMoney() {
-		List<coins> currentmoney=new ArrayList<coins>(Arrays.asList( Quant_100, Quant_50, Quant_20, Quant_10, Quant_5));
+		List<coins> currentmoney=new ArrayList<coins>(Arrays.asList( Quant_100, Quant_50, Quant_20, Quant_10, Quant_5, Quant_1));
 		return currentmoney;
 	}
 	public List<coins> Make_Bet(int Quant_100,int Quant_50, int Quant_20, int Quant_10,int Quant_5,int Quant_1) {
