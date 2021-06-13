@@ -16,7 +16,6 @@ public class Game {
 		 bank= CreateBank();
 		 dealer=CreateDealer();
 		 gamblers= CreateGamblers(jogadores,bank);
-		 //System.out.println(Game.gamblers);
 		 apostaMinima = apostaMinimaSpinner;
 		 deck= CreateDeck();
 		 vez = -1;
@@ -60,6 +59,13 @@ public class Game {
 	public Player CreatePlayer() {
 		Player player = new Player();
 		return player;
+	}
+	
+	public static boolean Busted(int player) {
+		if(player == -1)
+			return dealer.HandValue()<21;
+		else
+			return gamblers.get(player).HandValue()>21;
 	}
 	
 	

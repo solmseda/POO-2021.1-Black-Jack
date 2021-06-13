@@ -4,6 +4,7 @@ import model.Game;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -43,6 +44,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
     JButton btnDouble;
     JButton btnSplit;
     JLabel lblCreditos;
+    JLabel lblQueima;
     
     int quant_100 = 0;
 	int quant_50 = 0;
@@ -100,12 +102,13 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		lblValorDaAposta.setBounds(59, 57, 68, 47);
 		add(lblValorDaAposta);
 		
-		JLabel lblAposta = new JLabel("Fa\u00E7a sua aposta:");
-		lblAposta.setForeground(Color.ORANGE);
-		lblAposta.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAposta.setFont(new Font("Calibri", Font.BOLD, 65));
-		lblAposta.setBounds(0, 116, 464, 115);
-		add(lblAposta);
+		lblQueima = new JLabel("Queimou!");
+		lblQueima.setVisible(false);
+		lblQueima.setForeground(Color.ORANGE);
+		lblQueima.setHorizontalAlignment(SwingConstants.CENTER);
+		lblQueima.setFont(new Font("Calibri", Font.BOLD, 95));
+		lblQueima.setBounds(0, 178, 464, 115);
+		add(lblQueima);
 		
 		btnStand = new JButton("Stand");
 		btnStand.setEnabled(false);
@@ -138,6 +141,13 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		btnDeal.setBounds(195, 364, 90, 38);
 		add(btnDeal);
 		
+		JLabel lblAposta = new JLabel("Fa\u00E7a sua aposta:");
+		lblAposta.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAposta.setForeground(Color.ORANGE);
+		lblAposta.setFont(new Font("Calibri", Font.BOLD, 65));
+		lblAposta.setBounds(0, 127, 464, 115);
+		add(lblAposta);
+		
 		btnDeal.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
@@ -166,7 +176,7 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	btnDeal.setVisible(false);
 			    int[] b = {quant_100, quant_50, quant_20, quant_10, quant_5, quant_1};
 			    Game.makeBet(player, b);
-			    lblAposta.setText(""+Game.GetBetAmount(player));
+			    lblQueima.setText(""+Game.GetBetAmount(player));
 		    	lblCreditos.setText(""+Game.GetGamblerMoney(player));
 			    lblPontuacao.setText(""+Game.GetGamblerHand(player));
 		    }
@@ -179,6 +189,14 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		    	revalidate();
 		    	repaint();
 		    	lblPontuacao.setText(""+Game.GetGamblerHand(player));
+		    	if(Game.Busted(player)) {
+		    		lblQueima.setText("Queimou!");
+		    		lblQueima.setVisible(true);
+		    		btnHit.setEnabled(false);
+		    		btnStand.setEnabled(false);
+		    		btnSplit.setEnabled(false);
+		    		btnDouble.setEnabled(false);
+		    	}
 		    }
 		});
 		

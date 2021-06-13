@@ -61,12 +61,24 @@ class Setup implements Observer {
 			interfaceGrafica.janelasPlayers.get(playerDaVez).setVisible(true);
 		}
 		else {
-			System.out.println("Cabou-se");
+			EndRound();
 		}
 	}
 	
 	public static void UpdateGamblersTable() {
 		
+	}
+	
+	public static void EndRound() {
+		/*
+		 * Acionar o dealer para virar sua segunda carta e poder comprar outras
+		*/
+		interfaceGrafica.janelaJogo.panel.btnNovaRodada.setVisible(true);
+		interfaceGrafica.janelaJogo.panel.btnSalvarJogo.setBounds(744, 61, 132, 39);
+		interfaceGrafica.janelaJogo.panel.btnEncerrarPartida.setBounds(744, 111, 132, 39);
+		/*
+		 * Salvar dados em um arquivo para poder recarregar na nova partida a partir de uma flag
+		 */
 	}
 
 	@Override

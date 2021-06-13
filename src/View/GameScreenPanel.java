@@ -25,6 +25,9 @@ public class GameScreenPanel extends JPanel {
 	public void mouseExited(MouseEvent e) {}
 	public GameScreenPanelSignal signal = new GameScreenPanelSignal();
 	public boolean newMatch = false;
+	public JButton btnNovaRodada;
+	public JButton btnSalvarJogo;
+	public JButton btnEncerrarPartida;
 
 	/**
 	 * Create the panel.
@@ -32,18 +35,8 @@ public class GameScreenPanel extends JPanel {
 	private BufferedImage backgroundImage;
 	public GameScreenPanel() {
 		setLayout(null);
-			
-		JButton btnEncerrarPartida = new JButton("Encerrar Partida");
-		btnEncerrarPartida.setBounds(744, 111, 132, 39);
-		btnEncerrarPartida.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnEncerrarPartida.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 System.exit(0);
-			}
-		});
-		add(btnEncerrarPartida);
 		
-		JButton btnNovaRodada = new JButton("Nova rodada");
+		btnNovaRodada = new JButton("Nova rodada");
 		btnNovaRodada.setBounds(744, 11, 132, 39);
 		btnNovaRodada.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNovaRodada.addActionListener(new ActionListener() {
@@ -51,11 +44,14 @@ public class GameScreenPanel extends JPanel {
 				newMatch = true;
 				signal.send(newMatch);
 				newMatch = false;
+				btnNovaRodada.setVisible(false);
+				btnSalvarJogo.setBounds(744, 11, 132, 39);
+				btnEncerrarPartida.setBounds(744, 61, 132, 39);
 			}
 		});
 		add(btnNovaRodada);
 		
-		JButton btnSalvarJogo = new JButton("Salvar Jogo");
+		btnSalvarJogo = new JButton("Salvar Jogo");
 		btnSalvarJogo.setBounds(744, 61, 132, 39);
 		btnSalvarJogo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSalvarJogo.addActionListener(new ActionListener() {
@@ -64,6 +60,16 @@ public class GameScreenPanel extends JPanel {
 			}
 		});
 		add(btnSalvarJogo);
+			
+		btnEncerrarPartida = new JButton("Encerrar Partida");
+		btnEncerrarPartida.setBounds(744, 111, 132, 39);
+		btnEncerrarPartida.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnEncerrarPartida.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 System.exit(0);
+			}
+		});
+		add(btnEncerrarPartida);
 		
 		JLabel lblApostaMinimaTitulo = new JLabel("Aposta m\u00EDnima:");
 		lblApostaMinimaTitulo.setForeground(Color.LIGHT_GRAY);

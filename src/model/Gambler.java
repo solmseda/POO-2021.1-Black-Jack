@@ -17,7 +17,6 @@ import java.util.List;
 		allCoins=GetMoney();
 	}
 	
-	
 	public void Split() {
 		SplitHand.add(hand.get(1));
 		hand.remove(1);
@@ -55,8 +54,6 @@ import java.util.List;
 		return bet;
 	}
 	
-	
-	  
 	public Boolean Stand() {
 		/* No jogo finalizado essa função steá vinculada a um botão que irá passar a a vez do jogador através de uma booleana no controller */
 		return true;
