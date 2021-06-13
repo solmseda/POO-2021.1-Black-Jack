@@ -78,45 +78,45 @@ public class PlayerScreenPanel extends JPanel implements MouseListener  {
 		setBackground(new Color(0, 128, 0));
 		setLayout(null);
 		
-		JLabel lblMao = new JLabel("M\u00E3o");
+		JLabel lblMao = new JLabel("M\u00E3o:");
 		lblMao.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblMao.setBounds(399, 203, 47, 38);
+		lblMao.setBounds(398, 27, 58, 34);
 		add(lblMao);
 		JLabel lblMaoNum = new JLabel("1");
-		lblMaoNum.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblMaoNum.setBounds(456, 203, 14, 38);
+		lblMaoNum.setFont(new Font("Calibri", Font.BOLD, 26));
+		lblMaoNum.setBounds(414, 61, 32, 38);
 		add(lblMaoNum);
 		JLabel lblPontuacaoTitulo = new JLabel("Pontua\u00E7\u00E3o:");
 		lblPontuacaoTitulo.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblPontuacaoTitulo.setBounds(332, 21, 107, 47);
+		lblPontuacaoTitulo.setBounds(271, 21, 107, 47);
 		add(lblPontuacaoTitulo);
 		
 		JLabel lblPontuacao = new JLabel(""+0);
 		lblPontuacao.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPontuacao.setFont(new Font("Calibri", Font.BOLD, 26));
-		lblPontuacao.setBounds(363, 57, 47, 47);
+		lblPontuacao.setBounds(302, 57, 47, 47);
 		add(lblPontuacao);
 		
 		JLabel lblValorDaApostaTitulo = new JLabel("Valor da aposta:");
 		lblValorDaApostaTitulo.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblValorDaApostaTitulo.setBounds(23, 21, 153, 47);
+		lblValorDaApostaTitulo.setBounds(10, 21, 153, 47);
 		add(lblValorDaApostaTitulo);
 		
 		JLabel lblCreditosTitulo = new JLabel("Cr\u00E9ditos:");
 		lblCreditosTitulo.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblCreditosTitulo.setBounds(207, 21, 88, 47);
+		lblCreditosTitulo.setBounds(173, 21, 88, 47);
 		add(lblCreditosTitulo);
 		
 		lblCreditos = new JLabel(""+Game.GetGamblerMoney(player));
 		lblCreditos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreditos.setFont(new Font("Calibri", Font.BOLD, 26));
-		lblCreditos.setBounds(207, 57, 88, 47);
+		lblCreditos.setBounds(173, 57, 88, 47);
 		add(lblCreditos);
 		
 		lblValorDaAposta = new JLabel(String.valueOf(bet));
 		lblValorDaAposta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblValorDaAposta.setFont(new Font("Calibri", Font.BOLD, 26));
-		lblValorDaAposta.setBounds(59, 57, 68, 47);
+		lblValorDaAposta.setBounds(46, 57, 68, 47);
 		add(lblValorDaAposta);
 		
 		lblResultado = new JLabel("Queimou!");
