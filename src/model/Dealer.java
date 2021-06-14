@@ -1,3 +1,7 @@
+// Raquel Olhobetchi Ferreira da Silva
+// Sol Castilho Araújo de Moraes Sêda
+// Victor Nielsen Ribeirete
+
 package model;
 
 class Dealer extends Player{

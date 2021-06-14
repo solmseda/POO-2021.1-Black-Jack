@@ -1,3 +1,7 @@
+// Raquel Olhobetchi Ferreira da Silva
+// Sol Castilho Araújo de Moraes Sêda
+// Victor Nielsen Ribeirete
+
 package model;
 import java.util.*;
     class Bank{
