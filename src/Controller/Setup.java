@@ -8,6 +8,8 @@ import model.Game;
 import View.Interface;
 
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 @SuppressWarnings("deprecation")
@@ -61,7 +63,6 @@ class Setup implements Observer {
 		}
 		Game.vez++;
 		playerDaVez++;
-		System.out.println(playerDaVez);
 		if(playerDaVez<Jogadores.size()) {
 			Game.StartPlayerTurn(playerDaVez);
 			interfaceGrafica.janelasPlayers.get(playerDaVez).setVisible(true);
@@ -83,14 +84,27 @@ class Setup implements Observer {
 	}
 	
 	public static void EndRound() {
-		/*
-		 * Acionar o dealer para virar sua segunda carta e poder comprar outras
-		*/
-		interfaceGrafica.janelaJogo.panel.btnNovaRodada.setVisible(true);
-		interfaceGrafica.janelaJogo.panel.btnSalvarJogo.setBounds(744, 61, 132, 39);
-		interfaceGrafica.janelaJogo.panel.btnEncerrarPartida.setBounds(744, 111, 132, 39);
+
 		interfaceGrafica.janelaJogo.panel.revealDealerCard();
-		
+		Timer timer = new Timer();
+		final long temp = 2000;
+		TimerTask delay = new TimerTask() {
+			@Override
+			public void run() {
+				interfaceGrafica.janelaJogo.panel.finishDealer();
+				ArrayList<Integer> allPlayersHandValues = new ArrayList<Integer>();
+				allPlayersHandValues.add(Game.GiveDealerHandValue());
+				for(int i=0; i<Game.gamblers.size();i++) {
+					allPlayersHandValues.add(Game.GetGamblerHand(i));
+				}
+				int playerVencedor = Game.CheckWinner(allPlayersHandValues);
+				interfaceGrafica.janelaJogo.panel.exibeVencedor(playerVencedor-1,interfaceGrafica.janelaInicial.panel.Jogadores);
+				interfaceGrafica.janelaJogo.panel.btnNovaRodada.setVisible(true);
+				interfaceGrafica.janelaJogo.panel.btnSalvarJogo.setBounds(744, 61, 132, 39);
+				interfaceGrafica.janelaJogo.panel.btnEncerrarPartida.setBounds(744, 111, 132, 39);
+			}
+		};
+		timer.schedule(delay, temp);
 		/*
 		 * Salvar dados em um arquivo para poder recarregar na nova partida a partir de uma flag
 		 */

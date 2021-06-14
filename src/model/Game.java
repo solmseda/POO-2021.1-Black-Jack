@@ -80,6 +80,26 @@ public class Game {
 		return sum;
 	}
 	
+	public static int CheckWinner(ArrayList<Integer> valorMaos) {
+		int check = 0;
+		int max = 0;
+		int playerVencedor = 0;
+		for(int i=0; i<valorMaos.size(); i++) {
+			if(valorMaos.get(i)>max && max<=21) {
+				max = valorMaos.get(i);
+				playerVencedor = i;
+			}
+			else if(valorMaos.get(i)==max && max<=21) {
+				check = max;
+				playerVencedor = i;
+			}
+		}
+		if(check == max)
+			return -1;
+		else
+			return playerVencedor;
+	}
+	
 	public static int BestHand(int player) {
 		int besthand= 0;
 		for(int i=1;i< gamblers.get(player).AllHands.size();i++) {
@@ -88,12 +108,27 @@ public class Game {
 			}
 		}
 		return besthand;
+		
 	}
 	public static void DealerTurn() {
 		for (int i=0; i<2; i++) {
 			dealer.hand.add(dealer.GiveCard(Game.deck));
-			}
 		}
+	}
+	
+	public static void DealerFinish() {
+		while(dealer.CanBuyCards()) {
+			dealer.hand.add(dealer.GiveCard(deck));
+		}
+	}
+	
+	public static List<Card> GiveDealerHand() {
+		return dealer.hand;
+	}
+	
+	public static int GiveDealerHandValue() {
+		return dealer.HandValue();
+	}
 	
 	public static boolean Busted(int player) {
 		if(player == -1)
