@@ -1,3 +1,7 @@
+// Raquel Olhovetchi Ferreira da Silva
+// Sol Castilho Araújo de Moraes Sêda
+// Victor Nielsen Ribeirete
+
 package Controller;
 
 import java.awt.EventQueue;
