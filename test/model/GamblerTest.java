@@ -1,4 +1,4 @@
-// Raquel Olhobetchi Ferreira da Silva
+// Raquel Olhovetchi Ferreira da Silva
 // Sol Castilho Araújo de Moraes Sêda
 // Victor Nielsen Ribeirete
 
