@@ -85,14 +85,18 @@ public class Game {
 		int max = 0;
 		int playerVencedor = 0;
 		for(int i=0; i<valorMaos.size(); i++) {
-			if(valorMaos.get(i)>max && max<=21) {
+			if(valorMaos.get(i)>21) {
+				valorMaos.set(i, 0);
+			}
+			if (valorMaos.get(i)>max) {
 				max = valorMaos.get(i);
 				playerVencedor = i;
 			}
-			else if(valorMaos.get(i)==max && max<=21) {
+			else if(valorMaos.get(i)==max) {
 				check = max;
 				playerVencedor = i;
 			}
+			System.out.println(valorMaos.get(i));
 		}
 		if(check == max)
 			return -1;

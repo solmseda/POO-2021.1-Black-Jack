@@ -40,6 +40,7 @@ class Setup implements Observer {
 	}
 	
 	public static void NewGame() {
+		Game.vez = -1;
 		playerDaVez = -1;
 		Jogadores = interfaceGrafica.janelaInicial.panel.Jogadores;
 		apostaMinima = interfaceGrafica.janelaInicial.panel.apostaMinima;
