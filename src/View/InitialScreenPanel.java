@@ -44,6 +44,7 @@ public class InitialScreenPanel extends JPanel{
 	public ArrayList<String> Jogadores = new ArrayList<String>();
 	public int apostaMinima;
 	public boolean gameReady = false;
+	public boolean LoadgameReady = false;
 	JSpinner ApostaMinima;
 	public InitialScreenPanelSignal signal = new InitialScreenPanelSignal();
 	
@@ -566,7 +567,9 @@ public class InitialScreenPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				LoadgameReady = true;
+				signal.send(LoadgameReady);
+				LoadgameReady = false;
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();

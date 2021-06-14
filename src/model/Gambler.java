@@ -10,7 +10,7 @@ import java.util.List;
 	coins Quant_20= new coins(0,20);
 	coins Quant_10= new coins(0,10);
 	coins Quant_5= new coins(0,5);
-	coins Quant_1= new coins(0,10);
+	coins Quant_1= new coins(0,1);
 	public List<coins> allCoins= new ArrayList<coins>();	
 	public List<List<Card>>AllHands = new ArrayList<List<Card>>();
 	public int handNums=1;
@@ -58,16 +58,14 @@ import java.util.List;
 		bet.add(new coins(Quant_20,20));
 		bet.add(new coins(Quant_10,10));
 		bet.add(new coins(Quant_5,5));
+		bet.add(new coins(Quant_1,1));
 		for(int i=0;i<bet.size();i++) {
 			allCoins.get(i).qtt-=bet.get(i).qtt;
 		}
 		return bet;
 	}
 	
-	public Boolean Stand() {
-		/* No jogo finalizado essa fun��o ste� vinculada a um bot�o que ir� passar a a vez do jogador atrav�s de uma booleana no controller */
-		return true;
-	}
+
 	public void Hit(Dealer dealer, Deck deck, int handnum) 
 	{
 		Card card = dealer.GiveCard(deck);
@@ -83,6 +81,8 @@ import java.util.List;
 		bet.add(new coins(Quant_20,20));
 		bet.add(new coins(Quant_10,10));
 		bet.add(new coins(Quant_5,5));
+		bet.add(new coins(Quant_1,1));
+
 		return bet;
 	}
 	

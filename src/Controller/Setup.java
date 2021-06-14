@@ -47,7 +47,7 @@ class Setup implements Observer {
 		interfaceGrafica.criaJanelajogo();
 		interfaceGrafica.janelaJogo.panel.signal.addObserver(setup);
 		interfaceGrafica.janelaJogo.setVisible(true);
-		
+		System.out.println(Jogadores.size()+"HGFDSFD");
 		for(int player=0; player<Jogadores.size(); player++) {
 			interfaceGrafica.criaJanelaPlayer(Jogadores,player);
 			interfaceGrafica.janelasPlayers.get(player).panel.signal.addObserver(setup);
@@ -55,24 +55,24 @@ class Setup implements Observer {
 		}
 	}
 	
-	/*public static void LoadGame(ArrayList<Gambler> gamblers, Dealer dealer, int vez) {
-		playerDaVez = vez;
-		SaveSystem save = new SaveSystem();
-		
-		Jogadores = interfaceGrafica.janelaInicial.panel.Jogadores;
-		apostaMinima = interfaceGrafica.janelaInicial.panel.apostaMinima;
-		
-		Game.LoadGame(gamblers, dealer, vez, apostaMinima);
+	public static void LoadGame() {
+		playerDaVez = Game.vez;
+		 
+		Game.LoadGame(apostaMinima);
+		Jogadores= Game.GetPlayers();
+
 		interfaceGrafica.criaJanelajogo();
 		interfaceGrafica.janelaJogo.panel.signal.addObserver(setup);
 		interfaceGrafica.janelaJogo.setVisible(true);
-		
-		for(int player=0; player<Jogadores.size(); player++) {
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		for(int player=0; player<Game.CountPlayers(); player++) {
 			interfaceGrafica.criaJanelaPlayer(Jogadores,player);
+			 
 			interfaceGrafica.janelasPlayers.get(player).panel.signal.addObserver(setup);
 			turnosCompletos.add(false);
+			
 		}
-	}*/
+	}
 	
 	public static void NextPlayer() {
 		if(playerDaVez == -1) {
@@ -122,6 +122,8 @@ class Setup implements Observer {
 		if(interfaceGrafica.janelaInicial.panel.gameReady == true)
 			NewGame();
 		
+		if(interfaceGrafica.janelaInicial.panel.LoadgameReady == true)
+			LoadGame();
 		if(interfaceGrafica.janelaJogo.panel.newMatch == true)
 			NextPlayer();
 		

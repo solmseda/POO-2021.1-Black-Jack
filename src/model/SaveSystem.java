@@ -32,7 +32,7 @@ public class SaveSystem {
 			
 			for(int i = 0; i < jogadores.size(); i++) {
 				myWriter.write(jogadores.get(i).Name);
-				
+				myWriter.write(System.getProperty("line.separator"));
 				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(0).qtt));
 				myWriter.write(System.getProperty("line.separator"));
 				myWriter.write(String.valueOf(jogadores.get(i).allCoins.get(1).qtt));
@@ -47,6 +47,7 @@ public class SaveSystem {
 				myWriter.write(System.getProperty("line.separator"));
 				
 				for(int j = 0 ; j < jogadores.get(i).hand.size(); j ++) {
+					 
 					myWriter.write(jogadores.get(i).hand.get(j).naipe);
 					myWriter.write(System.getProperty("line.separator"));
 					myWriter.write(jogadores.get(i).hand.get(j).Name);
@@ -55,7 +56,7 @@ public class SaveSystem {
 					myWriter.write(System.getProperty("line.separator"));
 				}
 			}
-			
+			 
 			myWriter.write(dealer.hand.get(0).naipe);
 			myWriter.write(System.getProperty("line.separator"));
 			myWriter.write(dealer.hand.get(0).Name);
@@ -68,7 +69,7 @@ public class SaveSystem {
 			myWriter.write(dealer.hand.get(1).Name);
 			myWriter.write(System.getProperty("line.separator"));
 			myWriter.write(String.valueOf(dealer.hand.get(1).valor));
-			myWriter.write(System.getProperty("line.separator"));
+ 
 			
 			myWriter.close();
 
@@ -82,18 +83,21 @@ public class SaveSystem {
 		//List<Gambler> gamblers = new ArrayList<Gambler>();
 		
 		
-		File save = new File("Save1.txt");
+		File save = new File("Save.txt");
 		try {
 			Scanner myReader = new Scanner(save);
 			while(myReader.hasNextLine()) {
 					String data = myReader.nextLine();
 					int size = Integer.parseInt(data);
-					
+					 
 					data = myReader.nextLine();
 					turn = Integer.parseInt(data);
-					
+					Deck deck= new Deck(); 
 					for (int i = 0; i < size; i++) {
+						data = myReader.nextLine();
 						Gambler player = new Gambler(data);
+						
+						
 						
 						data = myReader.nextLine();
 						player.allCoins.get(0).qtt = Integer.parseInt(data);
@@ -112,7 +116,10 @@ public class SaveSystem {
 						
 						data = myReader.nextLine();
 						player.allCoins.get(5).qtt = Integer.parseInt(data);
-						
+						Card card=dealer.GiveCard(deck);
+
+						player.hand.add(card);
+						player.hand.add(card);
 						data = myReader.nextLine();
 						player.hand.get(0).naipe = data;
 						
@@ -121,10 +128,22 @@ public class SaveSystem {
 						
 						data = myReader.nextLine();
 						player.hand.get(0).valor = Integer.parseInt(data);
+						 
+						data = myReader.nextLine();
+						player.hand.get(1).naipe = data;
+						
+						data = myReader.nextLine();
+						player.hand.get(1).Name = data;
+						
+						data = myReader.nextLine();
+						player.hand.get(1).valor = Integer.parseInt(data);
 						
 						gamblers.add(player);
 					}
-					
+					Card card=dealer.GiveCard(deck);
+
+					dealer.hand.add(card);
+					dealer.hand.add(card);
 					data = myReader.nextLine();
 					dealer.hand.get(0).naipe = data;
 					

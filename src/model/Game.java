@@ -23,13 +23,29 @@ public class Game {
 		 vez = -1;
 	}
 	
-	public static void LoadGame(ArrayList<Gambler> jogadores, Dealer dealerloading, int turn, int apostaMinimaSpinner) {
-		bank= CreateBank();
-		 dealer= dealerloading;
-		 gamblers= jogadores;
-		 apostaMinima = apostaMinimaSpinner;
-		 deck= CreateDeck();
-		 vez = turn;
+	public static void LoadGame( int apostaMinimaSpinner) {
+		 dealer=CreateDealer();
+		 bank= CreateBank();
+		 ArrayList<String> jogadores= new ArrayList<String>();
+		 jogadores.add("a");
+		 gamblers= CreateGamblers(jogadores,bank);
+		 SaveSystem save = new SaveSystem();
+		 save.RetrieveGame(gamblers, dealer, vez);
+		 apostaMinima= apostaMinimaSpinner;
+		 
+		
+	}
+	public static int CountPlayers() {
+		return gamblers.size();
+	}
+	public static ArrayList<String> GetPlayers(){
+		
+		ArrayList<String> players= new ArrayList<String>();
+		for(int i=0;i<gamblers.size();i++) {
+			players.add(gamblers.get(i).Name);
+		}
+		return players;
+			
 	}
 	
 	public static void StartPlayerTurn(int currentPlayer) {
