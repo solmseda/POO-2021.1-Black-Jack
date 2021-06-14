@@ -1,3 +1,7 @@
+// Raquel Olhobetchi Ferreira da Silva
+// Sol Castilho Araújo de Moraes Sêda
+// Victor Nielsen Ribeirete
+
 package View;
 import java.awt.Dimension;
 import java.awt.Toolkit;

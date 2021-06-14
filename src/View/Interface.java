@@ -1,3 +1,7 @@
+// Raquel Olhobetchi Ferreira da Silva
+// Sol Castilho Araújo de Moraes Sêda
+// Victor Nielsen Ribeirete
+
 package View;
 
 import java.util.ArrayList;
